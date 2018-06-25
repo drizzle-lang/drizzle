@@ -16,3 +16,17 @@ Join in the adventure if you want to :heart:
 - Maybe get a feel for the good parts of a few languages and try to add them into Sapphire without compromising on anything
 
 These are lofty (probably too lofty for just me right now) goals but damnit I'm gonna have a good try off it!
+
+## Language Ideas
+
+```sapphire
+const to = 'world'
+let msg = 'hello, {{to}}!'
+
+if (4 > 3) ->
+  msg += ' what a great day'
+
+def say(msg: string) =>
+  println(msg)
+```
+idk, maybe?
