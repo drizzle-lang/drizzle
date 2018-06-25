@@ -10,6 +10,8 @@ Join in the adventure if you want to :heart:
 
 ## Thought Dump
 - Maybe a compiled language? (https://compilerbook.com/)
+    - That book follows on from where the interpreter one leaves off so maybe start with an interpreted language?
+    - Could use this language as an excuse to learn something like C++?
 - Easy to read syntax (one of the reasons I love Python / Crystal so much)
 - Maybe get a feel for the good parts of a few languages and try to add them into Sapphire without compromising on anything
 
