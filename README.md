@@ -30,3 +30,5 @@ def say(msg: string) =>
   println(msg)
 ```
 idk, maybe?
+issue with that style is we'd have to give indentation importance.
+alternatively use braces (easier to interpret) with english keywords (and, or, not vs &&, ||, !)
