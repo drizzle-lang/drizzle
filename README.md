@@ -1,5 +1,7 @@
 # Sapphire
 
+`.sph`
+
 ![placeholder logo type image](https://dummyimage.com/600x400/002366/d4def6.png&text=Sapphire)
 
 A placeholder repository for my very own programming language, for when I eventually get around to it :]
