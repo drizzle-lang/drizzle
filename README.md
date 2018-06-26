@@ -16,6 +16,8 @@ Join in the adventure if you want to :heart:
     - Hopefully we could set it up that the Sapphire interpreter / compiler will eventually be written in sapphire
     - Could use this language as an excuse to learn something like C++?
     - The compiler book builds its own VM, but maybe Sapphire could run on the LLVM for cross compatibility?
+- I think I might write the interpreter in Go up until the point where Sapphire is feature complete enough that it could interpret itself
+    - When I start the Sapphire version of the interpreter, backup the Go interpreter to a separate branch that we can use to start writing a compiler
 - Easy to read syntax (one of the reasons I love Python / Crystal so much)
 - Maybe get a feel for the good parts of a few languages and try to add them into Sapphire without compromising on anything
 
