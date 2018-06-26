@@ -27,7 +27,7 @@ These are lofty (probably too lofty for just me right now) goals but damnit I'm 
 const to = 'world'
 let msg = 'hello, {{to}}!'
 
-if (4 > 3) {
+if (4 > 3 and true is not false) {
   msg += ' what a great day'
 }
 
