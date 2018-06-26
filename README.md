@@ -51,3 +51,5 @@ I have an idea for a logo but I don't know if I'll be able to make it but I'll t
 ## Notes from reading the Interpreter Book while working on Ked
 - Use a parser generator as they are far more robust than something we could write
     - Need to define the language with BNF notation however
+    -  `yacc`, `bison` or `ANTLR`
+    - Depending on what langs these can generate parsers in will greatly affect my choice of language for the initial interpreter >.>
