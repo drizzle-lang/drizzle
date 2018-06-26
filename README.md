@@ -41,3 +41,7 @@ I honestly do like braces over indentation (also they're easier to interpret >.>
 ## Notes
 - I completely intend to use Sapphire for my development of anything I can really, so I'll be pushing it's development forward out of necessity regardless of whether anybody else uses it :)
 - I also intend to write many blog posts about the development of Sapphire and keep the source code as open and easy to read as possible so that anyone can help out!
+
+## Logo
+I have an idea for a logo but I don't know if I'll be able to make it but I'll try;
+- A lineart vector image of a teardrop shaped sapphire in #002366 (the language color), but nice looking idk
