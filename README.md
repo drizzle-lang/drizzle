@@ -36,9 +36,8 @@ def say(msg: string) -> string {
   return 'goodbye'
 }
 ```
-idk, maybe?
-issue with that style is we'd have to give indentation importance.
-alternatively use braces (easier to interpret) with english keywords (and, or, not vs &&, ||, !)
+I honestly do like braces over indentation (also they're easier to interpret >.>)  but I also like the english-y nature of Python's syntax so I also want to include examples of that.
 
 ## Notes
 - I completely intend to use Sapphire for my development of anything I can really, so I'll be pushing it's development forward out of necessity regardless of whether anybody else uses it :)
+- I also intend to write many blog posts about the development of Sapphire and keep the source code as open and easy to read as possible so that anyone can help out!
