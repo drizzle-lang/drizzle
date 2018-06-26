@@ -47,3 +47,7 @@ I honestly do like braces over indentation (also they're easier to interpret >.>
 ## Logo
 I have an idea for a logo but I don't know if I'll be able to make it but I'll try;
 - A lineart vector image of a teardrop shaped sapphire in #002366 (the language color), but nice looking idk
+
+## Notes from reading the Interpreter Book while working on Ked
+- Use a parser generator as they are far more robust than something we could write
+    - Need to define the language with BNF notation however
