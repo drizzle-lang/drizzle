@@ -26,11 +26,14 @@ These are lofty (probably too lofty for just me right now) goals but damnit I'm 
 const to = 'world'
 let msg = 'hello, {{to}}!'
 
-if (4 > 3) ->
+if (4 > 3) {
   msg += ' what a great day'
+}
 
-def say(msg: string) =>
+def say(msg: string) -> string {
   println(msg)
+  return 'goodbye'
+}
 ```
 idk, maybe?
 issue with that style is we'd have to give indentation importance.
