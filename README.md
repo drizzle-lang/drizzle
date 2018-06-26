@@ -39,3 +39,6 @@ def say(msg: string) -> string {
 idk, maybe?
 issue with that style is we'd have to give indentation importance.
 alternatively use braces (easier to interpret) with english keywords (and, or, not vs &&, ||, !)
+
+## Notes
+- I completely intend to use Sapphire for my development of anything I can really, so I'll be pushing it's development forward out of necessity regardless of whether anybody else uses it :)
