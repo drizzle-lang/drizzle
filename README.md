@@ -53,3 +53,8 @@ I have an idea for a logo but I don't know if I'll be able to make it but I'll t
     - Need to define the language with BNF notation however
     -  `yacc`, `bison` or `ANTLR`
     - Depending on what langs these can generate parsers in will greatly affect my choice of language for the initial interpreter >.>
+    
+## Things every language should have (a.k.a extension ideas)
+- Documentation generator
+- Dependency manager
+- linter / formatter
