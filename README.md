@@ -23,6 +23,12 @@ Join in the adventure if you want to :heart:
 
 These are lofty (probably too lofty for just me right now) goals but damnit I'm gonna have a good try off it!
 
+My main goal is making a language that I can use and that I enjoy using.
+
+By using it myself, I'll be able to push development more, and as I push development I'll hopefully have to end up reading more in depth about the subject and hopefully Sapphire will get better and better.
+
+If even one other person uses this language, I'd be over the moon :smile:
+
 ## Language Ideas
 
 ```sapphire
