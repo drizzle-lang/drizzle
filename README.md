@@ -55,6 +55,12 @@ I have an idea for a logo but I don't know if I'll be able to make it but I'll t
     - Depending on what langs these can generate parsers in will greatly affect my choice of language for the initial interpreter >.>
     
 ## Things every language should have (a.k.a extension ideas)
+In an ideal situation, these would be built in to the language directly, i.e `sapphire docs`, `sapphire deps`, `sapphire fmt`
+
 - Documentation generator
+    - Could we treat documentation as it's own mini language built up from definition and comment tokens
+    - Tokenize, build an AST, parse and render HTML all from the source files in the directory?
 - Dependency manager
+    - I really like Crystal's `shard` mechanism, simple yaml file to pull from remote git repos
 - linter / formatter
+    - No idea how this one will work but I guess the language needs a style guide before we can make one of these
