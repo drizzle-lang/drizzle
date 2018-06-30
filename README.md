@@ -70,3 +70,8 @@ In an ideal situation, these would be built in to the language directly, i.e `sa
     - I really like Crystal's `shard` mechanism, simple yaml file to pull from remote git repos
 - linter / formatter
     - No idea how this one will work but I guess the language needs a style guide before we can make one of these
+    
+## Finalised High Level Decisions
+- **Initial Language**: C++
+- **Logo**:
+- **Interpreted / Compiled**: Interpreted initially
