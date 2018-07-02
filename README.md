@@ -1,4 +1,4 @@
-# ![placeholder logo type image](https://dummyimage.com/600x400/002366/d4def6.png&text=Sapphire)
+# ![sapphire logo banner first draft](./img/banner.png)
 
 Sapphire is my very own programming language, simultaneously developed as a language I would like to use and a never-ending source of things to learn.
 
