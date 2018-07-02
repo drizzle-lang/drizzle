@@ -39,7 +39,7 @@ The syntax is inspired by a mix of Python, Swift and TypeScript, which ***hopefu
 
 ```sapphire
 const person = 'World'
-let msg = 'Hello, {{ to }}' // Creates a string 'Hello, World' through templating (some day in the far future)
+let msg = 'Hello, {{ to }}'  # Creates a string 'Hello, World' through templating (some day in the far future)
 
 if (4 > 3 and true is not false) {
     msg += '!'
