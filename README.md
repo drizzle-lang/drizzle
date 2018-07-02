@@ -24,15 +24,14 @@ Some basic extensions that I would like to see built in to the language itself;
 
 ## Roadmap
 Here's a basic roadmap for anyone who is interested in what's going on with this project;
-- [ ] Finish the interpreter book with [ked](https://github.com/crnbrdrck/ked).
-- [ ] Learn enough C++ to get a start on the project.
-- [ ] Go through the [interpreter book](https://interpreterbook.com) and get Sapphire up and running as far as that book goes.
-- [ ] Once the [compiler book](https://compilerbook.com) is released, go through that and turn Sapphire into a compiled language.
-- [ ] Get Sapphire to the point where it can replace it's C++ interpreter.
-- [ ] Get Sapphire to the point where it can replace it's C++ compiler.
-- [ ] Keep improving stuff
+- Learn enough C++ to get a start on the project.
+- Go through the [interpreter book](https://interpreterbook.com) and get Sapphire up and running as far as that book goes.
+- Once the [compiler book](https://compilerbook.com) is released, go through that and turn Sapphire into a compiled language.
+- Get Sapphire to the point where it can replace it's C++ interpreter.
+- Get Sapphire to the point where it can replace it's C++ compiler.
+- Start trying to add on the extra Sapphire tools.
+- Keep improving stuff.
 
-Although I'm currently not sure where in the list they should go, there should also be a point on developing the tools like `docs` and `fmt`.
 
 ## Syntax Idea
 The syntax is inspired by a mix of Python, Swift and TypeScript, which ***hopefully*** leads to a nice looking syntax;
