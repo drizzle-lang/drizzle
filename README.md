@@ -9,6 +9,13 @@ The goals of the project are (in some particular order):
 - Learn about the kind of work that goes into developing production grade languages.
 - Eventually get Sapphire to the point where it can interpret / compile itself.
 
+## Project Details
+- Written in C++.
+- Parser (will eventually be) generated using [ANTLR](http://www.antlr.org/) for C++.
+- Language will initially be interpreted, then will be compiled.
+    - When the compiled version starts, the interpreted version will be archived to a protected branch.
+- When language is mature enough, rewrite the interpreter, and later the compiler, in Sapphire.
+
 ## Extensions
 Some basic extensions that I would like to see built in to the language itself;
 - `sapphire docs`: Similar to how crystal generates documentation I would like to have Sapphire being able to parse code and generate doc pages
