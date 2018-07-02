@@ -25,6 +25,8 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
 - [ ] Get Sapphire to the point where it can replace it's C++ compiler.
 - [ ] Keep improving stuff
 
+Although I'm currently not sure where in the list they should go, there should also be a point on developing the tools like `docs` and `fmt`.
+
 ## Syntax Idea
 The syntax is inspired by a mix of Python, Swift and TypeScript, which ***hopefully*** leads to a nice looking syntax;
 
