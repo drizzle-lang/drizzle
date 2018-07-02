@@ -17,7 +17,7 @@ Some basic extensions that I would like to see built in to the language itself;
 
 ## Roadmap
 Here's a basic roadmap for anyone who is interested in what's going on with this project;
-- [ ] Finish [ked](https://github.com/crnbrdrck/ked).
+- [ ] Finish the interpreter book with [ked](https://github.com/crnbrdrck/ked).
 - [ ] Learn enough C++ to get a start on the project.
 - [ ] Go through the [interpreter book](https://interpreterbook.com) and get Sapphire up and running as far as that book goes.
 - [ ] Once the [compiler book](https://compilerbook.com) is released, go through that and turn Sapphire into a compiled language.
