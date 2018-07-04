@@ -15,7 +15,8 @@ println(my_list[0])  # Prints '1'
 let me: {str: str | int} = {'name': 'crnbrdrck', 'age': 22}
 # Could also be typed as `dict` which would have less static checking
 # Explicitly stating types will allow the interpreter to run some static analysis
-println(my_dict['name'])  # Prints 'crnbrdrck'
+println(my_dict["name"])  # Prints 'crnbrdrck'
+# Also allows double quote strings
 
 # Function definitions
 # `num` is a type alias that allows both int and float types to be used
