@@ -1,0 +1,127 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: Sapphire
+file_extensions:
+  - sph
+scope: source.sapphire
+contexts:
+  main:
+    - include: comments
+    - include: constants
+    - include: functions
+    - include: keywords
+    - include: storage
+    - include: strings
+    - include: variables
+
+  strings:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character
+    - match: "'"
+      scope: punctuation.definition.string.begin.sapphire
+      push: single_quoted_string
+
+    - match: '"'
+      scope: punctuation.definition.string.begin.sapphire
+      push: double_quoted_string
+
+  comments:
+    # Comments begin with a '//' and finish at the end of the line
+    - match: '#'
+      scope: punctuation.definition.comment.sapphire
+      push: line_comment
+
+  keywords:
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
+    - match: '\b(for|while)\b'
+      scope: keyword.control.sapphire
+
+    - match: '\b(if|elsif|else)\b'
+      scope: keyword.control.conditional.sapphire
+
+    # Other keywords
+    - match: '\b(return)\b'
+      scope: keyword.other.sapphire
+
+    # Operators
+    - match: '\b(=)\b'
+      scope: keyword.operator.assignment.sapphire
+
+    - match: '\b(\+|-|\*|/)\b'
+      scope: keyword.operator.arithmetic.sapphire
+
+    - match: '\b(>|<|>=|<=|==)\b'
+      scope: keyword.operator.logical.sapphire
+
+  constants:
+    # Numbers
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.sapphire
+
+  variables:
+    # Handle parsing let and const statements with all the stuff in them
+    - match: 'let ([a-zA-Z_]+)'
+      captures:
+        '1': variable.other.sapphire
+
+    - match: 'const ([a-zA-Z_]+)'
+      captures:
+        '1': variable.other.constant.sapphire
+
+  functions:
+    # Handling for functions since they are big
+    - match: '(def) ([a-zA-Z_\?!]+)'
+      captures:
+        '1': storage.type.sapphire
+        '2': entity.name.function.sapphire
+
+  storage:
+    # Storage types
+    - match: '\b(def|class|let|const|int|bool|str|list|dict|num)\b'
+      scope: storage.type.sapphire
+
+  double_quoted_string:
+    - meta_scope: string.quoted.double.sapphire
+    - match: '\\.'
+      scope: constant.character.escape.sapphire
+    - match: '"'
+      scope: punctuation.definition.string.end.sapphire
+      pop: true
+
+  single_quoted_string:
+    - meta_scope: string.quoted.double.sapphire
+    - match: '\\.'
+      scope: constant.character.escape.sapphire
+    - match: "'"
+      scope: punctuation.definition.string.end.sapphire
+      pop: true
+
+  line_comment:
+    - meta_scope: comment.line.sapphire
+    - match: $
+      pop: true
+
+# Minimal scope coverage left to do
+# entity.name
+# entity.other.inherited-class
+# entity.name.section
+# entity.name.tag
+# entity.other.attribute-name
+# variable
+# variable.language
+# variable.parameter
+# variable.function
+# constant
+# constant.language
+# constant.character.escape
+# storage.type
+# storage.modifier
+# support
+# keyword
+# invalid
+# invalid.deprecated
