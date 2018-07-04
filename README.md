@@ -11,6 +11,9 @@ The goals of the project are (in some particular order):
 
 ## Project Details
 - Written in C++.
+    - A newly realised issue with this is to-do with memory management.
+    - C++ doesn't have Garbage Collection as standard.
+    - This means we can try to write our own GC, should we feel like we need one.
 - Parser (will eventually be) generated using [ANTLR](http://www.antlr.org/) for C++.
 - Language will initially be interpreted, then will be compiled.
     - When the compiled version starts, the interpreted version will be archived to a protected branch.
