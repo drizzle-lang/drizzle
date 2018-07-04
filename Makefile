@@ -3,3 +3,6 @@ CC = g++
 
 token.o: src/token/token.cpp
 	$(CC) $(CFLAGS) -o build/token.o -c src/token/token.cpp
+
+clean:
+	rm build/*.o
