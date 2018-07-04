@@ -1,3 +1,5 @@
+# I finally *get* makefiles
+
 CFLAGS = -O
 CC = g++
 SRC = src/main.cpp src/token/token.cpp
@@ -13,4 +15,4 @@ build/main.o: src/main.cpp
 	$(CC) $(CFLAGS) -o build/main.o -c src/main.cpp
 
 clean:
-	rm build/*.o
+	rm build/*.o bin/sapphire
