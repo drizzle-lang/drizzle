@@ -30,4 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Sapphire specific stuff
 bin/sapphire
+bin/test
