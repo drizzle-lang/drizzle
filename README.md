@@ -38,7 +38,7 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
 
 
 ## Syntax Idea
-The syntax is inspired by a mix of Python, Swift and TypeScript, which ***hopefully*** leads to a nice looking syntax;
+The syntax is inspired by a mix of Python, Swift, Crystal and TypeScript, which ***hopefully*** leads to a nice looking syntax;
 
 ```sapphire
 const person = 'World'
@@ -55,6 +55,8 @@ def say(msg: string) -> string {
 
 say(msg)
 ```
+
+The Crystal syntax added is the use and convention of `?` and `!` methods.
 
 ## Contributing
 This project is open to anyone who wants to learn anything about creating programming languages!
