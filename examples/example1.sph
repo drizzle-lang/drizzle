@@ -1,53 +1,8 @@
-# This example file gives the sapphire translation for the Monkey code given in the book's introduction
+let five: int = 5
+let ten: int = 10
 
-# Variable assignment
-let age: int = 1
-let name: str = 'Sapphire'
-let result: int = 10 * (20 / 2)
-
-# Lists
-let my_list: [int] = [1, 2, 3, 4, 5]
-# Could also be typed as `list` which would have less static checking
-# Explicitly stating types will allow the interpreter to run some static analysis
-println(my_list[0])  # Prints '1'
-
-# Dictionaries
-let me: {str: str | int} = {'name': 'crnbrdrck', 'age': 22}
-# Could also be typed as `dict` which would have less static checking
-# Explicitly stating types will allow the interpreter to run some static analysis
-println(my_dict["name"])  # Prints 'crnbrdrck'
-# Also allows double quote strings
-
-# Function definitions
-# `num` is a type alias that allows both int and float types to be used
-def add(a: num, b: num) -> num {
-  return a + b
-}
-# Sapphire, unlike Monkey, does not allow implicit returns
-# I do like it in Crystal but I prefer being explicit
-# That said, I return implicitly in Crystal >90% of the time...
-
-# Fibonacci function
-def fibonacci(x: int) -> int {
-  if (x == 0) {
-    return 0
-  }
-  elsif (x == 1) {
-    return 1
-  }
-  else {
-    return fibonacci(x - 1) + fibonacci(x - 2)
-  }
+def add(x: num, y: num) -> num {
+    return x + y
 }
 
-# Sapphire will support higher order functions, i.e. functions that take other functions as parameters
-# The syntax isn't for definite, but it will do for now
-def run_twice(f: ((num) -> num), x: num) -> num {
-  return f(f(x))
-}
-
-def add_two(x: num) {
-  return x + 2
-}
-
-println(run_twice(add_two, 2)))  # Should print '6'
+let result: num = add(five, ten)
