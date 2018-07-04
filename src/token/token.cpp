@@ -5,12 +5,12 @@ using namespace std;
 
 class Token {
 public:
-    Token(TokenType type, string literal) {
+    Token(tokenType type, string literal) {
         this->type = type;
         this->literal = literal;
     }
 
-    TokenType getType() {
+    tokenType getType() {
         return this->type;
     }
 
@@ -18,6 +18,10 @@ public:
         return this->literal;
     }
 private:
-    TokenType type;
+    tokenType type;
     string literal;
+    // Set up for production style tokens with error info
+    string filename;
+    long lineNum;
+    long charNum;
 };

@@ -1,27 +1,32 @@
 // Define our TokenType values as an enum
-enum TokenType {
+#include<string>
+using namespace std;
+
+typedef string tokenType;
+
+namespace TokenType {
     // Special tokens
-    ILLEGAL,
-    END_OF_FILE,
+    tokenType ILLEGAL     = "ILLEGAL";
+    tokenType END_OF_FILE = "EOF";
 
     // Identifiers / Literals
-    IDENT,
-    INTEGER,
-    TYPE_DEC,
+    tokenType IDENT    = "IDENT";
+    tokenType INTEGER  = "INTEGER";
+    tokenType TYPE_DEC = "TYPE_DEC";
 
     // Operators
-    ASSIGN,
-    PLUS,
+    tokenType ASSIGN = "=";
+    tokenType PLUS   = "+";
 
     // Delimiters
-    COMMA,
-    COLON,
-    LPAREN,
-    RPAREN,
-    LBRACE,
-    RBRACE,
+    tokenType COMMA  = ",";
+    tokenType COLON  = ":";
+    tokenType LPAREN = "(";
+    tokenType RPAREN = ")";
+    tokenType LBRACE = "{";
+    tokenType RBRACE = "}";
 
     // Keywords
-    FUNCTION,
-    LET
-};
+    tokenType FUNCTION = "FUNCTION";
+    tokenType LET      = "LET";
+}
