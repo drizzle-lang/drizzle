@@ -1,27 +1,44 @@
-#include<iostream>
 #include<string>
-#include "token_type.h"
+#include "token.h"
 using namespace std;
 
-class Token {
-public:
-    Token(tokenType type, string literal) {
-        this->type = type;
-        this->literal = literal;
-    }
+// Actually give the token types a definition in this file
+namespace TokenType  {
+    // Special tokens
+    tokenType ILLEGAL     = "ILLEGAL";
+    tokenType END_OF_FILE = "EOF";
 
-    tokenType getType() {
-        return this->type;
-    }
+    // Identifiers / Literals
+    tokenType IDENT    = "IDENT";
+    tokenType INTEGER  = "INTEGER";
+    tokenType TYPE_DEC = "TYPE_DEC";
 
-    string getLiteral() {
-        return this->literal;
-    }
-private:
-    tokenType type;
-    string literal;
-    // Set up for production style tokens with error info
-    string filename;
-    long lineNum;
-    long charNum;
-};
+    // Operators
+    tokenType ASSIGN = "=";
+    tokenType PLUS   = "+";
+
+    // Delimiters
+    tokenType COMMA  = ",";
+    tokenType COLON  = ":";
+    tokenType LPAREN = "(";
+    tokenType RPAREN = ")";
+    tokenType LBRACE = "{";
+    tokenType RBRACE = "}";
+
+    // Keywords
+    tokenType FUNCTION = "FUNCTION";
+    tokenType LET      = "LET";
+}
+
+Token::Token(tokenType type, string literal) {
+    this->type = type;
+    this->literal = literal;
+}
+
+string Token::getType()  {
+    return this->type;
+}
+
+string Token::getLiteral() {
+    return this->literal;
+}
