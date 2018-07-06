@@ -48,6 +48,10 @@ public:
     tokenType getType();
 
     string getLiteral();
+
+    bool operator==(const Token& other);
+
+    bool operator==(const tokenType type);
 private:
     tokenType type;
     string literal;
