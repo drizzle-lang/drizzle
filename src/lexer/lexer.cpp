@@ -13,8 +13,54 @@ Lexer::Lexer(string input) {
 }
 
 Token Lexer::getNextToken() {
-    // Not ready yet, so just return a token as a place holder
-    return Token(TokenType::ILLEGAL, "ILLEGAL");
+    // Parse the current character of the input and create the corresponding token for it
+    tokenType type;
+    string value;
+    switch (this->currentCharacter) {
+        case '=':
+            type = TokenType::ASSIGN;
+            value = "=";
+            break;
+        case ':':
+            type = TokenType::COLON;
+            value = ":";
+            break;
+        case '(':
+            type = TokenType::LPAREN;
+            value = "(";
+            break;
+        case ')':
+            type = TokenType::RPAREN;
+            value = ")";
+            break;
+        case ',':
+            type = TokenType::COMMA;
+            value = ",";
+            break;
+        case '+':
+            type = TokenType::PLUS;
+            value = "+";
+            break;
+        case '{':
+            type = TokenType::LBRACE;
+            value = "{";
+            break;
+        case '}':
+            type = TokenType::RBRACE;
+            value = "}";
+            break;
+        case '\0':
+            type = TokenType::END_OF_FILE;
+            value = "";
+            break;
+        default:
+            type = TokenType::ILLEGAL;
+            value = "";
+            break;
+    }
+    Token token(type, value);
+    this->readNextCharacter();
+    return token;
 }
 
 // Getters and Setters
