@@ -28,7 +28,7 @@ Some basic extensions that I would like to see built in to the language itself;
 ## Roadmap
 Here's a basic roadmap for anyone who is interested in what's going on with this project;
 - Write a basic (non-production) version of the interpreter in C++
-    - Book progress: page 15/201
+    - Book progress: page 16/201
     - At 201, there's a link to a lost chapter that adds macros
         - I may or may not add this, we'll see how it goes
 - Research and learn ANTLR4 and use it to generate a better parser.
