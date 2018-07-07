@@ -20,8 +20,8 @@ build/main.o: src/main.cpp
 	$(CC) $(CFLAGS) -o build/main.o -c src/main.cpp
 
 # Building stuff for testing
-tests: $(TESTOBJ)
-	$(CC) $(CFLAGS) -o bin/test $(TESTOBJ)
+tests: $(TESTOBJ) build/token.o build/lexer.o
+	$(CC) $(CFLAGS) -o bin/test $(TESTOBJ) build/token.o build/lexer.o
 
 build/test.o: test/main.cpp
 	$(CC) $(CFLAGS) -o build/test.o -c test/main.cpp
