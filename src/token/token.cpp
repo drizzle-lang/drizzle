@@ -51,3 +51,12 @@ bool Token::operator==(const tokenType type) {
     // Shorthand stuff to check if the token is a given type using the == operator
     return (this->type == type);
 }
+
+bool Token::operator!=(const Token& other) {
+    // Because !(this == other) didn't work >.>
+    return !(this->type == other.type && this->literal == other.literal);
+}
+
+bool Token::operator!=(const tokenType type) {
+    return !(this->type == type);
+}

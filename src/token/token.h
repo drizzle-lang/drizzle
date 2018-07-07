@@ -52,6 +52,10 @@ public:
     bool operator==(const Token& other);
 
     bool operator==(const tokenType type);
+
+    bool operator!=(const Token& other);
+
+    bool operator!=(const tokenType type);
 private:
     tokenType type;
     string literal;
