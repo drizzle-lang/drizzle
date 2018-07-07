@@ -1,1 +1,1 @@
-void testNextToken();
+int testNextToken();
