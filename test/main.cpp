@@ -3,6 +3,8 @@
 
 int main() {
     // Lexer tests
-    testNextToken();
+    if(testNextToken() == 1) {
+        return 1;
+    }
     return 0;
 }
