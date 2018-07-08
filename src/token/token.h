@@ -49,6 +49,12 @@ public:
 
     string getLiteral();
 
+    string getFilename();
+
+    int getLineNum();
+
+    int getCharNum();
+
     bool operator==(const Token& other);
 
     bool operator==(const tokenType type);

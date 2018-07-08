@@ -33,6 +33,10 @@ namespace TokenType  {
 Token::Token(tokenType type, string literal) {
     this->type = type;
     this->literal = literal;
+    // Replace these with params later
+    this->filename = "<stdin>";
+    this->lineNum = -1;
+    this->charNum = -1;
 }
 
 string Token::getType()  {
@@ -41,6 +45,18 @@ string Token::getType()  {
 
 string Token::getLiteral() {
     return this->literal;
+}
+
+string Token::getFilename() {
+    return "TODO";
+}
+
+int Token::getLineNum() {
+    return 0;
+}
+
+int Token::getCharNum() {
+    return 0;
 }
 
 bool Token::operator==(const Token& other) {
