@@ -3,6 +3,12 @@
 #include "lexer.h"
 using namespace std;
 
+// Helpers that aren't class related
+bool isLetter(char character) {
+    return ('a' <= character && character <= 'z') || ('A' <= character && character <= 'Z') || (character == '_');
+}
+
+// Lexer stuff
 Lexer::Lexer(string input) {
     this->input = input;
     this->inputSize = sizeof(input) / sizeof(char);
@@ -24,6 +30,10 @@ Token Lexer::getNextToken() {
         case ':':
             type = TokenType::COLON;
             value = ":";
+            break;
+        case ';':
+            type = TokenType::SEMI_COLON;
+            value = ";";
             break;
         case '(':
             type = TokenType::LPAREN;
@@ -56,8 +66,13 @@ Token Lexer::getNextToken() {
         default:
             // Check if the token is an identifier and if not return illegal
             if (isLetter(this->currentCharacter)) {
-                type = TokenType::IDENT;
                 value = this->readIdentifier();
+                if (keywords.count(value) == 1) {
+                    type = keywords[value];
+                }
+                else {
+                    type = TokenType::IDENT;
+                }
             }
             else {
                 type = TokenType::ILLEGAL;
@@ -109,9 +124,4 @@ string Lexer::readIdentifier() {
     // Get the slice from pos to this->position and that's the ident name
     int length = this->position - pos;
     return this->input.substr(pos, length);
-}
-
-// Helpers that aren't class related
-bool isLetter(char character) {
-    return ('a' <= character && character <= 'z') || ('A' <= character && character <= 'Z') || (character == '_');
 }
