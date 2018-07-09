@@ -38,6 +38,9 @@ unordered_map<string, tokenType> keywords = {
     {"def", TokenType::FUNCTION},
     {"let", TokenType::LET},
     {"return", TokenType::RETURN},
+    // Type definitions (temp solution until I figure out the best way to do this)
+    {"int", TokenType::TYPE},
+    {"num", TokenType::TYPE},
 };
 
 Token::Token(tokenType type, string literal) {
