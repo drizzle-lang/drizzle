@@ -49,15 +49,15 @@ string Token::getLiteral() {
 }
 
 string Token::getFilename() {
-    return "TODO";
+    return this->filename;
 }
 
 int Token::getLineNum() {
-    return 0;
+    return this->lineNum;
 }
 
 int Token::getCharNum() {
-    return 0;
+    return this->charNum;
 }
 
 bool Token::operator==(const Token& other) {
