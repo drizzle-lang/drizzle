@@ -21,7 +21,7 @@ int testNextToken() {
         Token(TokenType::TYPE, "int"),
         Token(TokenType::ASSIGN, "="),
         Token(TokenType::INTEGER, "5"),
-        Token(TokenType::SEMICOLON, ";"),
+        Token(TokenType::SEMI_COLON, ";"),
 
         // let ten: int = 10;
         Token(TokenType::LET, "let"),
@@ -30,7 +30,7 @@ int testNextToken() {
         Token(TokenType::TYPE, "int"),
         Token(TokenType::ASSIGN, "="),
         Token(TokenType::INTEGER, "10"),
-        Token(TokenType::SEMICOLON, ";"),
+        Token(TokenType::SEMI_COLON, ";"),
 
         // def add(x: num, y: num) -> num {
         Token(TokenType::DEFINE, "def"),
@@ -53,7 +53,7 @@ int testNextToken() {
         Token(TokenType::IDENT, "x"),
         Token(TokenType::PLUS, "+"),
         Token(TokenType::IDENT, "y"),
-        Token(TokenType::SEMICOLON, ";"),
+        Token(TokenType::SEMI_COLON, ";"),
 
         // }
         Token(TokenType::RBRACE, "}"),
@@ -70,7 +70,7 @@ int testNextToken() {
         Token(TokenType::COMMA, ","),
         Token(TokenType::IDENT, "ten"),
         Token(TokenType::RPAREN, ")"),
-        Token(TokenType::SEMICOLON, ";"),
+        Token(TokenType::SEMI_COLON, ";"),
     };
 
     // Create a lexer based on the input

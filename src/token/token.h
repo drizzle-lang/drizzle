@@ -21,6 +21,7 @@ namespace TokenType  {
 
     // Operators
     extern tokenType ASSIGN;
+    extern tokenType RETURN_TYPE;
     extern tokenType PLUS;
 
     // Delimiters
@@ -35,6 +36,8 @@ namespace TokenType  {
     // Keywords
     extern tokenType FUNCTION;
     extern tokenType LET;
+    extern tokenType DEFINE;
+    extern tokenType RETURN;
 }
 
 /*

@@ -11,24 +11,27 @@ namespace TokenType  {
     // Identifiers / Literals
     tokenType IDENT    = "IDENT";
     tokenType INTEGER  = "INTEGER";
-    tokenType TYPE = "TYPE";
+    tokenType TYPE     = "TYPE";
 
     // Operators
-    tokenType ASSIGN = "=";
-    tokenType PLUS   = "+";
+    tokenType ASSIGN      = "=";
+    tokenType RETURN_TYPE = "RETURN";
+    tokenType PLUS        = "+";
 
     // Delimiters
-    tokenType COMMA     = ",";
-    tokenType COLON     = ":";
-    tokenType SEMICOLON = ";";
-    tokenType LPAREN    = "(";
-    tokenType RPAREN    = ")";
-    tokenType LBRACE    = "{";
-    tokenType RBRACE    = "}";
+    tokenType COMMA      = ",";
+    tokenType COLON      = ":";
+    tokenType SEMI_COLON = ";";
+    tokenType LPAREN     = "(";
+    tokenType RPAREN     = ")";
+    tokenType LBRACE     = "{";
+    tokenType RBRACE     = "}";
 
     // Keywords
     tokenType FUNCTION = "FUNCTION";
     tokenType LET      = "LET";
+    tokenType DEFINE   = "DEFINE";
+    tokenType RETURN   = "RETURN";
 }
 
 Token::Token(tokenType type, string literal) {
