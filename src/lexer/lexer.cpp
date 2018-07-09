@@ -54,8 +54,15 @@ Token Lexer::getNextToken() {
             value = "";
             break;
         default:
-            type = TokenType::ILLEGAL;
-            value = "";
+            // Check if the token is an identifier and if not return illegal
+            if (isLetter(this->currentCharacter)) {
+                type = TokenType::IDENT;
+                value = this->readIdentifier();
+            }
+            else {
+                type = TokenType::ILLEGAL;
+                value = "";
+            }
             break;
     }
     Token token(type, value);
@@ -92,4 +99,19 @@ void Lexer::readNextCharacter() {
     }
     this->position = this->readPosition;
     this->readPosition++;
+}
+
+string Lexer::readIdentifier() {
+    int pos = this->position;
+    while(isLetter(this->currentCharacter)) {
+        this->readNextCharacter();
+    }
+    // Get the slice from pos to this->position and that's the ident name
+    int length = this->position - pos;
+    return this->input.substr(pos, length);
+}
+
+// Helpers that aren't class related
+bool isLetter(char character) {
+    return ('a' <= character && character <= 'z') || ('A' <= character && character <= 'Z') || (character == '_');
 }

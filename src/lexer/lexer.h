@@ -32,4 +32,5 @@ private:
 
     // Helpers
     void readNextCharacter();
+    string readIdentifier();
 };
