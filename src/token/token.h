@@ -26,6 +26,7 @@ namespace TokenType  {
     // Delimiters
     extern tokenType COMMA;
     extern tokenType COLON;
+    extern tokenType SEMI_COLON;
     extern tokenType LPAREN;
     extern tokenType RPAREN;
     extern tokenType LBRACE;

@@ -18,12 +18,13 @@ namespace TokenType  {
     tokenType PLUS   = "+";
 
     // Delimiters
-    tokenType COMMA  = ",";
-    tokenType COLON  = ":";
-    tokenType LPAREN = "(";
-    tokenType RPAREN = ")";
-    tokenType LBRACE = "{";
-    tokenType RBRACE = "}";
+    tokenType COMMA     = ",";
+    tokenType COLON     = ":";
+    tokenType SEMICOLON = ";";
+    tokenType LPAREN    = "(";
+    tokenType RPAREN    = ")";
+    tokenType LBRACE    = "{";
+    tokenType RBRACE    = "}";
 
     // Keywords
     tokenType FUNCTION = "FUNCTION";

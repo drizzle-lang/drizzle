@@ -14,21 +14,23 @@ int testNextToken() {
 
     // Build an array of expected tokens
     Token expectedTokens[] = {
-        // let five: int = 5
+        // let five: int = 5;
         Token(TokenType::LET, "let"),
         Token(TokenType::IDENT, "five"),
         Token(TokenType::COLON, ":"),
         Token(TokenType::TYPE, "int"),
         Token(TokenType::ASSIGN, "="),
         Token(TokenType::INTEGER, "5"),
+        Token(TokenType::SEMICOLON, ";"),
 
-        // let ten: int = 10
+        // let ten: int = 10;
         Token(TokenType::LET, "let"),
         Token(TokenType::IDENT, "ten"),
         Token(TokenType::COLON, ":"),
         Token(TokenType::TYPE, "int"),
         Token(TokenType::ASSIGN, "="),
         Token(TokenType::INTEGER, "10"),
+        Token(TokenType::SEMICOLON, ";"),
 
         // def add(x: num, y: num) -> num {
         Token(TokenType::DEFINE, "def"),
@@ -46,16 +48,17 @@ int testNextToken() {
         Token(TokenType::TYPE, "num"),
         Token(TokenType::LBRACE, "{"),
 
-        //     return x + y
+        //     return x + y;
         Token(TokenType::RETURN, "return"),
         Token(TokenType::IDENT, "x"),
         Token(TokenType::PLUS, "+"),
         Token(TokenType::IDENT, "y"),
+        Token(TokenType::SEMICOLON, ";"),
 
         // }
         Token(TokenType::RBRACE, "}"),
 
-        // let result: num = add(five, ten)
+        // let result: num = add(five, ten);
         Token(TokenType::LET, "let"),
         Token(TokenType::IDENT, "result"),
         Token(TokenType::COLON, ":"),
@@ -67,6 +70,7 @@ int testNextToken() {
         Token(TokenType::COMMA, ","),
         Token(TokenType::IDENT, "ten"),
         Token(TokenType::RPAREN, ")"),
+        Token(TokenType::SEMICOLON, ";"),
     };
 
     // Create a lexer based on the input
