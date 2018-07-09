@@ -33,7 +33,7 @@ int testNextToken() {
         Token(TokenType::SEMI_COLON, ";"),
 
         // def add(x: num, y: num) -> num {
-        Token(TokenType::DEFINE, "def"),
+        Token(TokenType::FUNCTION, "def"),
         Token(TokenType::IDENT, "add"),
         Token(TokenType::LPAREN, "("),
         Token(TokenType::IDENT, "x"),
