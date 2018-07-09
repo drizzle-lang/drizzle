@@ -33,4 +33,5 @@ private:
     // Helpers
     void readNextCharacter();
     string readIdentifier();
+    void skipWhitespace();
 };

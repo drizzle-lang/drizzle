@@ -22,6 +22,9 @@ Token Lexer::getNextToken() {
     // Parse the current character of the input and create the corresponding token for it
     tokenType type;
     string value;
+    // Skip whitespace characters
+    this->skipWhitespace();
+    cout << this->position << endl;
     switch (this->currentCharacter) {
         case '=':
             type = TokenType::ASSIGN;
@@ -73,6 +76,9 @@ Token Lexer::getNextToken() {
                 else {
                     type = TokenType::IDENT;
                 }
+                // Early return here to avoid reading the next character
+                Token token(type, value);
+                return token;
             }
             else {
                 type = TokenType::ILLEGAL;
@@ -124,4 +130,13 @@ string Lexer::readIdentifier() {
     // Get the slice from pos to this->position and that's the ident name
     int length = this->position - pos;
     return this->input.substr(pos, length);
+}
+
+void Lexer::skipWhitespace() {
+    while (this->currentCharacter == ' ' ||
+           this->currentCharacter == '\t' ||
+           this->currentCharacter == '\n' ||
+           this->currentCharacter == '\r') {
+        this->readNextCharacter();
+    }
 }
