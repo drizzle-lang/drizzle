@@ -27,7 +27,6 @@ Token Lexer::getNextToken() {
     string value;
     // Skip whitespace characters
     this->skipWhitespace();
-    cout << this->currentCharacter << endl;
     switch (this->currentCharacter) {
         case '=':
             type = TokenType::ASSIGN;
@@ -152,12 +151,10 @@ string Lexer::readNumber() {
 }
 
 void Lexer::skipWhitespace() {
-    cout << "skipWhitespace before: " << this->position << endl;
     while (this->currentCharacter == ' ' ||
            this->currentCharacter == '\t' ||
            this->currentCharacter == '\n' ||
            this->currentCharacter == '\r') {
         this->readNextCharacter();
     }
-    cout << "skipWhitespace after: " << this->position << endl;
 }
