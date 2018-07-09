@@ -17,7 +17,7 @@ namespace TokenType  {
     // Identifiers / Literals
     extern tokenType IDENT;
     extern tokenType INTEGER;
-    extern tokenType TYPE_DEC;
+    extern tokenType TYPE;
 
     // Operators
     extern tokenType ASSIGN;

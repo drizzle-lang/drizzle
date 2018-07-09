@@ -11,7 +11,7 @@ namespace TokenType  {
     // Identifiers / Literals
     tokenType IDENT    = "IDENT";
     tokenType INTEGER  = "INTEGER";
-    tokenType TYPE_DEC = "TYPE_DEC";
+    tokenType TYPE = "TYPE";
 
     // Operators
     tokenType ASSIGN = "=";
