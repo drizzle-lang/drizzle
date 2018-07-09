@@ -1,4 +1,5 @@
 #include<string>
+#include<unordered_map>
 #include "token.h"
 using namespace std;
 
@@ -30,9 +31,14 @@ namespace TokenType  {
     // Keywords
     tokenType FUNCTION = "FUNCTION";
     tokenType LET      = "LET";
-    tokenType DEFINE   = "DEFINE";
     tokenType RETURN   = "RETURN";
 }
+
+unordered_map<string, tokenType> keywords = {
+    {"def", TokenType::FUNCTION},
+    {"let", TokenType::LET},
+    {"return", TokenType::RETURN},
+};
 
 Token::Token(tokenType type, string literal) {
     this->type = type;

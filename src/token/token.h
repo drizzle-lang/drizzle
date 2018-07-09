@@ -1,4 +1,5 @@
 #include<string>
+#include<unordered_map>
 using namespace std;
 
 // Stuff for TokenTypes
@@ -39,6 +40,8 @@ namespace TokenType  {
     extern tokenType DEFINE;
     extern tokenType RETURN;
 }
+
+extern unordered_map<string, tokenType> keywords;
 
 /*
  * The Token class represents a Sapphire token generated from the source by the Lexer.
