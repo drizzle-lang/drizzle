@@ -22,8 +22,18 @@ namespace TokenType  {
 
     // Operators
     extern tokenType ASSIGN;
-    extern tokenType RETURN_TYPE;
+    extern tokenType EQ;
     extern tokenType PLUS;
+    extern tokenType MINUS;
+    extern tokenType RETURN_TYPE;
+    extern tokenType BANG;
+    extern tokenType NOT_EQ;
+    extern tokenType ASTERISK;
+    extern tokenType SLASH;
+    extern tokenType LT;
+    extern tokenType LE;
+    extern tokenType GT;
+    extern tokenType GE;
 
     // Delimiters
     extern tokenType COMMA;
@@ -37,7 +47,6 @@ namespace TokenType  {
     // Keywords
     extern tokenType FUNCTION;
     extern tokenType LET;
-    extern tokenType DEFINE;
     extern tokenType RETURN;
 }
 
@@ -51,24 +60,17 @@ extern unordered_map<string, tokenType> keywords;
 class Token {
 public:
     Token(tokenType type, string literal);
-
     tokenType getType();
-
     string getLiteral();
-
     string getFilename();
-
     int getLineNum();
-
     int getCharNum();
-
-    bool operator==(const Token& other);
-
+    string toString();
+    bool operator==(const Token other);
     bool operator==(const tokenType type);
-
-    bool operator!=(const Token& other);
-
+    bool operator!=(const Token other);
     bool operator!=(const tokenType type);
+
 private:
     tokenType type;
     string literal;

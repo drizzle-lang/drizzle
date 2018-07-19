@@ -16,8 +16,18 @@ namespace TokenType  {
 
     // Operators
     tokenType ASSIGN      = "=";
-    tokenType RETURN_TYPE = "RETURN";
+    tokenType EQ          = "==";
     tokenType PLUS        = "+";
+    tokenType MINUS       = "-";
+    tokenType RETURN_TYPE = "->";
+    tokenType BANG        = "!";
+    tokenType NOT_EQ      = "!=";
+    tokenType ASTERISK    = "*";
+    tokenType SLASH       = "/";
+    tokenType LT          = "<";
+    tokenType LE          = "<=";
+    tokenType GT          = ">";
+    tokenType GE          = ">=";
 
     // Delimiters
     tokenType COMMA      = ",";
@@ -72,7 +82,11 @@ int Token::getCharNum() {
     return this->charNum;
 }
 
-bool Token::operator==(const Token& other) {
+string Token::toString() {
+    return "Token(" + this->type + ", " + this->literal + ")";
+}
+
+bool Token::operator==(const Token other) {
     return (this->type == other.type && this->literal == other.literal);
 }
 
@@ -81,7 +95,7 @@ bool Token::operator==(const tokenType type) {
     return (this->type == type);
 }
 
-bool Token::operator!=(const Token& other) {
+bool Token::operator!=(const Token other) {
     // Because !(this == other) didn't work >.>
     return !(this->type == other.type && this->literal == other.literal);
 }

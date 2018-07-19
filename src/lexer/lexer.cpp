@@ -29,8 +29,15 @@ Token Lexer::getNextToken() {
     this->skipWhitespace();
     switch (this->currentCharacter) {
         case '=':
-            type = TokenType::ASSIGN;
-            value = "=";
+            if (this->peekCharacter() == '=') {
+                this->readNextCharacter();
+                type = TokenType::EQ;
+                value = "==";
+            }
+            else {
+                type = TokenType::ASSIGN;
+                value = "=";
+            }
             break;
         case ':':
             type = TokenType::COLON;
@@ -55,6 +62,58 @@ Token Lexer::getNextToken() {
         case '+':
             type = TokenType::PLUS;
             value = "+";
+            break;
+        case '-':
+            if (this->peekCharacter() == '>') {
+                this->readNextCharacter();
+                type = TokenType::RETURN_TYPE;
+                value = "->";
+            }
+            else {
+                type = TokenType::MINUS;
+                value = "-";
+            }
+            break;
+        case '!':
+            if (this->peekCharacter() == '=') {
+                this->readNextCharacter();
+                type = TokenType::NOT_EQ;
+                value = "!=";
+            }
+            else {
+                type = TokenType::BANG;
+                value = "!";
+            }
+            break;
+        case '*':
+            type = TokenType::ASTERISK;
+            value = "*";
+            break;
+        case '/':
+            type = TokenType::SLASH;
+            value = "/";
+            break;
+        case '<':
+            if (this->peekCharacter() == '=') {
+                this->readNextCharacter();
+                type = TokenType::LE;
+                value = "<=";
+            }
+            else {
+                type = TokenType::LT;
+                value = "<";
+            }
+            break;
+        case '>':
+            if (this->peekCharacter() == '=') {
+                this->readNextCharacter();
+                type = TokenType::GE;
+                value = ">=";
+            }
+            else {
+                type = TokenType::GT;
+                value = ">";
+            }
             break;
         case '{':
             type = TokenType::LBRACE;
@@ -128,6 +187,16 @@ void Lexer::readNextCharacter() {
     }
     this->position = this->readPosition;
     this->readPosition++;
+}
+
+char Lexer::peekCharacter() {
+    // Return the next character without moving the pointers
+    if (this->readPosition >= this->input.length()) {
+        this->currentCharacter = '\0';
+    }
+    else {
+        this->currentCharacter = this->input[this->readPosition];
+    }
 }
 
 string Lexer::readIdentifier() {
