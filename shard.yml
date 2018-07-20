@@ -1,0 +1,13 @@
+name: sapphire
+version: 0.1.0
+
+authors:
+  - Ciaran Broderick <cb@cix.ie>
+
+targets:
+  sapphire:
+    main: src/sapphire.cr
+
+crystal: 0.25.1
+
+license: MIT
