@@ -39,23 +39,9 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
 ## Syntax Idea
 The syntax is inspired by a mix of Python, Swift, Crystal and TypeScript, which ***hopefully*** leads to a nice looking syntax;
 
-```sapphire
-const person = 'World'
-let msg = 'Hello, {{ to }}'  # Creates a string 'Hello, World' through templating (some day in the far future)
-
-if (4 > 3 and true is not false) {
-    msg += '!'
-}
-
-def say(msg: string) -> string {
-    println(msg)
-    return 'Message was said'
-}
-
-say(msg)
-```
-
 The Crystal syntax added is the use and convention of `?` and `!` methods.
+
+An example of the syntax can be seen at https://crnbrdrck.xyz/sapphire/syntax/
 
 ## Contributing
 This project is open to anyone who wants to learn anything about creating programming languages!
