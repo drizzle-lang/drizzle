@@ -10,11 +10,10 @@ The goals of the project are (in some particular order):
 - Eventually get Sapphire to the point where it can interpret / compile itself.
 
 ## Project Details
-- Written in C++.
-    - A newly realised issue with this is to-do with memory management.
-    - C++ doesn't have Garbage Collection as standard.
-    - This means we can try to write our own GC, should we feel like we need one.
-- Parser (will eventually be) generated using [ANTLR](http://www.antlr.org/) for C++.
+- Written in Crystal.
+    - Sapphire will work off of Crystal's GC.
+    - If we decide to write the interpreter in Sapphire later, we'll then have to implement out own GC.
+- Parser (will eventually be) generated using [ANTLR](http://www.antlr.org/) for Go and translated into Crystal (like the books I'll be using).
 - Language will initially be interpreted, then will be compiled.
     - When the compiled version starts, the interpreted version will be archived to a protected branch.
 - When language is mature enough, rewrite the interpreter, and later the compiler, in Sapphire.
@@ -27,15 +26,12 @@ Some basic extensions that I would like to see built in to the language itself;
 
 ## Roadmap
 Here's a basic roadmap for anyone who is interested in what's going on with this project;
-- Write a basic (non-production) version of the interpreter in C++
-    - Book progress: page 20/201
-    - At 201, there's a link to a lost chapter that adds macros
-        - I may or may not add this, we'll see how it goes
+- Write a basic (non-production) version of the interpreter in Crystal
 - Research and learn ANTLR4 and use it to generate a better parser.
 - Go through the [interpreter book](https://interpreterbook.com) and get Sapphire up and running as far as that book goes.
 - Once the [compiler book](https://compilerbook.com) is released, go through that and turn Sapphire into a compiled language.
-- Get Sapphire to the point where it can replace it's C++ interpreter.
-- Get Sapphire to the point where it can replace it's C++ compiler.
+- Get Sapphire to the point where it can replace it's Crystal interpreter.
+- Get Sapphire to the point where it can replace it's Crystal compiler.
 - Start trying to add on the extra Sapphire tools.
 - Keep improving stuff.
 
