@@ -1,0 +1,9 @@
+remote_theme: crnbrdrck/storm
+title: Sapphire
+email: crn@crnbrdrck.xyz
+description: >-
+  Sapphire is a programming language designed simultaneously as a language that I (crnbrdrck) would like to use, and as something I can use to continuously learn new things.
+  It is inspired by languages like Python, Swift, Crystal and TypeScript. It is strongly, staticly typed, with (hopefully) an easy to read syntax that will hopefully balance speed with ease.
+
+sass:
+  style: compress
