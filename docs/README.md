@@ -23,3 +23,5 @@ Once the implementation phase begins however, there will be no more changes to t
 #### Footnote
 I took inspiration for the layout of the docs from the [Crystal docs](https://crystal-lang.org/docs/) as I found them very nice to read.
 
+#### Theme
+The theme for the docs is called [Storm](https://github.com/crnbrdrck/storm), and was made by me.
