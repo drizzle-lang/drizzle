@@ -13,3 +13,5 @@ navigation:
     dropdown:
       - name: Index
         url: /syntax/
+      - name: Musings
+        url: /syntax/musings/
