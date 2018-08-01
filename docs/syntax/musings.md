@@ -12,6 +12,8 @@ This is nothing definite, and as I start to cement ideas, they will be moved to 
 ## Contents
 - [Types](#types)
     - [Any](#any)
+    - [Null](#null)
+    - [Nullable](#nullable-types)
     - [Numerics](#numerics)
     - [Strings](#strings)
     - [Lists](#lists)
@@ -41,6 +43,37 @@ Some of them, i.e. `complex`, I am currently unsure about, but for the most part
 - `dict[any, any]` allows both keys and values to be any *hashable* type (`dict` also works).
 - `set[any]` is a set of any *hashable* type
 - Please note that `any` only works for collection types. For now, I don't think like you should be allowed to declare an `any` type variable.
+
+### Null
+- `null` is a special variable that represents nothing.
+- In cases where a variable can only be `null`, the variable can be typed with the `none` type
+- If a variable can be `null` then the type must be suffixed with a `?` character, indicating that the variable is *nullable*.
+    - `let a: list[int]  = null  # ERROR`
+    - `let b: list[int]? = null  # OK`
+- Return types can also be *nullable*.
+    - `def f() -> str  = return null  # ERROR`
+    - `def f() -> str? = return null  # OK`
+- See the section on [Nullable Types](#nullable-types) for more information
+
+### Nullable Types
+- If a type declaration has a `?` suffix, then the type is considered *nullable* and can have `null` assigned to it.
+- If a user tries to use a nullable type without checking for `null` values the interpreter will warn them.
+- Nullables can be converted into their normal types by appending the `!` character to the variable name.
+    - `let s: str? = 'abc'  # s is of type str?`
+    - `s = s!  # now s is of type str`
+- If the `!` is used when the value of a nullable is null, an error will be thrown
+- You can check the value of a nullable by instead appending the `?` character.
+    - This will return a boolean stating whether the value of the variable is null or not
+    - ```
+    let s: str? = null
+    # Here, s is of type `str?`
+    if s? {
+        # Here we know s is not null, so s becomes the `str` type
+    }
+    else {
+        # Here we know s is null, so s becomes the `none` type
+    }
+    ```
 
 ### Numerics
 - `int`.
