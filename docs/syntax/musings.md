@@ -9,41 +9,79 @@ Here's just a list of thoughts I'm having about the language at the moment.
 
 This is nothing definite, and as I start to cement ideas, they will be moved to their own sections in this section.
 
+## Contents
+- [Types](#types)
+    - [`any`](#any)
+    - [Numerics](#numerics)
+    - [Strings](#strings)
+    - [Lists](#lists)
+    - [Tuples](#tuples)
+    - [Dictionaries](#dictionaries)
+    - [Sets](#sets)
+- [Operators](#operators)
+    - [Arithmetic](#arithmetic)
+    - [Logic](#logic)
+    - [Other](#other)
+- [Function](#functions)
+
 ## Types
 
-- `any`
-    - `any` is a special type that is used for type hinting collection type variables where the types of all the possible items in the collection is unknown.
-    - `list[any]` allows a list of any type objects (`list` also works).
-    - `tuple[any]` allows a tuple of any type objects (`tuple` also works).
-    - `dict[str, any]` is a dictionary with string keys and any type values.
-    - `dict[any, any]` allows both keys and values to be any *hashable* type (`dict` also works).
-- `Numeric Types`
-    - `int`.
-    - `float`.
-    - `num` is a super type for both that can be used for param and return types in functions that can handle `int` and `float` types.
-    - Like Ruby / Crystal, the numeric types in `Sapphire` will have methods (`x: float = 3.as(float)`).
-    - Currently, I think we can just have a single `int` and `float` type for 64-bit integers and 64-bit floats for now.
-- `String`
-    - `"Hello, World"`.
-    - String templating follows Ruby / Crystal style (`We just converted #{x} into a float`).
-    - For typing, `str` is used.
-- `Boolean`
-    - `true`, `false`.
-    - For typing, `bool` is used.
-- `Lists`
-    - `a: list[int]: [1, 2, 3]`
-    - `b: list: [1, 'abc', 3.1415]`
-    - Lists are mutable, like in Python
-        - `b[0] = 2 # => OK`
-- `Tuples`
-    - `c: tuple[int] = (1, 2, 3)`
-    - `d: tuple = (1, 'abc', 3.1415)`
-    - Tuples are immutable
-        - `d[0] = 2 # => ERROR`
-- `Dicts`
-    - `map: dict[str, str] = {'a': 'b', 'b': 'a'}`
-    - `map2: dict[str, any] = {'a': 'b', 'b': 2}`
-    - `map3: dict = {0: 'a', 'b': 1}`
+### Any
+- `any` is a special type that is used for type hinting collection type variables where the types of all the possible items in the collection is unknown.
+- `list[any]` allows a list of any type objects (`list` also works).
+- `tuple[any]` allows a tuple of any type objects (`tuple` also works).
+- `dict[str, any]` is a dictionary with string keys and any type values.
+- `dict[any, any]` allows both keys and values to be any *hashable* type (`dict` also works).
+- `set[any]` is a set of any *hashable* type
+- Please note that `any` only works for collection types. For now, I don't think like you should be allowed to declare an `any` type variable.
+
+### Numerics
+- `int`.
+    - 64 bit integer.
+- `float`.
+    - 64 bit floating point number.
+- `oct`
+    - Octal number
+- `hex`
+    - Hexadecimal number
+- `complex`
+    - Complex numbers
+    - This is just a thought, not 100% on the inclusion of this tbh.
+- `num` is a super type for all numeric types that can be used for param and return types in functions that can handle `int` and `float` types.
+- Like Ruby / Crystal, the numeric types in `Sapphire` will have methods (`x: float = 3.as(float)`).
+- Currently, I think we can just have a single `int` and `float` type for 64-bit integers and 64-bit floats for now.
+
+### Strings
+- `'Hello, World'`.
+- String templating follows Ruby / Crystal style (`'We just converted #{x} into a float'`).
+- For typing, `str` is used.
+
+### Booleans
+- `true`, `false`.
+- For typing, `bool` is used.
+
+### Lists
+- `a: list[int]: [1, 2, 3]`
+- `b: list: [1, 'abc', 3.1415]`
+- Lists are mutable, like in Python
+    - `b[0] = 2 # => OK`
+
+### Tuples
+- `c: tuple[int] = (1, 2, 3)`
+- `d: tuple = (1, 'abc', 3.1415)`
+- Tuples are immutable
+    - `d[0] = 2 # => ERROR`
+
+### Dictionaries
+- `map: dict[str, str] = {'a': 'b', 'b': 'a'}`
+- `map2: dict[str, any] = {'a': 'b', 'b': 2}`
+- `map3: dict = {0: 'a', 'b': 1}`
+
+### Sets
+- `s1: set[int] = {1, 2, 3}`
+- `s2: set = {1, 'b', 0xa}`
+
+A big plus Sapphire has over Python in this regard is that, due to Sapphire's type declarations, the `{}` literal can be used to define empty sets **and** empty dicts with no hassle!
 
 ## Operators
 
@@ -53,7 +91,7 @@ For example, the `-` operator when used in `infix` notation denotes subtraction 
 
 The operator meanings in the lists below are `infix` notation unless stated otherwise.
 
-### Arithmetic Operators
+### Arithmetic
 - `+`
     - Addition (infix)
         - `1 + 2  # == 3`
@@ -77,7 +115,7 @@ The operator meanings in the lists below are `infix` notation unless stated othe
     - Modulo (remainder of a division)
         - `5 % 2  # == 1`
 
-### Logical Operators
+### Logic
 - `==`
     - Equality
         - `1 == 1  # true`
