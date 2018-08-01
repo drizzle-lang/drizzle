@@ -15,3 +15,5 @@ navigation:
         url: /syntax/
       - name: Musings
         url: /syntax/musings/
+      - name: Credits
+        url: /syntax/credits/
