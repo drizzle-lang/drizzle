@@ -76,9 +76,9 @@ else {
 }
 
 let t: str? = 'abc'
-# Type of t is str?
+# Type of t is `str?`
 t = t!
-# Type of t is now str
+# Type of t is now `str`
 ```
 
 ### Numerics
