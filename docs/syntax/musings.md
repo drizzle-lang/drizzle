@@ -11,7 +11,7 @@ This is nothing definite, and as I start to cement ideas, they will be moved to 
 
 ## Contents
 - [Types](#types)
-    - [`any`](#any)
+    - [Any](#any)
     - [Numerics](#numerics)
     - [Strings](#strings)
     - [Lists](#lists)
