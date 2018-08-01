@@ -15,6 +15,8 @@ Also taken from Python, and also Swift a little bit, is the style of type declar
 
 Return types in Python are hinted using the `->` operator, which I also really like.
 
+A lot of the data-type names, specifically collection types, in Sapphire are inspired by Python. Sapphire has `list`, `tuple`, `dict`, `set`, etc.
+
 ## Crystal
 Crystal also uses colons for type declarations, which helps cement my decision in using them as Crystal is another programming language I really enjoy using.
 
