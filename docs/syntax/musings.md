@@ -96,14 +96,14 @@ The operator meanings in the lists below are `infix` notation unless stated othe
 
 ### Arithmetic
 - `+`
-    - Addition (infix)
+    - Addition (`infix`)
         - `1 + 2  # == 3`
-    - Unary plus (prefix)
+    - Unary plus (`prefix`)
         - `+1`
 - `-`
-    - Subtraction (infix)
+    - Subtraction (`infix`)
         - `2 - 1  # == 1`
-    - Unary minus (prefix)
+    - Unary minus (`prefix`)
         - `-1`
 - `*`
     - Multiplication
