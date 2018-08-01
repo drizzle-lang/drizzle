@@ -174,6 +174,10 @@ def multiply_message(msg: str, times: int = 5) {
     to_print = msg * times
     println(to_print)
 }
+
+# In this example we show that Sapphire supports default params
+multiply_message('a')  # Prints 'aaaaa'
+multiply_message('a', 3)  # Prints 'aaa'
 ```
 
 Sapphire also supports simple one line functions;
@@ -196,11 +200,31 @@ The `null` type is returned from a function in 3 cases:
 
 ## OOP
 
-Classes in Sapphire are denoted by the `class` keyword. Inheritance uses the `<` operator.
+Classes in Sapphire are denoted by the `class` keyword.
+Inheritance uses the `<` operator.
 
 ```sapphire
 class Dog < Animal {}
 ```
+
+The constuctor in Sapphire is an instance function called `init`.
+
+```sapphire
+class Person {
+    name: str
+    age: int
+
+    def init(name: str, age: int = 0) {
+        self.name = name
+        self.age = age
+    }
+}
+
+let p1 = Person('Sapphire')
+let p2 = Person('Sapphire', 5)
+```
+
+By default, an empty constructor is defined that takes no parameters and does nothing other than creates the instance for the user.
 
 ### Instance Variables and Methods
 Instance variables and methods are created simply by declaring them within the scope of the class itself
@@ -214,7 +238,8 @@ class Dog < Animal {
 }
 ```
 
-`self` is used to explicitly access instance variables or methods. Unlike Python, `self` does not have to be provided as a parameter.
+`self` is used to explicitly access instance variables or methods.
+Unlike Python, `self` does not have to be provided as a parameter.
 
 ### Class Variables and Methods
 The `static` keyword is used to denote class variables or methods
@@ -245,7 +270,7 @@ abstract class Animal {
     def is_animal?() -> bool = return true
 }
 
-a: Animal = Animal()  # Causes an error as abstract classes cannot be instantiated
+let a: Animal = Animal()  # Causes an error as abstract classes cannot be instantiated
 
 class Dog < Animal {}  # Causes an error as not all abstract functions are defined
 
@@ -253,5 +278,5 @@ class Cat < Animal {
     def make_noise() = return 'Meow!'
 }  # Valid definition as it fully defines all abstract methods
 
-b: Animal = Cat()  # Valid as `Cat` is a concrete class that is a subclass of Animal
+let b: Animal = Cat()  # Valid as `Cat` is a concrete class that is a subclass of Animal
 ```
