@@ -114,19 +114,35 @@ The operator meanings in the lists below are `infix` notation unless stated othe
 - `=`
     - Assignment
         - `let x: int = 3`
+- `->`
+    - Return Type Identifier
+        - `def test() -> int = 3`
 
 ## Functions
 
 Functions in Sapphire are defined using the `def` keyword.
 
 ```sapphire
-def multiply_message(msg: str, times: int = 5):
+def multiply_message(msg: str, times: int = 5) {
     to_print = msg * times
     println(to_print)
+}
 ```
 
 Sapphire also supports simple one line functions;
 
 ```sapphire
-def multiply_message(msg: str, times: int = 5): println(msg * times)
+def multiply_message(msg: str, times: int = 5) = println(msg * times)
 ```
+
+Return types of the function are shown through the use of the `->` operator
+
+```sapphire
+def test() -> int = 3
+```
+
+If no return type is explicitly described, the `null` type is assumed to be the return type.
+The `null` type is returned from a function in 3 cases:
+1. When there's no `return` statement in the function.
+2. When there's an empty `return` statement in the function.
+3. When `null` is explicitly returned from the function.
