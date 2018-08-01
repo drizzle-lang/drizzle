@@ -64,6 +64,7 @@ Some of them, i.e. `complex`, I am currently unsure about, but for the most part
 - If the `!` is used when the value of a nullable is null, an error will be thrown
 - You can check the value of a nullable by instead appending the `?` character.
     - This will return a boolean stating whether the value of the variable is null or not
+
 ```sapphire
 let s: str? = null
 # Here, s is of type `str?`
