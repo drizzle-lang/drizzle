@@ -25,6 +25,9 @@ This is nothing definite, and as I start to cement ideas, they will be moved to 
 - [Function](#functions)
 
 ## Types
+Below is a list of all the different built in data types that are in my thoughts for Sapphire.
+
+Some of them, i.e. `complex`, I am currently unsure about, but for the most part these types should be pretty set in stone.
 
 ### Any
 - `any` is a special type that is used for type hinting collection type variables where the types of all the possible items in the collection is unknown.
