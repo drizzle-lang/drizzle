@@ -31,6 +31,8 @@ I like both of these conventions and hope to adopt them into Sapphire also.
 
 Also, I think that the Crystal / Ruby style of string formatting is one of the nicest I have ever seen, and so will be used in Sapphire also.
 
+Sapphire also uses Crystal's `<` operator for denoting inheritance of classes.
+
 ## Swift
 Swift has a similar enough syntax to Python in the areas I have discussed in the Python section, with regards to type declarations especially.
 

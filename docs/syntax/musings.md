@@ -22,7 +22,11 @@ This is nothing definite, and as I start to cement ideas, they will be moved to 
     - [Arithmetic](#arithmetic)
     - [Logic](#logic)
     - [Other](#other)
-- [Function](#functions)
+- [Functions](#functions)
+- [Object Orientation](#oop)
+    - [Instance Variables and Methods](#instance-variables-and-methods)
+    - [Class Variables and Methods](#class-variables-and-methods)
+    - [Abstract Classes and Methods](#abstract-classes-and-methods)
 
 ## Types
 Below is a list of all the different built in data types that are in my thoughts for Sapphire.
@@ -141,6 +145,8 @@ The operator meanings in the lists below are `infix` notation unless stated othe
 - `<`
     - Less Than
         - `2 < 3  # true`
+    - Class Inheritance
+        - `Dog < Animal`
 - `>`
     - Greater Than
         - `2 > 3  # false`
@@ -157,7 +163,7 @@ The operator meanings in the lists below are `infix` notation unless stated othe
         - `let x: int = 3`
 - `->`
     - Return Type Identifier
-        - `def test() -> int = 3`
+        - `def test() -> int = return 3`
 
 ## Functions
 
@@ -187,3 +193,67 @@ The `null` type is returned from a function in 3 cases:
 1. When there's no `return` statement in the function.
 2. When there's an empty `return` statement in the function.
 3. When `null` is explicitly returned from the function.
+
+## OOP
+
+Classes in Sapphire are denoted by the `class` keyword. Inheritance uses the `<` operator.
+
+```sapphire
+class Dog < Animal {
+
+}
+```
+
+### Instance Variables and Methods
+Instance variables and methods are created simply by declaring them within the scope of the class itself
+
+```sapphire
+class Dog < Animal {
+    noise: str = 'Bark!'
+    def make_noise() -> str {
+        return self.noise
+    }
+}
+```
+
+`self` is used to explicitly access instance variables or methods. Unlike Python, `self` does not have to be provided as a parameter.
+
+### Class Variables and Methods
+The `static` keyword is used to denote class variables or methods
+
+```sapphire
+class Dog < Animal {
+    static noise: str = 'Bark!'
+    static def make_noise() -> str {
+        return self.noise
+    }
+}
+```
+
+The `self` keyword can be used to access both class and instance methods and variables.
+
+### Abstract Classes and Methods
+The `abstract` keyword can be used as a modifier on both `class` and `def` keywords to create abstract classes and functions.
+
+Abstract classes are classes that can not be instantiated by themselves, and abstract methods are methods that do not have a definition.
+
+When an abstract class is inherited by a concrete class, all abstract methods need to be defined or the code will not run.
+
+```sapphire
+abstract class Animal {
+    abstract def make_noise() -> str
+
+    # Abstract classes can also contain concrete definitions
+    def is_animal?() -> bool = return true
+}
+
+a: Animal = Animal()  # Causes an error as abstract classes cannot be instantiated
+
+class Dog < Animal {}  # Causes an error as not all abstract functions are defined
+
+class Cat < Animal {
+    def make_noise() = return 'Meow!'
+}  # Valid definition as it fully defines all abstract methods
+
+b: Animal = Cat()  # Valid as `Cat` is a concrete class that is a subclass of Animal
+```
