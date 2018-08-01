@@ -64,16 +64,21 @@ Some of them, i.e. `complex`, I am currently unsure about, but for the most part
 - If the `!` is used when the value of a nullable is null, an error will be thrown
 - You can check the value of a nullable by instead appending the `?` character.
     - This will return a boolean stating whether the value of the variable is null or not
-    - ```
-    let s: str? = null
-    # Here, s is of type `str?`
-    if s? {
-        # Here we know s is not null, so s becomes the `str` type
-    }
-    else {
-        # Here we know s is null, so s becomes the `none` type
-    }
-    ```
+```sapphire
+let s: str? = null
+# Here, s is of type `str?`
+if s? {
+    # Here we know s is not null, so s becomes the `str` type
+}
+else {
+    # Here we know s is null, so s becomes the `none` type
+}
+
+let t: str? = 'abc'
+# Type of t is str?
+t = t!
+# Type of t is now str
+```
 
 ### Numerics
 - `int`.
