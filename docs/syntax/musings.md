@@ -199,9 +199,7 @@ The `null` type is returned from a function in 3 cases:
 Classes in Sapphire are denoted by the `class` keyword. Inheritance uses the `<` operator.
 
 ```sapphire
-class Dog < Animal {
-
-}
+class Dog < Animal {}
 ```
 
 ### Instance Variables and Methods
