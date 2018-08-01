@@ -189,7 +189,7 @@ def multiply_message(msg: str, times: int = 5) = println(msg * times)
 Return types of the function are shown through the use of the `->` operator
 
 ```sapphire
-def test() -> int = 3
+def test() -> int = return 3
 ```
 
 If no return type is explicitly described, the `null` type is assumed to be the return type.
