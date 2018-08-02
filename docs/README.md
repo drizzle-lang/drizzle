@@ -20,8 +20,8 @@ First and foremost this will be a language that I want to use, and as such I mig
 
 Once the implementation phase begins however, there will be no more changes to the design.
 
-#### Footnote
+### Footnote
 I took inspiration for the layout of the docs from the [Crystal docs](https://crystal-lang.org/docs/) as I found them very nice to read.
 
-#### Theme
+### Theme
 The theme for the docs is called [Storm](https://github.com/crnbrdrck/storm), and was made by me.

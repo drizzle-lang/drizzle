@@ -30,6 +30,8 @@ say(msg)
 ```
 
 ## Contents
+Here's a little breakdown of the contents of this documentation section;
+
 - [Types](./datatypes/)
     - [Any](./datatypes/#any)
     - [Null](./datatypes/#null)
@@ -40,3 +42,14 @@ say(msg)
     - [Tuples](./datatypes/#tuples)
     - [Dictionaries](./datatypes/#dictionaries)
     - [Sets](./datatypes/#sets)
+- [Operators](./operators/)
+    - [Arithmetic](./operators/#arithmetic)
+    - [Logic](./operators/#logic)
+    - [Other](./operators/#other)
+- [Functions](./functions/)
+    - [Single Line Functions](./functions/#single-line-functions)
+    - [Return Types](./functions/#return-types)
+- [Classes](./classes/)
+    - [Instance Variables and Methods](./classes/#instance-variables-and-methods)
+    - [Class Variables and Methods](./classes/#class-variables-and-methods)
+    - [Abstract Classes and Methods](./classes/#abstract-classes-and-methods)

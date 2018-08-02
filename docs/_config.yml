@@ -15,5 +15,11 @@ navigation:
         url: /syntax/
       - name: Datatypes
         url: /syntax/datatypes/
+      - name: Operators
+        url: /syntax/operators/
+      - name: Functions
+        url: /syntax/functions/
+      - name: Classes
+        url: /syntax/classes/
       - name: Credits
         url: /syntax/credits/
