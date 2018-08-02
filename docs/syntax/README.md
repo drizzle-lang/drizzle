@@ -28,3 +28,15 @@ def say(msg: string) -> string {
 
 say(msg)
 ```
+
+## Contents
+- [Types](./datatypes/)
+    - [Any](./datatypes/#any)
+    - [Null](./datatypes/#null)
+    - [Nullable](./datatypes/#nullable-types)
+    - [Numerics](./datatypes/#numerics)
+    - [Strings](./datatypes/#strings)
+    - [Lists](./datatypes/#lists)
+    - [Tuples](./datatypes/#tuples)
+    - [Dictionaries](./datatypes/#dictionaries)
+    - [Sets](./datatypes/#sets)

@@ -13,7 +13,7 @@ navigation:
     dropdown:
       - name: Index
         url: /syntax/
-      - name: Musings
-        url: /syntax/musings/
+      - name: Datatypes
+        url: /syntax/datatypes/
       - name: Credits
         url: /syntax/credits/
