@@ -99,3 +99,14 @@ t = t!
 - `s2: set = {1, 'b', 0xa}`
 
 A big plus Sapphire has over Python in this regard is that, due to Sapphire's type declarations, the `{}` literal can be used to define empty sets **and** empty dicts with no hassle!
+
+## Ranges
+
+Following a similar style to Crystal, ranges are defined in two ways;
+
+- `0..5`
+    - Contains the numbers from 0 to 5 inclusive (0, 1, 2, 3, 4, 5)
+- `0...5`
+    - Contains the numbers from 0 to 5 exclusive (0, 1, 2, 3, 4)
+
+As a metaphor to remember this, you can imagine that adding the third dot pushes the 5 out of the range.
