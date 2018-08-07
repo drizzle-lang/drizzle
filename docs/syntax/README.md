@@ -42,6 +42,7 @@ Here's a little breakdown of the contents of this documentation section;
     - [Tuples](./datatypes/#tuples)
     - [Dictionaries](./datatypes/#dictionaries)
     - [Sets](./datatypes/#sets)
+    - [Ranges](./datatypes/#ranges)
 - [Operators](./operators/)
     - [Arithmetic](./operators/#arithmetic)
     - [Logic](./operators/#logic)
