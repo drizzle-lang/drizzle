@@ -17,6 +17,8 @@ navigation:
         url: /syntax/datatypes/
       - name: Operators
         url: /syntax/operators/
+      - name: Control
+        url: /syntax/control/
       - name: Functions
         url: /syntax/functions/
       - name: Classes

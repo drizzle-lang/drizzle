@@ -90,7 +90,7 @@ for i: int in [0, 1, 2, 3, 4] {
 ```
 
 The output of this will be
-```
+```sapphire
 0
 1
 2

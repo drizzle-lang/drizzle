@@ -32,7 +32,7 @@ say(msg)
 ## Contents
 Here's a little breakdown of the contents of this documentation section;
 
-- [Types](./datatypes/)
+- [Datatypes](./datatypes/)
     - [Any](./datatypes/#any)
     - [Null](./datatypes/#null)
     - [Nullable](./datatypes/#nullable-types)
@@ -47,6 +47,11 @@ Here's a little breakdown of the contents of this documentation section;
     - [Arithmetic](./operators/#arithmetic)
     - [Logic](./operators/#logic)
     - [Other](./operators/#other)
+- [Control Statements](./control/)
+    - [Truthy / Falsey Values](./control/#truthy--falsey)
+    - [Conditionals](./control/#conditionals)
+    - [Loops](./control/#loops)
+    - [Break / Continue Statements](./control/#break--continue)
 - [Functions](./functions/)
     - [Single Line Functions](./functions/#single-line-functions)
     - [Return Types](./functions/#return-types)
