@@ -28,20 +28,13 @@ Some basic extensions that I would like to see built in to the language itself;
 Here's a basic roadmap for anyone who is interested in what's going on with this project;
 - Write a basic (non-production) version of the interpreter in Crystal
 - Research and learn ANTLR4 and use it to generate a better parser.
+    - ANTLR cannot generate Crystal code so instead I intend to have it generate Go code and translate it, like I am doing with the book.
 - Go through the [interpreter book](https://interpreterbook.com) and get Sapphire up and running as far as that book goes.
 - Once the [compiler book](https://compilerbook.com) is released, go through that and turn Sapphire into a compiled language.
 - Get Sapphire to the point where it can replace it's Crystal interpreter.
 - Get Sapphire to the point where it can replace it's Crystal compiler.
 - Start trying to add on the extra Sapphire tools.
 - Keep improving stuff.
-
-
-## Syntax Idea
-The syntax is inspired by a mix of Python, Crystal, and a little bit of Swift, which ***hopefully*** will lead to a nice looking syntax;
-
-The Crystal syntax added is the use and convention of `?` and `!` methods.
-
-An example of the syntax can be seen at https://crnbrdrck.xyz/sapphire/syntax/
 
 ## Contributing
 This project is open to anyone who wants to learn anything about creating programming languages!
