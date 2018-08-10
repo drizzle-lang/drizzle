@@ -98,7 +98,9 @@ t = t!
 - `s1: set[int] = {1, 2, 3}`
 - `s2: set = {1, 'b', 0xa}`
 
-A big plus Sapphire has over Python in this regard is that, due to Sapphire's type declarations, the `{}` literal can be used to define empty sets **and** empty dicts with no hassle!
+A big plus Sapphire has over Python in this regard is that, due to Sapphire's type declarations, the `{}` literal can be used to define empty sets **and** empty dicts with no hassle\*!
+
+\* A small bit of hassle might arise when using the literal in a conditional (`if s == {}`) but hopefully the parser will be able to handle it.
 
 ## Ranges
 

@@ -30,8 +30,7 @@ A `falsey` value is anything that is empty or represents nothing, which includes
 - `''  # empty string`
 - `[]  # empty list`
 - `()  # empty tuple`
-- `{}  # empty set`
-- `{:}  # empty dict (have to have the colon when not type hinted)`
+- `{}  # empty set or dict (depends on type decl)`
 - `null`
 
 A value is `truthy` if it is not one of the above values.
