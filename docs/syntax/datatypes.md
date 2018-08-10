@@ -120,3 +120,11 @@ When something can be one of a select few types, e.g values in a `dict`, then th
 Union types are simply a list of types separated by the `|` character.
 
 For example, `dict[str, str | int]` is the type for a dictionary with string keys and either string or integer values.
+
+## Functions
+
+As Sapphire supports *higher order functions*, meaning that functions can be passed as parameters, then these functions need to have a type hinting syntax.
+
+The syntax is as simple as possible, simply the types in the argument tuple, the return type operator and the return type, all contained in parentheses.
+
+For example, `((num, num) -> num)` is the type for functions that take in two `num` type parameters and return a `num` type parameter.
