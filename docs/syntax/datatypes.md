@@ -110,3 +110,11 @@ Following a similar style to Crystal, ranges are defined in two ways;
     - Contains the numbers from 0 to 5 exclusive (0, 1, 2, 3, 4)
 
 As a metaphor to remember this, you can imagine that adding the third dot pushes the 5 out of the range.
+
+## Union Types
+
+When something can be one of a select few types, e.g values in a `dict`, then they can by typed using union types.
+
+Union types are simply a list of types separated by the `|` character.
+
+For example, `dict[str, str | int]` is the type for a dictionary with string keys and either string or integer values.
