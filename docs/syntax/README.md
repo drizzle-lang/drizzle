@@ -14,19 +14,42 @@ Here is a brief example of the Sapphire code as it is currently planned to look.
 
 If any specifics change in this section that affect this example, the example will also be updated.
 ```sapphire
-const person = 'World'
-let msg = 'Hello, #{to}'  # Creates a string 'Hello, World' through templating (some day in the far future)
+# Also allows double quote strings
 
-if (4 > 3 and true is not false) {
-    msg += '!'
+# Function definitions
+# `num` is a type alias that allows both int and float types to be used
+def add(a: num, b: num) -> num {
+    return a + b
+}
+# Sapphire, unlike Monkey, does not allow implicit returns
+# I do like it in Crystal but I prefer being explicit
+# That said, I return implicitly in Crystal >90% of the time...
+
+# Fibonacci function
+def fibonacci(x: int) -> int {
+    if (x == 0) {
+        return 0
+    }
+    elsif (x == 1) {
+        return 1
+    }
+    else {
+        return fibonacci(x - 1) + fibonacci(x - 2)
+    }
 }
 
-def say(msg: string) -> string {
-    println(msg)
-    return 'Message was said'
+# Sapphire will support higher order functions, i.e. functions that take other functions as parameters
+# The syntax isn't for definite, but it will do for now
+def run_twice(f: ((num) -> num), x: num) -> num {
+    return f(f(x))
 }
 
-say(msg)
+def add_two(x: num) {
+    return x + 2
+}
+
+println(run_twice(add_two, 2)));  # Should print '6'
+
 ```
 
 ## Contents
