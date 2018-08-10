@@ -128,3 +128,52 @@ As Sapphire supports *higher order functions*, meaning that functions can be pas
 The syntax is as simple as possible, simply the types in the argument tuple, the return type operator and the return type, all contained in parentheses.
 
 For example, `((num, num) -> num)` is the type for functions that take in two `num` type parameters and return a `num` type parameter.
+
+## Type Aliasing
+
+To conserve time and energy, type aliases can be set up for cases where you have a large type definition that is used in multiple places.
+
+Let's take the following value as an example;
+
+```sapphire
+[
+    [1, 'abc', {'a', 1}],
+    {'a': 1, 'b': ['a', 1, {'a': 'b'}]},
+]
+```
+
+The type declaration for this ~~monstrosity~~ lovely value should look something like `list[list[int | str | set[str | int]] | dict[str, int | list[str | int | dict[str, str]]]]`.
+
+Imagine if you were using this type of data as a parameter and return type for many different functions.
+Sure you could copy and paste, but what if you had to allow integer keys in the dict of the list of the dict..
+You get the picture.
+
+Sapphire allows you to create a type alias without much effort, that you can use anywhere in the code.
+Let's take a look at the two ways we can create a variable to house this value;
+
+```sapphire
+# Not so good
+let v: list[list[int | str | set[str | int]] | dict[str, int | list[str | int | dict[str, str]]]] = get_data()
+
+def get_data() -> list[list[int | str | set[str | int]] | dict[str, int | list[str | int | dict[str, str]]]] {
+    return [
+        [1, 'abc', {'a', 1}],
+        {'a': 1, 'b': ['a', 1, {'a': 'b'}]},
+    ]
+}
+
+# Much better
+const monstrosity: type = list[list[int | str | set[str | int]] | dict[str, int | list[str | int | dict[str, str]]]]
+
+let v: monstrosity = get_data()
+
+def get_data() -> monstrosity {
+    return [
+        [1, 'abc', {'a', 1}],
+        {'a': 1, 'b': ['a', 1, {'a': 'b'}]},
+    ]
+}
+```
+
+There's nothing stopping you from writing your code in the first style, but it's probably far more preferential to use type aliasing in a situation like this.
+Hopefully, however, a type like this doesn't show up in your code all that often...
