@@ -1,8 +1,8 @@
-let five: int = 5;
-let ten: int = 10;
+let five: int = 5
+let ten: int = 10
 
 def add(x: num, y: num) -> num {
-    return x + y;
+    return x + y
 }
 
-let result: num = add(five, ten);
+let result: num = add(five, ten)
