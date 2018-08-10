@@ -50,4 +50,4 @@ def add_two(x: num) {
     return x + 2
 }
 
-println(run_twice(add_two, 2)));  # Should print '6'
+println(run_twice(add_two, 2)))  # Should print '6'

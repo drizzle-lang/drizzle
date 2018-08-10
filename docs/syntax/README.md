@@ -21,9 +21,6 @@ If any specifics change in this section that affect this example, the example wi
 def add(a: num, b: num) -> num {
     return a + b
 }
-# Sapphire, unlike Monkey, does not allow implicit returns
-# I do like it in Crystal but I prefer being explicit
-# That said, I return implicitly in Crystal >90% of the time...
 
 # Fibonacci function
 def fibonacci(x: int) -> int {
@@ -38,8 +35,7 @@ def fibonacci(x: int) -> int {
     }
 }
 
-# Sapphire will support higher order functions, i.e. functions that take other functions as parameters
-# The syntax isn't for definite, but it will do for now
+# Sapphire supports higher order functions, i.e. functions that take other functions as parameters
 def run_twice(f: ((num) -> num), x: num) -> num {
     return f(f(x))
 }
@@ -48,7 +44,7 @@ def add_two(x: num) {
     return x + 2
 }
 
-println(run_twice(add_two, 2)));  # Should print '6'
+println(run_twice(add_two, 2)))  # Should print '6'
 
 ```
 
