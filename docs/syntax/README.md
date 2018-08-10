@@ -62,6 +62,8 @@ Here's a little breakdown of the contents of this documentation section;
     - [Dictionaries](./datatypes/#dictionaries)
     - [Sets](./datatypes/#sets)
     - [Ranges](./datatypes/#ranges)
+    - [Unions](./datatypes/#union-types)
+    - [Functions](./datatypes/#functions)
 - [Operators](./operators/)
     - [Arithmetic](./operators/#arithmetic)
     - [Logic](./operators/#logic)

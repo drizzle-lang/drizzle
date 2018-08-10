@@ -42,10 +42,12 @@ class Dog < Animal {
         return self.noise
     }
 }
+
+const d: Dog = Dog()
+println(d.make_noise())  # Bark!
 ```
 
-`self` is used to explicitly access instance variables or methods.
-Unlike Python, `self` does not have to be provided as a parameter.
+`self` is used to explicitly access instance variables or methods, and is automatically defined within the scope of the class for non-static methods.
 
 ## Class Variables and Methods
 The `static` keyword is used to denote class variables or methods
@@ -57,6 +59,11 @@ class Dog < Animal {
         return self.noise
     }
 }
+
+println(Dog.make_noise())  # Bark!
+# Can still access from an instance too
+const d: Dog = Dog()
+println(d.make_noise())  # Bark!
 ```
 
 The `self` keyword can be used to access both class and instance methods and variables.
