@@ -63,5 +63,16 @@ module Sapphire
 
     def initialize(@token_type : TokenType, @literal : String, @file_name : String = "<stdin>", @line_num : Int32 = 0, @char_num : Int32 = 0)
     end
+
+    # The `TokenType` that represents the type of this Token instance
+    getter token_type
+    # The literal value that was used to generate this Token instance
+    getter literal
+    # The name of the file this Token was generated from
+    getter file_name
+    # The number of the line in the file that this Token was generated from
+    getter line_num
+    # The number of the initial character in the string that generated this Token
+    getter char_num
   end
 end
