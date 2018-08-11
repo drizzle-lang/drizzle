@@ -49,4 +49,13 @@ module Sapphire
     # Return value from a function
     RETURN
   end
+
+  # Class that represents Tokens generated from the Sapphire source
+  class Token
+    @token_type : TokenType
+    @literal : String
+
+    def initialize(@token_type : TokenType, @literal : String)
+    end
+  end
 end
