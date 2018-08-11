@@ -54,8 +54,12 @@ module Sapphire
   class Token
     @token_type : TokenType
     @literal : String
+    # Production stuff
+    @file_name : String
+    @line_num : Int32
+    @char_num : Int32
 
-    def initialize(@token_type : TokenType, @literal : String)
+    def initialize(@token_type : TokenType, @literal : String, @filename : String = "<stdin>", @line_num : Int32 = 0, @char_num : Int32 = 0)
     end
   end
 end
