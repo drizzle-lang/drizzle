@@ -1,3 +1,5 @@
+require "./token"
+
 module Sapphire
   # The character that is used in situations such as the EOF or ILLEGAL Tokens
   NULL_CHARACTER = '\0'
@@ -6,8 +8,8 @@ module Sapphire
   #
   # It works similarly to a Python generator, with the `#get_next_token` method generating the next token from the source file.
   class Lexer
-    @file_name : String
-    @lines : Array(String)
+    @file_name : String = "<stdin>"
+    @lines : Array(String) = [] of String
     @line_num : Int32 = 0
     @char_num : Int32 = 0
     @read_char_num : Int32 = 0
@@ -19,8 +21,9 @@ module Sapphire
     #
     # Since this should only be called from the REPL, the file_name will be "<stdin>".
     def initialize(input : String)
-      @file_name = "<stdin>"
       @lines = input.split "\n"
+      # Set the initial current line if there is any line in the input to set it to.
+      @current_line = @lines[0] unless @lines.size == 0
       # Initialize all the pointers correctly by using the new `read_next_char` method.
       self.read_next_char
     end
@@ -44,7 +47,7 @@ module Sapphire
           @current_char = NULL_CHARACTER
         else
           # If not, update the current line and character values to be the actual current line and the newline character.
-          @current_line = @lines[@line_num - 1] # -1 because @line_num is 1-indexed for use in error messages.
+          @current_line = @lines[@line_num] # -1 because @line_num is 1-indexed for use in error messages.
           @current_char = '\n'
         end
       else
@@ -53,6 +56,56 @@ module Sapphire
         @char_num = @read_char_num
         @read_char_num += 1
       end
+    end
+
+    # Generate the next Token instance from the given input.
+    #
+    # This method first tries the current_char of the Lexer against all of the single character Tokens in Sapphire.
+    # If it does not match, it then attempts to build up identifiers / keywords or numbers, depending on what the character is.
+    def get_next_token : Token
+      # Save the current values of the line and character numbers to use them in the initialization of the Token instance.
+      # These values have 1 added to them as they should be 1-indexed when output in error messages
+      current_line = @line_num + 1
+      current_char = @char_num + 1
+      token_type : TokenType
+      literal : String
+      # Attempt to generate a Token instance based off of the @current_char value
+      case @current_char
+      when '='
+        token_type = TokenType::ASSIGN
+        literal = "="
+      when '+'
+        token_type = TokenType::PLUS
+        literal = "+"
+      when ','
+        token_type = TokenType::COMMA
+        literal = ","
+      when ':'
+        token_type = TokenType::COLON
+        literal = ":"
+      when '('
+        token_type = TokenType::LEFT_PAREN
+        literal = "("
+      when ')'
+        token_type = TokenType::RIGHT_PAREN
+        literal = ")"
+      when '{'
+        token_type = TokenType::LEFT_BRACE
+        literal = "{"
+      when '}'
+        token_type = TokenType::RIGHT_BRACE
+        literal = "}"
+      when NULL_CHARACTER
+        token_type = TokenType::EOF
+        literal = NULL_CHARACTER.to_s
+      else
+        token_type = TokenType::ILLEGAL
+        literal = NULL_CHARACTER.to_s
+      end
+      # Update the positions of the characters
+      self.read_next_char
+      # Generate and return the Token instance
+      return Token.new token_type, literal, @file_name, current_line, current_char
     end
   end
 end
