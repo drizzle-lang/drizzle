@@ -26,10 +26,9 @@ Some basic extensions that I would like to see built in to the language itself;
 
 ## Roadmap
 Here's a basic roadmap for anyone who is interested in what's going on with this project;
-- Write a basic (non-production) version of the interpreter in Crystal
+- Write a basic (non-production) version of the interpreter in Crystal, using the [interpreter book](https://interpreterbook.com).
 - Research and learn ANTLR4 and use it to generate a better parser.
     - ANTLR cannot generate Crystal code so instead I intend to have it generate Go code and translate it, like I am doing with the book.
-- Go through the [interpreter book](https://interpreterbook.com) and get Sapphire up and running as far as that book goes.
 - Once the [compiler book](https://compilerbook.com) is released, go through that and turn Sapphire into a compiled language.
 - Get Sapphire to the point where it can replace it's Crystal interpreter.
 - Get Sapphire to the point where it can replace it's Crystal compiler.
