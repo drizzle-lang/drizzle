@@ -18,7 +18,7 @@ describe Sapphire::Lexer do
       Sapphire::Token.new(Sapphire::TokenType::RIGHT_BRACE, "}", filename, 1, 6),
       Sapphire::Token.new(Sapphire::TokenType::COMMA, ",", filename, 1, 7),
       Sapphire::Token.new(Sapphire::TokenType::COLON, ":", filename, 1, 8),
-      Sapphire::Token.new(Sapphire::TokenType::EOF, "\0", filename, 1, 9),
+      Sapphire::Token.new(Sapphire::TokenType::EOF, "\0", filename, 2, 1),
     ]
 
     # Create a lexer for this file
