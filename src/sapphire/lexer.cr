@@ -28,6 +28,19 @@ module Sapphire
       self.read_next_char
     end
 
+    # Create a Lexer instance using a File instance.
+    #
+    # This will replace the filename and load the lines in to use as input.
+    def initialize(file : File)
+      # Remove the current directory from the path name
+      @file_name = file.path.split(Dir.current)[-1]
+      # Set the lines and current line values
+      @lines = File.read_lines file.path
+      @current_line = @lines[0] unless @lines.size == 0
+      # Initialize all character pointers
+      self.read_next_char
+    end
+
     # Update the `char_num` and `read_char_num` pointers, as well as the `current_line` and `current_char` values.
     # If the end of the current line has been reached, move to the next line (if exists).
     # If the end of the input has been reached, set the current char to be the `NULL_CHARACTER`.
