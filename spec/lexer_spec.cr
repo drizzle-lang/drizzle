@@ -89,8 +89,8 @@ describe Sapphire::Lexer do
       Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "num", file_name, 8, 13),
       Sapphire::Token.new(Sapphire::TokenType::ASSIGN, "=", file_name, 8, 17),
       Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "add", file_name, 8, 19),
-      Sapphire::Token.new(Sapphire::TokenType::LEFT_PAREN, "(", file_name, 8, 20),
-      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "five", file_name, 8, 21),
+      Sapphire::Token.new(Sapphire::TokenType::LEFT_PAREN, "(", file_name, 8, 22),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "five", file_name, 8, 23),
       Sapphire::Token.new(Sapphire::TokenType::COMMA, ",", file_name, 8, 27),
       Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "ten", file_name, 8, 29),
       Sapphire::Token.new(Sapphire::TokenType::RIGHT_PAREN, ")", file_name, 8, 32),
@@ -101,7 +101,6 @@ describe Sapphire::Lexer do
 
     # Create a lexer for this file
     lexer = Sapphire::Lexer.new input_file
-
     # Loop through the expected_tokens array and ensure that the tokens match the lexer output
     expected_tokens.each do |expected|
       received = lexer.get_next_token
