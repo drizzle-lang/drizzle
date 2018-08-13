@@ -111,4 +111,83 @@ describe Sapphire::Lexer do
       received.char_num.should eq expected.char_num
     end
   end
+
+  it "correctly creates Token instances given the `example2.sph` script as input" do
+    file_name = "examples/example2.sph"
+    input_file = File.open file_name
+
+    # Generate an array of expected Tokens
+    expected_tokens = [
+      # let number: int = 10 - 2 * 8 / 2
+      Sapphire::Token.new(Sapphire::TokenType::LET, "let", file_name, 1, 1),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "number", file_name, 1, 5),
+      Sapphire::Token.new(Sapphire::TokenType::COLON, ":", file_name, 1, 11),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "int", file_name, 1, 13),
+      Sapphire::Token.new(Sapphire::TokenType::ASSIGN, "=", file_name, 1, 17),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "10", file_name, 1, 19),
+      Sapphire::Token.new(Sapphire::TokenType::MINUS, "-", file_name, 1, 22),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "2", file_name, 1, 24),
+      Sapphire::Token.new(Sapphire::TokenType::ASTERISK, "*", file_name, 1, 26),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "8", file_name, 1, 28),
+      Sapphire::Token.new(Sapphire::TokenType::SLASH, "/", file_name, 1, 30),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "2", file_name, 1, 32),
+
+      # if (number < 10) {
+      Sapphire::Token.new(Sapphire::TokenType::IF, "if", file_name, 3, 1),
+      Sapphire::Token.new(Sapphire::TokenType::LEFT_PAREN, "(", file_name, 3, 4),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "number", file_name, 3, 5),
+      Sapphire::Token.new(Sapphire::TokenType::LT, "<", file_name, 3, 12),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "10", file_name, 3, 14),
+      Sapphire::Token.new(Sapphire::TokenType::RIGHT_PAREN, ")", file_name, 3, 16),
+      Sapphire::Token.new(Sapphire::TokenType::LEFT_BRACE, "{", file_name, 3, 18),
+
+      # return true
+      Sapphire::Token.new(Sapphire::TokenType::RETURN, "return", file_name, 4, 5),
+      Sapphire::Token.new(Sapphire::TokenType::TRUE, "true", file_name, 4, 12),
+
+      # }
+      Sapphire::Token.new(Sapphire::TokenType::RIGHT_BRACE, "}", file_name, 5, 1),
+
+      # elsif (not true) {
+      Sapphire::Token.new(Sapphire::TokenType::ELSIF, "elsif", file_name, 6, 1),
+      Sapphire::Token.new(Sapphire::TokenType::LEFT_PAREN, "(", file_name, 6, 7),
+      Sapphire::Token.new(Sapphire::TokenType::NOT, "not", file_name, 6, 8),
+      Sapphire::Token.new(Sapphire::TokenType::TRUE, "true", file_name, 6, 12),
+      Sapphire::Token.new(Sapphire::TokenType::RIGHT_PAREN, ")", file_name, 6, 16),
+      Sapphire::Token.new(Sapphire::TokenType::LEFT_BRACE, "{", file_name, 6, 18),
+
+      # return false
+      Sapphire::Token.new(Sapphire::TokenType::RETURN, "return", file_name, 7, 5),
+      Sapphire::Token.new(Sapphire::TokenType::FALSE, "false", file_name, 7, 12),
+
+      # }
+      Sapphire::Token.new(Sapphire::TokenType::RIGHT_BRACE, "}", file_name, 8, 1),
+
+      # else {
+      Sapphire::Token.new(Sapphire::TokenType::ELSE, "else", file_name, 9, 1),
+      Sapphire::Token.new(Sapphire::TokenType::LEFT_BRACE, "{", file_name, 9, 6),
+
+      # return false
+      Sapphire::Token.new(Sapphire::TokenType::RETURN, "return", file_name, 10, 5),
+      Sapphire::Token.new(Sapphire::TokenType::FALSE, "false", file_name, 10, 12),
+
+      # }
+      Sapphire::Token.new(Sapphire::TokenType::RIGHT_BRACE, "}", file_name, 11, 1),
+
+      # EOF
+      Sapphire::Token.new(Sapphire::TokenType::EOF, Char::ZERO.to_s, file_name, 12, 1),
+    ]
+
+    # Create a lexer for this file
+    lexer = Sapphire::Lexer.new input_file
+    # Loop through the expected_tokens array and ensure that the tokens match the lexer output
+    expected_tokens.each do |expected|
+      received = lexer.get_next_token
+      received.token_type.should eq expected.token_type
+      received.literal.should eq expected.literal
+      received.file_name.should eq expected.file_name
+      received.line_num.should eq expected.line_num
+      received.char_num.should eq expected.char_num
+    end
+  end
 end
