@@ -27,6 +27,14 @@ module Sapphire
     # Subtraction operator for subtracting numbers.
     # Also the unary negation operator.
     MINUS
+    # Star operator used for multiplication, among other potential stuff later on too
+    ASTERISK
+    # Slash operator used for division
+    SLASH
+    # Less than logical operator
+    LT
+    # Greater than logical operator
+    GT
 
     # Delimiters
 
