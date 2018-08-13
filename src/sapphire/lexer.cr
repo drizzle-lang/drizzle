@@ -110,6 +110,18 @@ module Sapphire
           token_type = TokenType::MINUS
           literal = "-"
         end
+      when '*'
+        token_type = TokenType::ASTERISK
+        literal = "*"
+      when '/'
+        token_type = TokenType::SLASH
+        literal = "/"
+      when '<'
+        token_type = TokenType::LT
+        literal = "<"
+      when '>'
+        token_type = TokenType::GT
+        literal = ">"
       when ','
         token_type = TokenType::COMMA
         literal = ","
