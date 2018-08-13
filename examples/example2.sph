@@ -1,0 +1,11 @@
+let number: int = 10 - 2 * 8 / 2
+
+if (number < 10) {
+    return true
+}
+elsif (not true) {
+    return false
+}
+else {
+    return false
+}
