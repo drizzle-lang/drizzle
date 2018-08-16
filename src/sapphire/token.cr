@@ -31,10 +31,21 @@ module Sapphire
     ASTERISK
     # Slash operator used for division
     SLASH
+
+    # Logical Operators
+
     # Less than logical operator
     LT
     # Greater than logical operator
     GT
+    # Equality logical operator
+    EQ
+    # Inequality logical operator
+    NOT_EQ
+    # Less than or equal to
+    LT_EQ
+    # Greater than or equal to
+    GT_EQ
 
     # Delimiters
 
