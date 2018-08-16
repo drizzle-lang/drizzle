@@ -174,8 +174,48 @@ describe Sapphire::Lexer do
       # }
       Sapphire::Token.new(Sapphire::TokenType::RIGHT_BRACE, "}", file_name, 11, 1),
 
+      # let x: bool = 1 == 1
+      Sapphire::Token.new(Sapphire::TokenType::LET, "let", file_name, 13, 1),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "x", file_name, 13, 5),
+      Sapphire::Token.new(Sapphire::TokenType::COLON, ":", file_name, 13, 6),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "bool", file_name, 13, 8),
+      Sapphire::Token.new(Sapphire::TokenType::ASSIGN, "=", file_name, 13, 13),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "1", file_name, 13, 15),
+      Sapphire::Token.new(Sapphire::TokenType::EQ, "==", file_name, 13, 17),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "1", file_name, 13, 20),
+
+      # let y: bool = 2 != 1
+      Sapphire::Token.new(Sapphire::TokenType::LET, "let", file_name, 14, 1),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "y", file_name, 14, 5),
+      Sapphire::Token.new(Sapphire::TokenType::COLON, ":", file_name, 14, 6),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "bool", file_name, 14, 8),
+      Sapphire::Token.new(Sapphire::TokenType::ASSIGN, "=", file_name, 14, 13),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "2", file_name, 14, 15),
+      Sapphire::Token.new(Sapphire::TokenType::NOT_EQ, "!=", file_name, 14, 17),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "1", file_name, 14, 20),
+
+      # let z: bool = 2 <= 1
+      Sapphire::Token.new(Sapphire::TokenType::LET, "let", file_name, 15, 1),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "z", file_name, 15, 5),
+      Sapphire::Token.new(Sapphire::TokenType::COLON, ":", file_name, 15, 6),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "bool", file_name, 15, 8),
+      Sapphire::Token.new(Sapphire::TokenType::ASSIGN, "=", file_name, 15, 13),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "2", file_name, 15, 15),
+      Sapphire::Token.new(Sapphire::TokenType::LT_EQ, "<=", file_name, 15, 17),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "1", file_name, 15, 20),
+
+      # let w: bool = 2 >= 1
+      Sapphire::Token.new(Sapphire::TokenType::LET, "let", file_name, 16, 1),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "w", file_name, 16, 5),
+      Sapphire::Token.new(Sapphire::TokenType::COLON, ":", file_name, 16, 6),
+      Sapphire::Token.new(Sapphire::TokenType::IDENTIFIER, "bool", file_name, 16, 8),
+      Sapphire::Token.new(Sapphire::TokenType::ASSIGN, "=", file_name, 16, 13),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "2", file_name, 16, 15),
+      Sapphire::Token.new(Sapphire::TokenType::GT_EQ, ">=", file_name, 16, 17),
+      Sapphire::Token.new(Sapphire::TokenType::INTEGER, "1", file_name, 16, 20),
+
       # EOF
-      Sapphire::Token.new(Sapphire::TokenType::EOF, Char::ZERO.to_s, file_name, 12, 1),
+      Sapphire::Token.new(Sapphire::TokenType::EOF, Char::ZERO.to_s, file_name, 17, 1),
     ]
 
     # Create a lexer for this file
