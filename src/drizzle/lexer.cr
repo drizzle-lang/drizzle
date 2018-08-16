@@ -94,8 +94,15 @@ module Drizzle
       # Attempt to generate a Token instance based off of the @current_char value
       case @current_char
       when '='
-        token_type = TokenType::ASSIGN
-        literal = "="
+        if self.peek_next_char == '='
+          token_type = TokenType::EQ
+          literal = "=="
+          # Read the second '=' char
+          self.read_next_char
+        else
+          token_type = TokenType::ASSIGN
+          literal = "="
+        end
       when '+'
         token_type = TokenType::PLUS
         literal = "+"
@@ -109,6 +116,32 @@ module Drizzle
         else
           token_type = TokenType::MINUS
           literal = "-"
+        end
+      when '*'
+        token_type = TokenType::ASTERISK
+        literal = "*"
+      when '/'
+        token_type = TokenType::SLASH
+        literal = "/"
+      when '<'
+        if self.peek_next_char == '='
+          token_type = TokenType::LT_EQ
+          literal = "<="
+          # Read the '=' character
+          self.read_next_char
+        else
+          token_type = TokenType::LT
+          literal = "<"
+        end
+      when '>'
+        if self.peek_next_char == '='
+          token_type = TokenType::GT_EQ
+          literal = ">="
+          # Read the '=' char
+          self.read_next_char
+        else
+          token_type = TokenType::GT
+          literal = ">"
         end
       when ','
         token_type = TokenType::COMMA
@@ -128,6 +161,17 @@ module Drizzle
       when '}'
         token_type = TokenType::RIGHT_BRACE
         literal = "}"
+      when '!'
+        if self.peek_next_char == '='
+          token_type = TokenType::NOT_EQ
+          literal = "!="
+          # Read the '=' character
+          self.read_next_char
+        else
+          # Bang on its own is currently an Illegal token
+          token_type = TokenType::ILLEGAL
+          literal = Char::ZERO.to_s
+        end
       when Char::ZERO
         token_type = TokenType::EOF
         literal = Char::ZERO.to_s

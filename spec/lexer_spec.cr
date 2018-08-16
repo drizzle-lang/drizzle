@@ -111,4 +111,123 @@ describe Drizzle::Lexer do
       received.char_num.should eq expected.char_num
     end
   end
+
+  it "correctly creates Token instances given the `example2.drzl` script as input" do
+    file_name = "examples/example2.drzl"
+    input_file = File.open file_name
+
+    # Generate an array of expected Tokens
+    expected_tokens = [
+      # let number: int = 10 - 2 * 8 / 2
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 1, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "number", file_name, 1, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 1, 11),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "int", file_name, 1, 13),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 1, 17),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "10", file_name, 1, 19),
+      Drizzle::Token.new(Drizzle::TokenType::MINUS, "-", file_name, 1, 22),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "2", file_name, 1, 24),
+      Drizzle::Token.new(Drizzle::TokenType::ASTERISK, "*", file_name, 1, 26),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "8", file_name, 1, 28),
+      Drizzle::Token.new(Drizzle::TokenType::SLASH, "/", file_name, 1, 30),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "2", file_name, 1, 32),
+
+      # if (number < 10) {
+      Drizzle::Token.new(Drizzle::TokenType::IF, "if", file_name, 3, 1),
+      Drizzle::Token.new(Drizzle::TokenType::LEFT_PAREN, "(", file_name, 3, 4),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "number", file_name, 3, 5),
+      Drizzle::Token.new(Drizzle::TokenType::LT, "<", file_name, 3, 12),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "10", file_name, 3, 14),
+      Drizzle::Token.new(Drizzle::TokenType::RIGHT_PAREN, ")", file_name, 3, 16),
+      Drizzle::Token.new(Drizzle::TokenType::LEFT_BRACE, "{", file_name, 3, 18),
+
+      # return true
+      Drizzle::Token.new(Drizzle::TokenType::RETURN, "return", file_name, 4, 5),
+      Drizzle::Token.new(Drizzle::TokenType::TRUE, "true", file_name, 4, 12),
+
+      # }
+      Drizzle::Token.new(Drizzle::TokenType::RIGHT_BRACE, "}", file_name, 5, 1),
+
+      # elsif (not true) {
+      Drizzle::Token.new(Drizzle::TokenType::ELSIF, "elsif", file_name, 6, 1),
+      Drizzle::Token.new(Drizzle::TokenType::LEFT_PAREN, "(", file_name, 6, 7),
+      Drizzle::Token.new(Drizzle::TokenType::NOT, "not", file_name, 6, 8),
+      Drizzle::Token.new(Drizzle::TokenType::TRUE, "true", file_name, 6, 12),
+      Drizzle::Token.new(Drizzle::TokenType::RIGHT_PAREN, ")", file_name, 6, 16),
+      Drizzle::Token.new(Drizzle::TokenType::LEFT_BRACE, "{", file_name, 6, 18),
+
+      # return false
+      Drizzle::Token.new(Drizzle::TokenType::RETURN, "return", file_name, 7, 5),
+      Drizzle::Token.new(Drizzle::TokenType::FALSE, "false", file_name, 7, 12),
+
+      # }
+      Drizzle::Token.new(Drizzle::TokenType::RIGHT_BRACE, "}", file_name, 8, 1),
+
+      # else {
+      Drizzle::Token.new(Drizzle::TokenType::ELSE, "else", file_name, 9, 1),
+      Drizzle::Token.new(Drizzle::TokenType::LEFT_BRACE, "{", file_name, 9, 6),
+
+      # return false
+      Drizzle::Token.new(Drizzle::TokenType::RETURN, "return", file_name, 10, 5),
+      Drizzle::Token.new(Drizzle::TokenType::FALSE, "false", file_name, 10, 12),
+
+      # }
+      Drizzle::Token.new(Drizzle::TokenType::RIGHT_BRACE, "}", file_name, 11, 1),
+
+      # let x: bool = 1 == 1
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 13, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "x", file_name, 13, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 13, 6),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "bool", file_name, 13, 8),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 13, 13),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "1", file_name, 13, 15),
+      Drizzle::Token.new(Drizzle::TokenType::EQ, "==", file_name, 13, 17),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "1", file_name, 13, 20),
+
+      # let y: bool = 2 != 1
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 14, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "y", file_name, 14, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 14, 6),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "bool", file_name, 14, 8),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 14, 13),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "2", file_name, 14, 15),
+      Drizzle::Token.new(Drizzle::TokenType::NOT_EQ, "!=", file_name, 14, 17),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "1", file_name, 14, 20),
+
+      # let z: bool = 2 <= 1
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 15, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "z", file_name, 15, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 15, 6),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "bool", file_name, 15, 8),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 15, 13),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "2", file_name, 15, 15),
+      Drizzle::Token.new(Drizzle::TokenType::LT_EQ, "<=", file_name, 15, 17),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "1", file_name, 15, 20),
+
+      # let w: bool = 2 >= 1
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 16, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "w", file_name, 16, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 16, 6),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "bool", file_name, 16, 8),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 16, 13),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "2", file_name, 16, 15),
+      Drizzle::Token.new(Drizzle::TokenType::GT_EQ, ">=", file_name, 16, 17),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "1", file_name, 16, 20),
+
+      # EOF
+      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 17, 1),
+    ]
+
+    # Create a lexer for this file
+    lexer = Drizzle::Lexer.new input_file
+    # Loop through the expected_tokens array and ensure that the tokens match the lexer output
+    expected_tokens.each do |expected|
+      received = lexer.get_next_token
+      received.token_type.should eq expected.token_type
+      received.literal.should eq expected.literal
+      received.file_name.should eq expected.file_name
+      received.line_num.should eq expected.line_num
+      received.char_num.should eq expected.char_num
+    end
+  end
 end

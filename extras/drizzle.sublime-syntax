@@ -45,7 +45,7 @@ contexts:
       scope: keyword.control.conditional.drizzle
 
     # Other keywords
-    - match: '\b(return)\b'
+    - match: '\b(return|not|and|or)\b'
       scope: keyword.other.drizzle
 
     # Operators
@@ -62,6 +62,10 @@ contexts:
     # Numbers
     - match: '\b(-)?[0-9.]+\b'
       scope: constant.numeric.drizzle
+
+    # Other literal values
+    - match: '\b(null|true|false)\b'
+      scope: constant.language.sapphire
 
   variables:
     # Handle parsing let and const statements with all the stuff in them
@@ -125,3 +129,4 @@ contexts:
 # keyword
 # invalid
 # invalid.deprecated
+
