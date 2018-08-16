@@ -52,3 +52,6 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
 This project is open to anyone who wants to learn anything about creating programming languages!
 
 A goal for early stages is to keep documentation at a high enough quality that it will hopefully be easy to follow what's going on, but if not then please open an issue!
+
+### Contributors
+- [crnbrdrck](https://github.com/crnbrdrck): creator, designer, maintainer
