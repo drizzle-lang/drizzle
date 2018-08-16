@@ -1,5 +1,5 @@
 require "./spec_helper"
 
-describe Sapphire do
+describe Drizzle do
   # TODO: Write integration tests for the language as a whole
 end

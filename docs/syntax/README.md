@@ -5,15 +5,15 @@ permalink: /syntax/
 ---
 
 # Syntax
-Sapphire's source code can can be written in anything up to Unicode, due to Crystal's ability to handle Unicode codepoints in it's `char` type.
+Drizzle's source code can can be written in anything up to Unicode, due to Crystal's ability to handle Unicode codepoints in it's `char` type.
 
 The language is currently in an initial design phase, so all the docs in this section are subject to change at will until the implementation begins.
 
 ## Example
-Here is a brief example of the Sapphire code as it is currently planned to look.
+Here is a brief example of the Drizzle code as it is currently planned to look.
 
 If any specifics change in this section that affect this example, the example will also be updated.
-```sapphire
+```drizzle
 # Also allows double quote strings
 
 # Function definitions
@@ -35,7 +35,7 @@ def fibonacci(x: int) -> int {
     }
 }
 
-# Sapphire supports higher order functions, i.e. functions that take other functions as parameters
+# Drizzle supports higher order functions, i.e. functions that take other functions as parameters
 def run_twice(f: ((num) -> num), x: num) -> num {
     return f(f(x))
 }

@@ -1,13 +1,13 @@
 ---
-title: Sapphire
+title: Drizzle
 layout: home
 permalink: /
 ---
 
-# Sapphire Programming Language
-Welcome to the language reference for the Sapphire Programming Language, although this is currently just some musings at the moment.
+# Drizzle Programming Language
+Welcome to the language reference for the Drizzle Programming Language, although this is currently just some musings at the moment.
 
-The Sapphire project has the following goals:
+The Drizzle project has the following goals:
 - Have an easy to read syntax without compromising on speed.
 - Have static type checking while keeping type declarations unobtrusive (heavily inspired by Python / Swift)
 

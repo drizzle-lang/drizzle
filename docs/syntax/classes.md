@@ -6,16 +6,16 @@ permalink: /syntax/classes/
 
 # Classes
 
-Classes in Sapphire are denoted by the `class` keyword.
+Classes in Drizzle are denoted by the `class` keyword.
 Inheritance uses the `<` operator.
 
-```sapphire
+```drizzle
 class Dog < Animal {}
 ```
 
-The constuctor in Sapphire is an instance function called `init`.
+The constuctor in Drizzle is an instance function called `init`.
 
-```sapphire
+```drizzle
 class Person {
     name: str
     age: int
@@ -26,8 +26,8 @@ class Person {
     }
 }
 
-let p1 = Person('Sapphire')
-let p2 = Person('Sapphire', 5)
+let p1 = Person('Drizzle')
+let p2 = Person('Drizzle', 5)
 ```
 
 By default, an empty constructor is defined that takes no parameters and does nothing other than creates the instance for the user.
@@ -35,7 +35,7 @@ By default, an empty constructor is defined that takes no parameters and does no
 ## Instance Variables and Methods
 Instance variables and methods are created simply by declaring them within the scope of the class itself
 
-```sapphire
+```drizzle
 class Dog < Animal {
     noise: str = 'Bark!'
     def make_noise() -> str {
@@ -52,7 +52,7 @@ println(d.make_noise())  # Bark!
 ## Class Variables and Methods
 The `static` keyword is used to denote class variables or methods
 
-```sapphire
+```drizzle
 class Dog < Animal {
     static noise: str = 'Bark!'
     static def make_noise() -> str {
@@ -75,7 +75,7 @@ Abstract classes are classes that can not be instantiated by themselves, and abs
 
 When an abstract class is inherited by a concrete class, all abstract methods need to be defined or the code will not run.
 
-```sapphire
+```drizzle
 abstract class Animal {
     abstract def make_noise() -> str
 

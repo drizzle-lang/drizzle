@@ -1,8 +1,8 @@
-# This example file gives the sapphire translation for the Monkey code given in the book's introduction
+# This example file gives the Drizzle translation for the Monkey code given in the book's introduction
 
 # Variable assignment
 let age: int = 1
-let name: str = 'Sapphire'
+let name: str = 'Drizzle'
 let result: int = 10 * (20 / 2)
 
 # Lists
@@ -23,7 +23,7 @@ println(my_dict["name"])  # Prints 'crnbrdrck'
 def add(a: num, b: num) -> num {
     return a + b
 }
-# Sapphire, unlike Monkey, does not allow implicit returns
+# Drizzle, unlike Monkey, does not allow implicit returns
 # I do like it in Crystal but I prefer being explicit
 # That said, I return implicitly in Crystal >90% of the time...
 
@@ -40,7 +40,7 @@ def fibonacci(x: int) -> int {
     }
 }
 
-# Sapphire will support higher order functions, i.e. functions that take other functions as parameters
+# Drizzle will support higher order functions, i.e. functions that take other functions as parameters
 # The syntax isn't for definite, but it will do for now
 def run_twice(f: ((num) -> num), x: num) -> num {
     return f(f(x))

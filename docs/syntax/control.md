@@ -6,7 +6,7 @@ permalink: /syntax/control/
 
 # Control Statements
 
-Control statements in Sapphire include the following;
+Control statements in Drizzle include the following;
 
 - `if`
 - `elif`
@@ -16,7 +16,7 @@ Control statements in Sapphire include the following;
 - `break`
 - `continue`
 
-Before we go into the details, we first need to discuss what Sapphire treats as truthy and falsey.
+Before we go into the details, we first need to discuss what Drizzle treats as truthy and falsey.
 
 ## Truthy / Falsey
 
@@ -43,7 +43,7 @@ These can be followed by any number of `elif` (else if) statements, and can also
 
 The syntax of these is as follows;
 
-```sapphire
+```drizzle
 if false {
     println('False is a truthy value')
 }
@@ -62,7 +62,7 @@ If none of the `elif` statements' expressions evaluate to a truthy value, the `e
 
 Similar to Python, `if` statements can be used as part of assignment statements, like the following;
 
-```sapphire
+```drizzle
 let x: int = if false { 3 } else { 4 }  # x == 4
 ```
 
@@ -70,11 +70,11 @@ In these situations, they are named `conditional expressions` instead of stateme
 
 ## Loops
 
-There are two types of looping in Sapphire; `for` and `while`.
+There are two types of looping in Drizzle; `for` and `while`.
 
 `for` loops are used when the number of repetitions are known in advance, e.g. to do something 5 times, you can use the following code;
 
-```sapphire
+```drizzle
 for i: int in 0...5 {
     println(i)
 }
@@ -83,14 +83,14 @@ See more on `ranges` in the [Datatypes](/syntax/datatypes/#ranges) page.
 
 The same output can be generated from the following;
 
-```sapphire
+```drizzle
 for i: int in [0, 1, 2, 3, 4] {
     println(i)
 }
 ```
 
 The output of this will be
-```sapphire
+```drizzle
 0
 1
 2
@@ -102,7 +102,7 @@ On the other hand, `while` loops are used when you don't know the amount of repe
 
 `while` loops take an expression, and if it evaluates to a `truthy` value, the block of the loop will be run.
 
-```sapphire
+```drizzle
 let i: int = 0
 while i < 10 {
     i++
@@ -111,7 +111,7 @@ while i < 10 {
 
 ## Break / Continue
 
-There are two loop specific control statements in Sapphire; `break` and `continue`.
+There are two loop specific control statements in Drizzle; `break` and `continue`.
 
 `break` when used inside a loop will stop the execution of the loop and continue execution of the program after the block of the loop.
 

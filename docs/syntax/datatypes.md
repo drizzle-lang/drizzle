@@ -5,7 +5,7 @@ permalink: /syntax/datatypes/
 ---
 
 # Datatypes
-Below is a list of all the different built in datatypes that are in my thoughts for Sapphire.
+Below is a list of all the different built in datatypes that are in my thoughts for Drizzle.
 
 Some of them I am currently unsure about, but for the most part these types should be pretty set in stone.
 
@@ -39,7 +39,7 @@ Some of them I am currently unsure about, but for the most part these types shou
 - You can check the value of a nullable by instead appending the `?` character.
     - This will return a boolean stating whether the value of the variable is null or not
 
-```sapphire
+```drizzle
 let s: str? = null
 # Here, s is of type `str?`
 if s? {
@@ -65,7 +65,7 @@ t = t!
 - `hex`
     - Hexadecimal number
 - `num` is a super type for all numeric types that can be used for param and return types in functions that can handle `int` and `float` types.
-- Like Ruby / Crystal, the numeric types in `Sapphire` will have methods (`x: float = 3.as(float)`).
+- Like Ruby / Crystal, the numeric types in `Drizzle` will have methods (`x: float = 3.as(float)`).
 - Currently, I think we can just have a single `int` and `float` type for 64-bit integers and 64-bit floats for now.
 
 ## Strings
@@ -98,7 +98,7 @@ t = t!
 - `s1: set[int] = {1, 2, 3}`
 - `s2: set = {1, 'b', 0xa}`
 
-A big plus Sapphire has over Python in this regard is that, due to Sapphire's type declarations, the `{}` literal can be used to define empty sets **and** empty dicts with no hassle\*!
+A big plus Drizzle has over Python in this regard is that, due to Drizzle's type declarations, the `{}` literal can be used to define empty sets **and** empty dicts with no hassle\*!
 
 \* A small bit of hassle might arise when using the literal in a conditional (`if s == {}`) but hopefully the parser will be able to handle it.
 
@@ -123,7 +123,7 @@ For example, `dict[str, str | int]` is the type for a dictionary with string key
 
 ## Functions
 
-As Sapphire supports *higher order functions*, meaning that functions can be passed as parameters, then these functions need to have a type hinting syntax.
+As Drizzle supports *higher order functions*, meaning that functions can be passed as parameters, then these functions need to have a type hinting syntax.
 
 The syntax is as simple as possible, simply the types in the argument tuple, the return type operator and the return type, all contained in parentheses.
 
@@ -135,7 +135,7 @@ To conserve time and energy, type aliases can be set up for cases where you have
 
 Let's take the following value as an example;
 
-```sapphire
+```drizzle
 [
     [1, 'abc', {'a', 1}],
     {'a': 1, 'b': ['a', 1, {'a': 'b'}]},
@@ -148,10 +148,10 @@ Imagine if you were using this type of data as a parameter and return type for m
 Sure you could copy and paste, but what if you had to allow integer keys in the dict of the list of the dict..
 You get the picture.
 
-Sapphire allows you to create a type alias without much effort, that you can use anywhere in the code.
+Drizzle allows you to create a type alias without much effort, that you can use anywhere in the code.
 Let's take a look at the two ways we can create a variable to house this value;
 
-```sapphire
+```drizzle
 # Not so good
 let v: list[list[int | str | set[str | int]] | dict[str, int | list[str | int | dict[str, str]]]] = get_data()
 

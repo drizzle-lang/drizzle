@@ -1,12 +1,12 @@
-name: sapphire
+name: drizzle
 version: 0.1.0
 
 authors:
   - Ciaran Broderick <cb@cix.ie>
 
 targets:
-  sapphire:
-    main: src/sapphire.cr
+  drizzle:
+    main: src/drizzle.cr
 
 crystal: 0.25.1
 

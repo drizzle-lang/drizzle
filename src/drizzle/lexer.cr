@@ -1,6 +1,6 @@
 require "./token"
 
-module Sapphire
+module Drizzle
   # The Lexer is the class in charge of reading in input from a file and converting the text into tokens.
   #
   # It works similarly to a Python generator, with the `#get_next_token` method generating the next token from the source file.
@@ -79,7 +79,7 @@ module Sapphire
 
     # Generate the next Token instance from the given input.
     #
-    # This method first tries the current_char of the Lexer against all of the single character Tokens in Sapphire.
+    # This method first tries the current_char of the Lexer against all of the single character Tokens in Drizzle.
     # If it does not match, it then attempts to build up identifiers / keywords or numbers, depending on what the character is.
     def get_next_token : Token
       # Skip whitespace characters
@@ -135,7 +135,7 @@ module Sapphire
         # There are some checks to be made here, as this could possibly be a keyword, identifier or number
         if @current_char.letter?
           literal = self.read_identifier
-          token_type = Sapphire::Keywords.fetch literal, TokenType::IDENTIFIER
+          token_type = Drizzle::Keywords.fetch literal, TokenType::IDENTIFIER
           no_read = true
         elsif @current_char.number?
           literal = self.read_number
@@ -171,7 +171,7 @@ module Sapphire
 
     # Builds up an integer number from the source code.
     #
-    # The interpreter book only handles integer numbers when I move to creating an ANTLR parser then Sapphire will have other number types too :D
+    # The interpreter book only handles integer numbers when I move to creating an ANTLR parser then Drizzle will have other number types too :D
     # The number is returned as a String still, to keep Token implementation simple
     def read_number : String
       # Save the current position and the current line, as well as the position of the end of the identifier
@@ -187,7 +187,7 @@ module Sapphire
       return @lines[line_num][start_pos...end_pos]
     end
 
-    # Skip whitespace characters in the input as it is unnecessary to turn them into Tokens for Sapphire
+    # Skip whitespace characters in the input as it is unnecessary to turn them into Tokens for Drizzle
     #
     # Whitespace characters include spaces, newlines, tabs, carriage returns, etc.
     def skip_whitespace

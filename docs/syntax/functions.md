@@ -6,30 +6,30 @@ permalink: /syntax/functions/
 
 # Functions
 
-Functions in Sapphire are defined using the `def` keyword.
+Functions in Drizzle are defined using the `def` keyword.
 
-```sapphire
+```drizzle
 def multiply_message(msg: str, times: int = 5) {
     to_print = msg * times
     println(to_print)
 }
 
-# In this example we show that Sapphire supports default params
+# In this example we show that Drizzle supports default params
 multiply_message('a')  # Prints 'aaaaa'
 multiply_message('a', 3)  # Prints 'aaa'
 ```
 
 ## Single Line Functions
-Sapphire also supports simple one line functions;
+Drizzle also supports simple one line functions;
 
-```sapphire
+```drizzle
 def multiply_message(msg: str, times: int = 5) = println(msg * times)
 ```
 
 ## Return Types
 Return types of the function are shown through the use of the `->` operator
 
-```sapphire
+```drizzle
 def test() -> int = return 3
 ```
 

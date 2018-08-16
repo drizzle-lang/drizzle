@@ -1,10 +1,10 @@
 %YAML 1.2
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
-name: Sapphire
+name: Drizzle
 file_extensions:
-  - sph
-scope: source.sapphire
+  - drzl
+scope: source.drizzle
 contexts:
   main:
     - include: comments
@@ -19,17 +19,17 @@ contexts:
     # Strings begin and end with quotes, and use backslashes as an escape
     # character
     - match: "'"
-      scope: punctuation.definition.string.begin.sapphire
+      scope: punctuation.definition.string.begin.drizzle
       push: single_quoted_string
 
     - match: '"'
-      scope: punctuation.definition.string.begin.sapphire
+      scope: punctuation.definition.string.begin.drizzle
       push: double_quoted_string
 
   comments:
     # Comments begin with a '//' and finish at the end of the line
     - match: '#'
-      scope: punctuation.definition.comment.sapphire
+      scope: punctuation.definition.comment.drizzle
       push: line_comment
 
   keywords:
@@ -39,70 +39,70 @@ contexts:
     # need to be escaped: this is done by using two single quotes next to each
     # other.
     - match: '\b(for|while)\b'
-      scope: keyword.control.sapphire
+      scope: keyword.control.drizzle
 
     - match: '\b(if|elsif|else)\b'
-      scope: keyword.control.conditional.sapphire
+      scope: keyword.control.conditional.drizzle
 
     # Other keywords
     - match: '\b(return)\b'
-      scope: keyword.other.sapphire
+      scope: keyword.other.drizzle
 
     # Operators
     - match: '\b(=)\b'
-      scope: keyword.operator.assignment.sapphire
+      scope: keyword.operator.assignment.drizzle
 
     - match: '\b(\+|-|\*|/)\b'
-      scope: keyword.operator.arithmetic.sapphire
+      scope: keyword.operator.arithmetic.drizzle
 
     - match: '\b(>|<|>=|<=|==)\b'
-      scope: keyword.operator.logical.sapphire
+      scope: keyword.operator.logical.drizzle
 
   constants:
     # Numbers
     - match: '\b(-)?[0-9.]+\b'
-      scope: constant.numeric.sapphire
+      scope: constant.numeric.drizzle
 
   variables:
     # Handle parsing let and const statements with all the stuff in them
     - match: 'let ([a-zA-Z_]+)'
       captures:
-        '1': variable.other.sapphire
+        '1': variable.other.drizzle
 
     - match: 'const ([a-zA-Z_]+)'
       captures:
-        '1': variable.other.constant.sapphire
+        '1': variable.other.constant.drizzle
 
   functions:
     # Handling for functions since they are big
     - match: '(def) ([a-zA-Z_\?!]+)'
       captures:
-        '1': storage.type.sapphire
-        '2': entity.name.function.sapphire
+        '1': storage.type.drizzle
+        '2': entity.name.function.drizzle
 
   storage:
     # Storage types
     - match: '\b(def|class|let|const|int|bool|str|list|dict|num)\b'
-      scope: storage.type.sapphire
+      scope: storage.type.drizzle
 
   double_quoted_string:
-    - meta_scope: string.quoted.double.sapphire
+    - meta_scope: string.quoted.double.drizzle
     - match: '\\.'
-      scope: constant.character.escape.sapphire
+      scope: constant.character.escape.drizzle
     - match: '"'
-      scope: punctuation.definition.string.end.sapphire
+      scope: punctuation.definition.string.end.drizzle
       pop: true
 
   single_quoted_string:
-    - meta_scope: string.quoted.double.sapphire
+    - meta_scope: string.quoted.double.drizzle
     - match: '\\.'
-      scope: constant.character.escape.sapphire
+      scope: constant.character.escape.drizzle
     - match: "'"
-      scope: punctuation.definition.string.end.sapphire
+      scope: punctuation.definition.string.end.drizzle
       pop: true
 
   line_comment:
-    - meta_scope: comment.line.sapphire
+    - meta_scope: comment.line.drizzle
     - match: $
       pop: true
 
