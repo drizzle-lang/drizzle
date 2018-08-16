@@ -9,3 +9,8 @@ elsif (not true) {
 else {
     return false
 }
+
+let x: bool = 1 == 1
+let y: bool = 2 != 1
+let z: bool = 2 <= 1
+let w: bool = 2 >= 1
