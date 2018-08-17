@@ -36,7 +36,7 @@ options.on("-h", "--help", "Show this help message") { help = true }
 # REPL env if nothing is passed
 if ARGV.size == 0
   puts header
-  # Drizzle::REPL.new
+  Drizzle::REPL.new
 else
   # Parse options and do stuff
   options.parse!
