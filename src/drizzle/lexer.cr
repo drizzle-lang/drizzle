@@ -253,6 +253,8 @@ module Drizzle
       # The easiest way is to set the read_pos to be the end of the current line and then call read next char
       @read_char_num = @current_line.size
       self.read_next_char
+      # Make sure to skip whitespace again to be safe
+      self.skip_whitespace
     end
 
     # Determine whether a given character is allowed to be used as part of an identifier name.
