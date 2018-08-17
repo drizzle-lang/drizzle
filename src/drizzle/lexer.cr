@@ -57,7 +57,7 @@ module Drizzle
           @current_char = Char::ZERO
         else
           # If not, update the current line and character values to be the actual current line and the newline character.
-          @current_line = @lines[@line_num] # -1 because @line_num is 1-indexed for use in error messages.
+          @current_line = @lines[@line_num]
           @current_char = '\n'
         end
       else
@@ -84,6 +84,10 @@ module Drizzle
     def get_next_token : Token
       # Skip whitespace characters
       self.skip_whitespace
+      # Skip comments by proceeding to the end of the line
+      if @current_char == '#'
+        self.skip_comment
+      end
       # Save the current values of the line and character numbers to use them in the initialization of the Token instance.
       # These values have 1 added to them as they should be 1-indexed when output in error messages
       current_line = @line_num + 1
@@ -239,6 +243,15 @@ module Drizzle
       while whitespace_chars.includes? @current_char
         self.read_next_char
       end
+    end
+
+    # Once a comment is found in the source, skip the lexer to the next line.
+    #
+    # In Drizzle, there are currently only single line comments, so we can just skip the line.
+    def skip_comment
+      # The easiest way is to set the read_pos to be the end of the current line and then call read next char
+      @read_char_num = @current_line.size
+      self.read_next_char
     end
 
     # Determine whether a given character is allowed to be used as part of an identifier name.
