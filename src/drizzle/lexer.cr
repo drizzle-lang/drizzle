@@ -86,6 +86,7 @@ module Drizzle
       self.skip_whitespace
       # Skip comments by proceeding to the end of the line
       if @current_char == '#'
+        # At a later point we might tokenize comments and use them for something, either in the interpreter or at least in the docs generator
         self.skip_comment
       end
       # Save the current values of the line and character numbers to use them in the initialization of the Token instance.
