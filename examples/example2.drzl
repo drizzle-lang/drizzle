@@ -1,5 +1,5 @@
 # Testing all arithmetic and logic operators
-let number: int = 10 - 2 * 8 / 2
+let number: int = 10 - 2 * 8 / 2 # Comment at end of line for test purposes
 
 if (number < 10) {
     return true
