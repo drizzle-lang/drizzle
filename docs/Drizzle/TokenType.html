@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.26.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/drizzle-lang/drizzle">
+  <title>Drizzle::TokenType - github.com/drizzle-lang/drizzle</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/drizzle-lang/drizzle/Drizzle" data-name="drizzle">
+      <a href="../Drizzle.html">Drizzle</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Lexer" data-name="drizzle::lexer">
+      <a href="../Drizzle/Lexer.html">Lexer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
+      <a href="../Drizzle/REPL.html">REPL</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Token" data-name="drizzle::token">
+      <a href="../Drizzle/Token.html">Token</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/TokenType" data-name="drizzle::tokentype">
+      <a href="../Drizzle/TokenType.html">TokenType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">enum</span> Drizzle::TokenType
+
+</h1>
+
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>Enum of the various types of Tokens in the Drizzle language.
+This enum is used for the creation of <code><a href="../Drizzle/Token.html">Token</a></code> instances, and will use its helper methods to help in the parsing stages also.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L4" target="_blank">
+        drizzle/token.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>Enum Members</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="ILLEGAL">
+        <strong>ILLEGAL</strong> = <code><span class="n">0</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Token is generated from a string that Drizzle does not recognise</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="EOF">
+        <strong>EOF</strong> = <code><span class="n">1</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>End of file token</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="IDENTIFIER">
+        <strong>IDENTIFIER</strong> = <code><span class="n">2</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Name of variable, function, type, etc</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="INTEGER">
+        <strong>INTEGER</strong> = <code><span class="n">3</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Integer literal</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="ASSIGN">
+        <strong>ASSIGN</strong> = <code><span class="n">4</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Assignment operator for assigning value to a variable</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="RETURN_TYPE">
+        <strong>RETURN_TYPE</strong> = <code><span class="n">5</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Return type operator for specifying a functions return type</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="PLUS">
+        <strong>PLUS</strong> = <code><span class="n">6</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Addition operator for adding two values together</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="MINUS">
+        <strong>MINUS</strong> = <code><span class="n">7</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Subtraction operator for subtracting numbers.
+Also the unary negation operator.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="ASTERISK">
+        <strong>ASTERISK</strong> = <code><span class="n">8</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Star operator used for multiplication, among other potential stuff later on too</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="SLASH">
+        <strong>SLASH</strong> = <code><span class="n">9</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Slash operator used for division</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="LT">
+        <strong>LT</strong> = <code><span class="n">10</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Less than logical operator</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="GT">
+        <strong>GT</strong> = <code><span class="n">11</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Greater than logical operator</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="EQ">
+        <strong>EQ</strong> = <code><span class="n">12</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Equality logical operator</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="NOT_EQ">
+        <strong>NOT_EQ</strong> = <code><span class="n">13</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Inequality logical operator</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="LT_EQ">
+        <strong>LT_EQ</strong> = <code><span class="n">14</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Less than or equal to</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="GT_EQ">
+        <strong>GT_EQ</strong> = <code><span class="n">15</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Greater than or equal to</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="COMMA">
+        <strong>COMMA</strong> = <code><span class="n">16</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Separating of items in a data structure / parameter list / etc.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="COLON">
+        <strong>COLON</strong> = <code><span class="n">17</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Separating of identifier from type in the case of variables and parameters</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="LEFT_PAREN">
+        <strong>LEFT_PAREN</strong> = <code><span class="n">18</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Opening of parameter lists and tuples, and of general brackets</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="RIGHT_PAREN">
+        <strong>RIGHT_PAREN</strong> = <code><span class="n">19</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Closing of parameter lists and tuples, and of general brackets</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="LEFT_BRACE">
+        <strong>LEFT_BRACE</strong> = <code><span class="n">20</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Opening of code blocks i.e. functions, as well as opening of set and dict literals</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="RIGHT_BRACE">
+        <strong>RIGHT_BRACE</strong> = <code><span class="n">21</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>CLosing of code blocks i.e. functions, as well as closing of set and dict literals</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="LET">
+        <strong>LET</strong> = <code><span class="n">22</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Declaration of a variable</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="FUNCTION">
+        <strong>FUNCTION</strong> = <code><span class="n">23</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Definition of a function</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="RETURN">
+        <strong>RETURN</strong> = <code><span class="n">24</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Return value from a function</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="IF">
+        <strong>IF</strong> = <code><span class="n">25</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Conditional statement</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="ELSIF">
+        <strong>ELSIF</strong> = <code><span class="n">26</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Elsif</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="ELSE">
+        <strong>ELSE</strong> = <code><span class="n">27</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Else</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="NOT">
+        <strong>NOT</strong> = <code><span class="n">28</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Logical negation</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="TRUE">
+        <strong>TRUE</strong> = <code><span class="n">29</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>True</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="FALSE">
+        <strong>FALSE</strong> = <code><span class="n">30</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>False</p>
+      </dd>
+      
+    
+  </dl>
+
+
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#assign%3F-instance-method" class="signature"><strong>#assign?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#asterisk%3F-instance-method" class="signature"><strong>#asterisk?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#colon%3F-instance-method" class="signature"><strong>#colon?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#comma%3F-instance-method" class="signature"><strong>#comma?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#else%3F-instance-method" class="signature"><strong>#else?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#elsif%3F-instance-method" class="signature"><strong>#elsif?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eof%3F-instance-method" class="signature"><strong>#eof?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eq%3F-instance-method" class="signature"><strong>#eq?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#false%3F-instance-method" class="signature"><strong>#false?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#function%3F-instance-method" class="signature"><strong>#function?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#gt%3F-instance-method" class="signature"><strong>#gt?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#gt_eq%3F-instance-method" class="signature"><strong>#gt_eq?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#identifier%3F-instance-method" class="signature"><strong>#identifier?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#if%3F-instance-method" class="signature"><strong>#if?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#illegal%3F-instance-method" class="signature"><strong>#illegal?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#integer%3F-instance-method" class="signature"><strong>#integer?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#left_brace%3F-instance-method" class="signature"><strong>#left_brace?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#left_paren%3F-instance-method" class="signature"><strong>#left_paren?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#let%3F-instance-method" class="signature"><strong>#let?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#lt%3F-instance-method" class="signature"><strong>#lt?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#lt_eq%3F-instance-method" class="signature"><strong>#lt_eq?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#minus%3F-instance-method" class="signature"><strong>#minus?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not%3F-instance-method" class="signature"><strong>#not?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not_eq%3F-instance-method" class="signature"><strong>#not_eq?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plus%3F-instance-method" class="signature"><strong>#plus?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#return%3F-instance-method" class="signature"><strong>#return?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#return_type%3F-instance-method" class="signature"><strong>#return_type?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#right_brace%3F-instance-method" class="signature"><strong>#right_brace?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#right_paren%3F-instance-method" class="signature"><strong>#right_paren?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#slash%3F-instance-method" class="signature"><strong>#slash?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#true%3F-instance-method" class="signature"><strong>#true?</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="assign?-instance-method">
+      <div class="signature">
+        
+        def <strong>assign?</strong>
+
+        <a class="method-permalink" href="#assign%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="asterisk?-instance-method">
+      <div class="signature">
+        
+        def <strong>asterisk?</strong>
+
+        <a class="method-permalink" href="#asterisk%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="colon?-instance-method">
+      <div class="signature">
+        
+        def <strong>colon?</strong>
+
+        <a class="method-permalink" href="#colon%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L55" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="comma?-instance-method">
+      <div class="signature">
+        
+        def <strong>comma?</strong>
+
+        <a class="method-permalink" href="#comma%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="else?-instance-method">
+      <div class="signature">
+        
+        def <strong>else?</strong>
+
+        <a class="method-permalink" href="#else%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L78" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="elsif?-instance-method">
+      <div class="signature">
+        
+        def <strong>elsif?</strong>
+
+        <a class="method-permalink" href="#elsif%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L76" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eof?-instance-method">
+      <div class="signature">
+        
+        def <strong>eof?</strong>
+
+        <a class="method-permalink" href="#eof%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eq?-instance-method">
+      <div class="signature">
+        
+        def <strong>eq?</strong>
+
+        <a class="method-permalink" href="#eq%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="false?-instance-method">
+      <div class="signature">
+        
+        def <strong>false?</strong>
+
+        <a class="method-permalink" href="#false%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L84" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="function?-instance-method">
+      <div class="signature">
+        
+        def <strong>function?</strong>
+
+        <a class="method-permalink" href="#function%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L70" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="gt?-instance-method">
+      <div class="signature">
+        
+        def <strong>gt?</strong>
+
+        <a class="method-permalink" href="#gt%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="gt_eq?-instance-method">
+      <div class="signature">
+        
+        def <strong>gt_eq?</strong>
+
+        <a class="method-permalink" href="#gt_eq%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L48" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="identifier?-instance-method">
+      <div class="signature">
+        
+        def <strong>identifier?</strong>
+
+        <a class="method-permalink" href="#identifier%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="if?-instance-method">
+      <div class="signature">
+        
+        def <strong>if?</strong>
+
+        <a class="method-permalink" href="#if%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L74" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="illegal?-instance-method">
+      <div class="signature">
+        
+        def <strong>illegal?</strong>
+
+        <a class="method-permalink" href="#illegal%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="integer?-instance-method">
+      <div class="signature">
+        
+        def <strong>integer?</strong>
+
+        <a class="method-permalink" href="#integer%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="left_brace?-instance-method">
+      <div class="signature">
+        
+        def <strong>left_brace?</strong>
+
+        <a class="method-permalink" href="#left_brace%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L61" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="left_paren?-instance-method">
+      <div class="signature">
+        
+        def <strong>left_paren?</strong>
+
+        <a class="method-permalink" href="#left_paren%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L57" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="let?-instance-method">
+      <div class="signature">
+        
+        def <strong>let?</strong>
+
+        <a class="method-permalink" href="#let%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="lt?-instance-method">
+      <div class="signature">
+        
+        def <strong>lt?</strong>
+
+        <a class="method-permalink" href="#lt%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L38" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="lt_eq?-instance-method">
+      <div class="signature">
+        
+        def <strong>lt_eq?</strong>
+
+        <a class="method-permalink" href="#lt_eq%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L46" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="minus?-instance-method">
+      <div class="signature">
+        
+        def <strong>minus?</strong>
+
+        <a class="method-permalink" href="#minus%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not?-instance-method">
+      <div class="signature">
+        
+        def <strong>not?</strong>
+
+        <a class="method-permalink" href="#not%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L80" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not_eq?-instance-method">
+      <div class="signature">
+        
+        def <strong>not_eq?</strong>
+
+        <a class="method-permalink" href="#not_eq%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plus?-instance-method">
+      <div class="signature">
+        
+        def <strong>plus?</strong>
+
+        <a class="method-permalink" href="#plus%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="return?-instance-method">
+      <div class="signature">
+        
+        def <strong>return?</strong>
+
+        <a class="method-permalink" href="#return%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L72" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="return_type?-instance-method">
+      <div class="signature">
+        
+        def <strong>return_type?</strong>
+
+        <a class="method-permalink" href="#return_type%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="right_brace?-instance-method">
+      <div class="signature">
+        
+        def <strong>right_brace?</strong>
+
+        <a class="method-permalink" href="#right_brace%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L63" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="right_paren?-instance-method">
+      <div class="signature">
+        
+        def <strong>right_paren?</strong>
+
+        <a class="method-permalink" href="#right_paren%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L59" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="slash?-instance-method">
+      <div class="signature">
+        
+        def <strong>slash?</strong>
+
+        <a class="method-permalink" href="#slash%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="true?-instance-method">
+      <div class="signature">
+        
+        def <strong>true?</strong>
+
+        <a class="method-permalink" href="#true%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/token.cr#L82" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

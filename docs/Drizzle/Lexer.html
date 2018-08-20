@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.26.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/drizzle-lang/drizzle">
+  <title>Drizzle::Lexer - github.com/drizzle-lang/drizzle</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/drizzle-lang/drizzle/Drizzle" data-name="drizzle">
+      <a href="../Drizzle.html">Drizzle</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/Lexer" data-name="drizzle::lexer">
+      <a href="../Drizzle/Lexer.html">Lexer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
+      <a href="../Drizzle/REPL.html">REPL</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Token" data-name="drizzle::token">
+      <a href="../Drizzle/Token.html">Token</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/TokenType" data-name="drizzle::tokentype">
+      <a href="../Drizzle/TokenType.html">TokenType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Drizzle::Lexer
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Drizzle/Lexer.html">Drizzle::Lexer</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>The Lexer is the class in charge of reading in input from a file and converting the text into tokens.</p>
+
+<p>It works similarly to a Python generator, with the <code><a href="../Drizzle/Lexer.html#get_next_token%3AToken-instance-method">#get_next_token</a></code> method generating the next token from the source file.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L7" target="_blank">
+        drizzle/lexer.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28input%3AString%29-class-method" class="signature"><strong>.new</strong>(input : String)</a>
+        
+          <div class="summary"><p>Create a Lexer instance using a String.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28file%3AFile%29-class-method" class="signature"><strong>.new</strong>(file : File)</a>
+        
+          <div class="summary"><p>Create a Lexer instance using a File instance.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#get_next_token%3AToken-instance-method" class="signature"><strong>#get_next_token</strong> : Token</a>
+        
+          <div class="summary"><p>Generate the next Token instance from the given input.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#peek_next_char%3AChar-instance-method" class="signature"><strong>#peek_next_char</strong> : Char</a>
+        
+          <div class="summary"><p>Check what the next character on the current line is, without updating all the pointers</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_identifier%3AString-instance-method" class="signature"><strong>#read_identifier</strong> : String</a>
+        
+          <div class="summary"><p>Builds up a possible identifier from the source.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_next_char-instance-method" class="signature"><strong>#read_next_char</strong></a>
+        
+          <div class="summary"><p>Update the <code>char_num</code> and <code>read_char_num</code> pointers, as well as the <code>current_line</code> and <code>current_char</code> values.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_number%3AString-instance-method" class="signature"><strong>#read_number</strong> : String</a>
+        
+          <div class="summary"><p>Builds up an integer number from the source code.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#skip_comment-instance-method" class="signature"><strong>#skip_comment</strong></a>
+        
+          <div class="summary"><p>Once a comment is found in the source, skip the lexer to the next line.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#skip_whitespace-instance-method" class="signature"><strong>#skip_whitespace</strong></a>
+        
+          <div class="summary"><p>Skip whitespace characters in the input as it is unnecessary to turn them into Tokens for Drizzle</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#valid_identifier_char%3F%28char%3AChar%29%3ABool-instance-method" class="signature"><strong>#valid_identifier_char?</strong>(char : Char) : Bool</a>
+        
+          <div class="summary"><p>Determine whether a given character is allowed to be used as part of an identifier name.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(input:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(input : String)
+
+        <a class="method-permalink" href="#new%28input%3AString%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Create a Lexer instance using a String.
+This string will be split on newline characters and turned into an array of lines, as if it had come from a File.</p>
+
+<p>Since this should only be called from the REPL, the file_name will be "&lt;stdin>".</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L20" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(file:File)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(file : File)
+
+        <a class="method-permalink" href="#new%28file%3AFile%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Create a Lexer instance using a File instance.</p>
+
+<p>This will replace the filename and load the lines in to use as input.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="get_next_token:Token-instance-method">
+      <div class="signature">
+        
+        def <strong>get_next_token</strong> : <a href="../Drizzle/Token.html">Token</a>
+
+        <a class="method-permalink" href="#get_next_token%3AToken-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Generate the next Token instance from the given input.</p>
+
+<p>This method first tries the current_char of the Lexer against all of the single character Tokens in Drizzle.
+If it does not match, it then attempts to build up identifiers / keywords or numbers, depending on what the character is.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L84" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="peek_next_char:Char-instance-method">
+      <div class="signature">
+        
+        def <strong>peek_next_char</strong> : Char
+
+        <a class="method-permalink" href="#peek_next_char%3AChar-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Check what the next character on the current line is, without updating all the pointers</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L72" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_identifier:String-instance-method">
+      <div class="signature">
+        
+        def <strong>read_identifier</strong> : String
+
+        <a class="method-permalink" href="#read_identifier%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Builds up a possible identifier from the source.</p>
+
+<p>This method is run whenever <code><a href="../Drizzle/Lexer.html#get_next_token%3AToken-instance-method">#get_next_token</a></code> comes across a letter in the input.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L207" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_next_char-instance-method">
+      <div class="signature">
+        
+        def <strong>read_next_char</strong>
+
+        <a class="method-permalink" href="#read_next_char-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Update the <code>char_num</code> and <code>read_char_num</code> pointers, as well as the <code>current_line</code> and <code>current_char</code> values.
+If the end of the current line has been reached, move to the next line (if exists).
+If the end of the input has been reached, set the current char to be the <code>Char::ZERO</code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_number:String-instance-method">
+      <div class="signature">
+        
+        def <strong>read_number</strong> : String
+
+        <a class="method-permalink" href="#read_number%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Builds up an integer number from the source code.</p>
+
+<p>The interpreter book only handles integer numbers when I move to creating an ANTLR parser then Drizzle will have other number types too :D
+The number is returned as a String still, to keep Token implementation simple</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L225" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="skip_comment-instance-method">
+      <div class="signature">
+        
+        def <strong>skip_comment</strong>
+
+        <a class="method-permalink" href="#skip_comment-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Once a comment is found in the source, skip the lexer to the next line.</p>
+
+<p>In Drizzle, there are currently only single line comments, so we can just skip the line.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L252" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="skip_whitespace-instance-method">
+      <div class="signature">
+        
+        def <strong>skip_whitespace</strong>
+
+        <a class="method-permalink" href="#skip_whitespace-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Skip whitespace characters in the input as it is unnecessary to turn them into Tokens for Drizzle</p>
+
+<p>Whitespace characters include spaces, newlines, tabs, carriage returns, etc.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L242" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="valid_identifier_char?(char:Char):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>valid_identifier_char?</strong>(char : Char) : Bool
+
+        <a class="method-permalink" href="#valid_identifier_char%3F%28char%3AChar%29%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Determine whether a given character is allowed to be used as part of an identifier name.</p>
+
+<p>Since the <code><a href="../Drizzle/Lexer.html#read_identifier%3AString-instance-method">#read_identifier</a></code> method is only run when the <code><a href="../Drizzle/Lexer.html#get_next_token%3AToken-instance-method">#get_next_token</a></code> finds a letter, we can safely allow numbers in this as well.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/9930bfe3286002a60fbe2f66c043a131a035ae75/src/drizzle/lexer.cr#L263" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
