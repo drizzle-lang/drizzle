@@ -1,4 +1,4 @@
-# ![drizzle banner](https://github.com/drizzle-lang/drizzle/raw/master/img/banner.png)
+<img alt="Drizzle Language Banner" src="https://github.com/drizzle-lang/drizzle/raw/master/img/banner.png" style="width: 100%;" />
 
 Drizzle is my very own programming language, simultaneously developed as a language I would like to use and a never-ending source of things to learn.
 
