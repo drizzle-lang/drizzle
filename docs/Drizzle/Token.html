@@ -107,7 +107,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/drizzle-lang/drizzle/blob/79c9aeb8095c4f4a3a2687ec7c2f30682b4bc7a4/src/drizzle/token.cr#L105" target="_blank">
+      <a href="https://github.com/drizzle-lang/drizzle/blob/d0ddc1aa5b1b787f924330bbb3a388f5d2638bfe/src/drizzle/token.cr#L90" target="_blank">
         drizzle/token.cr
       </a>
     
@@ -116,6 +116,24 @@
 
 
 
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="Keywords">
+        <strong>Keywords</strong> = <code>{<span class="s">&quot;let&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">LET</span>, <span class="s">&quot;def&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">FUNCTION</span>, <span class="s">&quot;return&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">RETURN</span>, <span class="s">&quot;if&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">IF</span>, <span class="s">&quot;elsif&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">ELSIF</span>, <span class="s">&quot;else&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">ELSE</span>, <span class="s">&quot;not&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">NOT</span>, <span class="s">&quot;true&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">TRUE</span>, <span class="s">&quot;false&quot;</span> => <span class="t">TokenType</span><span class="t">::</span><span class="t">FALSE</span>}</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Hash of all keywords in Drizzle to their corresponding TokenTypes.</p>
+
+<p>Used as part of the <code><a href="../Drizzle/Lexer.html">Lexer</a></code>'s process of generating a new Token in order to determine whether a read string of characters is a keyword or not.</p>
+      </dd>
+      
+    
+  </dl>
+
 
 
   <h2>Constructors</h2>
@@ -123,6 +141,8 @@
     
       <li class="entry-summary">
         <a href="#new%28token_type%3ATokenType%2Cliteral%3AString%2Cfile_name%3AString%3D%26quot%3B%26lt%3Bstdin%26gt%3B%26quot%3B%2Cline_num%3AInt32%3D0%2Cchar_num%3AInt32%3D0%29-class-method" class="signature"><strong>.new</strong>(token_type : TokenType, literal : String, file_name : String = <span class="s">&quot;&lt;stdin&gt;&quot;</span>, line_num : Int32 = <span class="n">0</span>, char_num : Int32 = <span class="n">0</span>)</a>
+        
+          <div class="summary"><p>Create an instance of a Token.</p></div>
         
       </li>
     
@@ -165,6 +185,8 @@
     
       <li class="entry-summary">
         <a href="#to_s%3AString-instance-method" class="signature"><strong>#to_s</strong> : String</a>
+        
+          <div class="summary"><p>Convert the Token instance into a String representation.</p></div>
         
       </li>
     
@@ -216,10 +238,12 @@
         <a class="method-permalink" href="#new%28token_type%3ATokenType%2Cliteral%3AString%2Cfile_name%3AString%3D%26quot%3B%26lt%3Bstdin%26gt%3B%26quot%3B%2Cline_num%3AInt32%3D0%2Cchar_num%3AInt32%3D0%29-class-method">#</a>
       </div>
       
+        <div class="doc"><p>Create an instance of a Token.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/79c9aeb8095c4f4a3a2687ec7c2f30682b4bc7a4/src/drizzle/token.cr#L113" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/d0ddc1aa5b1b787f924330bbb3a388f5d2638bfe/src/drizzle/token.cr#L114" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -244,7 +268,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/79c9aeb8095c4f4a3a2687ec7c2f30682b4bc7a4/src/drizzle/token.cr#L129" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/d0ddc1aa5b1b787f924330bbb3a388f5d2638bfe/src/drizzle/token.cr#L131" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -262,7 +286,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/79c9aeb8095c4f4a3a2687ec7c2f30682b4bc7a4/src/drizzle/token.cr#L125" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/d0ddc1aa5b1b787f924330bbb3a388f5d2638bfe/src/drizzle/token.cr#L127" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -280,7 +304,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/79c9aeb8095c4f4a3a2687ec7c2f30682b4bc7a4/src/drizzle/token.cr#L127" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/d0ddc1aa5b1b787f924330bbb3a388f5d2638bfe/src/drizzle/token.cr#L129" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -298,7 +322,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/79c9aeb8095c4f4a3a2687ec7c2f30682b4bc7a4/src/drizzle/token.cr#L123" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/d0ddc1aa5b1b787f924330bbb3a388f5d2638bfe/src/drizzle/token.cr#L125" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -311,10 +335,12 @@
         <a class="method-permalink" href="#to_s%3AString-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Convert the Token instance into a String representation.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/79c9aeb8095c4f4a3a2687ec7c2f30682b4bc7a4/src/drizzle/token.cr#L116" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/d0ddc1aa5b1b787f924330bbb3a388f5d2638bfe/src/drizzle/token.cr#L118" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -332,7 +358,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/79c9aeb8095c4f4a3a2687ec7c2f30682b4bc7a4/src/drizzle/token.cr#L121" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/d0ddc1aa5b1b787f924330bbb3a388f5d2638bfe/src/drizzle/token.cr#L123" target="_blank">View source</a>]
         
       </div>
     </div>
