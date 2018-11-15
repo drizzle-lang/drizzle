@@ -35,18 +35,38 @@ Some basic extensions that I would like to see built in to the language itself;
 - `drizzle docs`: Similar to how crystal generates documentation I would like to have Drizzle being able to parse code and generate doc pages
 - `drizzle fmt`: Similar to tools like `gofmt` or `crystal tool format`, I would like it for Drizzle to have a built-in formatter (once we have a style guide in place)
 - `drizzle drops`: When the language starts to grow, we would need to have some kind of dependency manager built in. Dependencies will be called `drops`
-- `drizzle playground`: Seems to be a common thing nowadays, so drizzle could do with one 
+- `drizzle playground`: Seems to be a common thing nowadays, so drizzle could do with one
 
 ## Roadmap
 Here's a basic roadmap for anyone who is interested in what's going on with this project;
-- Write a basic (non-production) version of the interpreter in Crystal, using the [interpreter book](https://interpreterbook.com).
-- Research and learn ANTLR4 and use it to generate a better parser.
-    - ANTLR cannot generate Crystal code so instead I intend to have it generate Go code and translate it, like I am doing with the book.
-- Once the [compiler book](https://compilerbook.com) is released, go through that and turn Drizzle into a compiled language.
-- Get Drizzle to the point where it can replace it's Crystal interpreter.
-- Get Drizzle to the point where it can replace it's Crystal compiler.
-- Start trying to add on the extra Drizzle tools.
-- Keep improving stuff.
+
+- [ ] Interpreter written in Crystal (using https://interpreterbook.com)
+    - [x] Chapter 1 (Lexing)
+    - [ ] Chapter 2 (Parsing)
+    - [ ] Chapter 3 (Evaluating)
+    - [ ] Chapter 4 (Extending the Interpreter)
+    - [ ] Chapter 5 (Macro System)
+- [ ] ANTLR Generated Parser
+    - [ ] Write (E)BNF notation for Drizzle
+    - [ ] Ensure the generated Parser works as intended
+    - [ ] Convert parser to Crystal (probably from Go or Python)
+- [ ] Compiler written in Crystal (using https://compilerbook.com)
+    - [ ] Chapter  1 (Compilers & VMs)
+    - [ ] Chapter  2 (Hello Bytecode)
+    - [ ] Chapter  3 (Compiling Expressions)
+    - [ ] Chapter  4 (Conditionals)
+    - [ ] Chapter  5 (Keeping Track of Names)
+    - [ ] Chapter  6 (String, Array and Hash)
+    - [ ] Chapter  7 (Functions)
+    - [ ] Chapter  8 (Built-in Functions)
+    - [ ] Chapter  9 (Closures)
+    - [ ] Chapter 10 (Taking Time)
+- [ ] Plans for after in no particular order;
+    - [ ] Self host the interpreter
+    - [ ] Self host the compiler
+    - [ ] Move the compiler to LLVM
+    - [ ] Add on extra tools
+    - [ ] Extend the drizzle stdlib
 
 ## Contributing
 This project is open to anyone who wants to learn anything about creating programming languages!
