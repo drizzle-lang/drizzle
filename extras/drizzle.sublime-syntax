@@ -15,22 +15,44 @@ contexts:
     - include: strings
     - include: variables
 
-  strings:
-    # Strings begin and end with quotes, and use backslashes as an escape
-    # character
-    - match: "'"
-      scope: punctuation.definition.string.begin.drizzle
-      push: single_quoted_string
-
-    - match: '"'
-      scope: punctuation.definition.string.begin.drizzle
-      push: double_quoted_string
-
   comments:
-    # Comments begin with a '//' and finish at the end of the line
+    # Comments begin with a '#' and finish at the end of the line
     - match: '#'
       scope: punctuation.definition.comment.drizzle
       push: line_comment
+
+  constants:
+    # Numbers
+    # Floats
+    - match: '\b[1-9][0-9]*\.[0-9]+\b'
+      scope: constant.numeric.float.drizzle
+
+    # Hexadecimals
+    - match: '\b0[xX][0-9]+\b'
+      scope: constant.numeric.hex.drizzle
+
+    # Integers
+    - match: '\b[1-9][0-9]*\b'
+      scope: constant.numeric.integer.drizzle
+
+    # Octals
+    - match: '\b0[oO][0-9]+\b'
+      scope: constant.numeric.octal.drizzle
+
+    # Other literal values
+    - match: '\b(null|true|false)\b'
+      scope: constant.language.drizzle
+
+  entities:
+    # Classes
+    - match: 'class ([a-zA-Z_]+)'
+      captures:
+        '1': entity.name.class.drizzle
+
+    # Handling for functions since they are big
+    - match: 'def ([a-zA-Z_\?!]+)'
+      captures:
+        '1': entity.name.function.drizzle
 
   keywords:
     # Keywords are if, else for and while.
@@ -38,6 +60,8 @@ contexts:
     # strings in YAML. When using single quoted strings, only single quotes
     # need to be escaped: this is done by using two single quotes next to each
     # other.
+
+    # Control
     - match: '\b(for|while)\b'
       scope: keyword.control.drizzle
 
@@ -46,10 +70,6 @@ contexts:
 
     - match: '\bimport\b'
       scope: keyword.control.import.drizzle
-
-    # Other keywords
-    - match: '\b(return)\b'
-      scope: keyword.other.drizzle
 
     # Operators
     - match: '\b(=)\b'
@@ -64,27 +84,25 @@ contexts:
     - match: '\b(and|or|not)\b'
       scope: keyword.operator.word.drizzle
 
-  constants:
-    # Numbers
-    # Integers
-    - match: '\b[1-9][0-9]*\b'
-      scope: constant.numeric.integer.drizzle
+    # Other keywords
+    - match: '\b(return)\b'
+      scope: keyword.other.drizzle
 
-    # Floats
-    - match: '\b[1-9][0-9]*\.[0-9]+\b'
-      scope: constant.numeric.float.drizzle
+  storage:
+    # Storage types
+    - match: '\b(def|class|let|const|int|bool|str|list|dict|num)\b'
+      scope: storage.type.drizzle
 
-    # Octals
-    - match: '\b0[oO][0-9]+\b'
-      scope: constant.numeric.octal.drizzle
+  strings:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character
+    - match: "'"
+      scope: punctuation.definition.string.begin.drizzle
+      push: single_quoted_string
 
-    # Hexadecimals
-    - match: '\b0[xX][0-9]+\b'
-      scope: constant.numeric.hex.drizzle
-
-    # Other literal values
-    - match: '\b(null|true|false)\b'
-      scope: constant.language.drizzle
+    - match: '"'
+      scope: punctuation.definition.string.begin.drizzle
+      push: double_quoted_string
 
   variables:
     # Handle parsing let and const statements with all the stuff in them
@@ -96,21 +114,7 @@ contexts:
       captures:
         '1': variable.other.constant.drizzle
 
-  entities:
-    # Handling for functions since they are big
-    - match: 'def ([a-zA-Z_\?!]+)'
-      captures:
-        '1': entity.name.function.drizzle
-
-    # Classes
-    - match: 'class ([a-zA-Z_]+)'
-      captures:
-        '1': entity.name.class.drizzle
-
-  storage:
-    # Storage types
-    - match: '\b(def|class|let|const|int|bool|str|list|dict|num)\b'
-      scope: storage.type.drizzle
+  # Non-main patterns
 
   double_quoted_string:
     - meta_scope: string.quoted.double.drizzle
