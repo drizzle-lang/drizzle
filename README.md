@@ -34,8 +34,8 @@ The goals of the project are (in some particular order):
 Some basic extensions that I would like to see built in to the language itself;
 - `drizzle docs`: Similar to how crystal generates documentation I would like to have Drizzle being able to parse code and generate doc pages
 - `drizzle fmt`: Similar to tools like `gofmt` or `crystal tool format`, I would like it for Drizzle to have a built-in formatter (once we have a style guide in place)
-- `drizzle deps`: When the language starts to grow, we would need to have some kind of dependency manager built in.
-    - Since the name change to `drizzle`, I'm thinking maybe calling deps `drops`?
+- `drizzle drops`: When the language starts to grow, we would need to have some kind of dependency manager built in. Dependencies will be called `drops`
+- `drizzle playground`: Seems to be a common thing nowadays, so drizzle could do with one 
 
 ## Roadmap
 Here's a basic roadmap for anyone who is interested in what's going on with this project;
