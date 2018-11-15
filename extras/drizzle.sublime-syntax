@@ -9,7 +9,7 @@ contexts:
   main:
     - include: comments
     - include: constants
-    - include: functions
+    - include: entities
     - include: keywords
     - include: storage
     - include: strings
@@ -44,8 +44,11 @@ contexts:
     - match: '\b(if|elsif|else)\b'
       scope: keyword.control.conditional.drizzle
 
+    - match: '\bimport\b'
+      scope: keyword.control.import.drizzle
+
     # Other keywords
-    - match: '\b(return|not|and|or)\b'
+    - match: '\b(return)\b'
       scope: keyword.other.drizzle
 
     # Operators
@@ -58,14 +61,30 @@ contexts:
     - match: '\b(>|<|>=|<=|==)\b'
       scope: keyword.operator.logical.drizzle
 
+    - match: '\b(and|or|not)\b'
+      scope: keyword.operator.word.drizzle
+
   constants:
     # Numbers
-    - match: '\b(-)?[0-9.]+\b'
-      scope: constant.numeric.drizzle
+    # Integers
+    - match: '\b[1-9][0-9]*\b'
+      scope: constant.numeric.integer.drizzle
+
+    # Floats
+    - match: '\b[1-9][0-9]*\.[0-9]+\b'
+      scope: constant.numeric.float.drizzle
+
+    # Octals
+    - match: '\b0[oO][0-9]+\b'
+      scope: constant.numeric.octal.drizzle
+
+    # Hexadecimals
+    - match: '\b0[xX][0-9]+\b'
+      scope: constant.numeric.hex.drizzle
 
     # Other literal values
     - match: '\b(null|true|false)\b'
-      scope: constant.language.sapphire
+      scope: constant.language.drizzle
 
   variables:
     # Handle parsing let and const statements with all the stuff in them
@@ -77,12 +96,16 @@ contexts:
       captures:
         '1': variable.other.constant.drizzle
 
-  functions:
+  entities:
     # Handling for functions since they are big
-    - match: '(def) ([a-zA-Z_\?!]+)'
+    - match: 'def ([a-zA-Z_\?!]+)'
       captures:
-        '1': storage.type.drizzle
-        '2': entity.name.function.drizzle
+        '1': entity.name.function.drizzle
+
+    # Classes
+    - match: 'class ([a-zA-Z_]+)'
+      captures:
+        '1': entity.name.class.drizzle
 
   storage:
     # Storage types
@@ -93,6 +116,8 @@ contexts:
     - meta_scope: string.quoted.double.drizzle
     - match: '\\.'
       scope: constant.character.escape.drizzle
+    - match: '#{[a-zA-Z_]+}'
+      scope: constant.other.placeholder
     - match: '"'
       scope: punctuation.definition.string.end.drizzle
       pop: true
@@ -101,6 +126,8 @@ contexts:
     - meta_scope: string.quoted.double.drizzle
     - match: '\\.'
       scope: constant.character.escape.drizzle
+    - match: '#{[a-zA-Z_]+}'
+      scope: constant.other.placeholder
     - match: "'"
       scope: punctuation.definition.string.end.drizzle
       pop: true
@@ -110,23 +137,4 @@ contexts:
     - match: $
       pop: true
 
-# Minimal scope coverage left to do
-# entity.name
-# entity.other.inherited-class
-# entity.name.section
-# entity.name.tag
-# entity.other.attribute-name
-# variable
-# variable.language
-# variable.parameter
-# variable.function
-# constant
-# constant.language
-# constant.character.escape
-# storage.type
-# storage.modifier
-# support
-# keyword
-# invalid
-# invalid.deprecated
-
+# TODO: Meta scopes
