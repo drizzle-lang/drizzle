@@ -67,6 +67,7 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
     - [ ] Move the compiler to LLVM
     - [ ] Add on extra tools
     - [ ] Extend the drizzle stdlib
+    - [ ] Improve the syntax definition file and convert it into .tmLanguage
 
 ## Contributing
 This project is open to anyone who wants to learn anything about creating programming languages!
