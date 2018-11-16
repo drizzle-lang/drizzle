@@ -1,9 +1,9 @@
-require "./node"
 require "./statement"
 
 module Drizzle
   module AST
-    class Program < Node
+    # A Program Node is the root of the entire program, and contains an array of statements.
+    class Program < Statement
       @statements : [] of Statement
 
       def literal : String
