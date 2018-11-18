@@ -21,15 +21,6 @@ The goals of the project are (in some particular order):
 - Learn about the kind of work that goes into developing production grade languages.
 - Eventually get Drizzle to the point where it can interpret / compile itself.
 
-## Project Details
-- Written in Crystal.
-    - Drizzle will work off of Crystal's GC.
-    - If we decide to write the interpreter in Drizzle later, we'll then have to implement out own GC.
-- Parser (will eventually be) generated using [ANTLR](http://www.antlr.org/) for Go and translated into Crystal (like the books I'll be using).
-- Language will initially be interpreted, then will be compiled.
-    - When the compiled version starts, the interpreted version will be archived to a protected branch.
-- When language is mature enough, rewrite the interpreter, and later the compiler, in Drizzle.
-
 ## Extensions
 Some basic extensions that I would like to see built in to the language itself;
 - `drizzle docs`: Similar to how crystal generates documentation I would like to have Drizzle being able to parse code and generate doc pages
@@ -46,6 +37,9 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
     - [ ] Chapter 3 (Evaluating)
     - [ ] Chapter 4 (Extending the Interpreter)
     - [ ] Chapter 5 (Macro System)
+- [ ] Minor Extras before improving the language again
+    - [ ] Improve the syntax definition file and convert it into .tmLanguage
+    - [ ] Do a simple POC project in Drizzle to show that it does actually work
 - [ ] ANTLR Generated Parser
     - [ ] Write (E)BNF notation for Drizzle
     - [ ] Ensure the generated Parser works as intended
@@ -67,6 +61,9 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
     - [ ] Move the compiler to LLVM
     - [ ] Add on extra tools
     - [ ] Extend the drizzle stdlib
+    
+### Notes
+- It would be nice if the project could maintain a side-by-side interpreter and compiler so that drizzle could have a fully functional REPL environment built into the language, or maybe provide drizzle-interpreter as a separate package or something idk
 
 ## Contributing
 This project is open to anyone who wants to learn anything about creating programming languages!
