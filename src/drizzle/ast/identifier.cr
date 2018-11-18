@@ -13,6 +13,9 @@ module Drizzle
       @token : Token
       @value : String
 
+      def initialize(@token, @value)
+      end
+
       def literal : String
         return @token.String
       end

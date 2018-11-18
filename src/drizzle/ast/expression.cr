@@ -1,4 +1,4 @@
-require "./ast"
+require "./node"
 
 module Drizzle
   module AST

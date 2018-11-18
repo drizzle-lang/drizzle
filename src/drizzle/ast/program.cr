@@ -4,7 +4,11 @@ module Drizzle
   module AST
     # A Program Node is the root of the entire program, and contains an array of statements.
     class Program < Statement
-      @statements : [] of Statement
+      @statements : Array(Statement)
+
+      def initialize
+        @statements = [] of Statement
+      end
 
       def literal : String
         unless @statements.empty?
@@ -12,6 +16,7 @@ module Drizzle
         else
           return ""
         end
+      end
     end
   end
 end

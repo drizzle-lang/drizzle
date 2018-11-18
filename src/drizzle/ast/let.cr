@@ -13,6 +13,9 @@ module Drizzle
       @type : Identifier
       @value : Expression
 
+      def initialize(@token, @name, @type, @value)
+      end
+
       def literal : String
         return @token.literal
       end
