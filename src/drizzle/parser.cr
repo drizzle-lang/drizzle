@@ -8,6 +8,7 @@ module Drizzle
     @lexer : Lexer
     @current : Token
     @peek : Token
+    @errors : Array(String) = [] of String
 
     def initialize(@lexer : Lexer)
       # Read the first two tokens to set up curr and peek variables
@@ -96,6 +97,13 @@ module Drizzle
       end
     end
 
+    # Error functions
+
+    # Add an error when `#eat?` gets an incorrect token type
+    def eat_error(expected_type : TokenType)
+      @errors << "expected next token to be #{expected_type}, instead got #{@peek.token_type}"
+    end
+
     # Getters and setters (writing them myself because I know the tokens will never be nil)
 
     # The token that is currently being inspected by the parser
@@ -104,5 +112,8 @@ module Drizzle
     # A pointer to the next token coming up in the stream.
     # This is used to help guide what kind of node will be built from `@current`
     getter peek
+
+    # Maintain an array of errors that are generated during the parsing step
+    getter errors
   end
 end
