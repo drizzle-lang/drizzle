@@ -10,15 +10,21 @@ module Drizzle
     class Let < Statement
       @token : Token
       @name : Identifier
-      @type : Identifier
-      @value : Expression
+      @datatype : Identifier
+      # TODO - Remove the nilable from this once parsing expressions is added to the parser
+      @value : Expression?
 
-      def initialize(@token, @name, @type, @value)
+      def initialize(@token, @name, @datatype, @value)
       end
 
       def literal : String
         return @token.literal
       end
+
+      getter token
+      getter name
+      getter datatype
+      getter value
     end
   end
 end

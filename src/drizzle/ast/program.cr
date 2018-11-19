@@ -6,8 +6,7 @@ module Drizzle
     class Program < Statement
       @statements : Array(Statement)
 
-      def initialize
-        @statements = [] of Statement
+      def initialize(@statements : Array(Statement))
       end
 
       def literal : String
@@ -17,6 +16,8 @@ module Drizzle
           return ""
         end
       end
+
+      getter statements
     end
   end
 end
