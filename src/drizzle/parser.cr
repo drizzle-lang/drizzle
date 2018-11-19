@@ -102,7 +102,7 @@ module Drizzle
 
     # Add an error when `#eat?` gets an incorrect token type
     def eat_error(expected_type : TokenType)
-      @errors << "expected next token to be #{expected_type}, instead got #{@peek.token_type}"
+      @errors << "SyntaxError: Expected #{expected_type}, got #{@peek.token_type}\n\t#{@peek.file_name} at line #{@peek.line_num}, char #{@peek.char_num}"
     end
 
     # Getters and setters (writing them myself because I know the tokens will never be nil)
