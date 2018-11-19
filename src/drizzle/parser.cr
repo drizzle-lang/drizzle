@@ -93,6 +93,7 @@ module Drizzle
         self.next_token
         return true
       else
+        self.eat_error expected_type
         return false
       end
     end
