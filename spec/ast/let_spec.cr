@@ -1,10 +1,28 @@
 require "../spec_helper"
 
-def test_let_statement(statement : Drizzle::AST::Statement, name : String)
+# Test helper that tests that a given statement is a let statement, and the identifiers involved are correct
+def test_let_statement(statement : Drizzle::AST::Statement, name : String, datatype : String)
   statement.literal.should eq "let"
   let_statement = statement.as(Drizzle::AST::Let)
   let_statement.name.value.should eq name
+  let_statement.datatype.value.should eq datatype
   let_statement.name.literal.should eq name
+end
+
+# Helper function that ensures there are no parser errors.
+#
+# If there are, it will print them out
+def check_parser_errors(parser : Drizzle::Parser)
+  errors = parser.errors
+  if errors.empty?
+    return
+  end
+
+  errors.each do |err|
+    puts err
+  end
+
+  errors.size.should eq 0
 end
 
 describe Drizzle::AST::Let do
@@ -18,20 +36,21 @@ describe Drizzle::AST::Let do
 
     # Parse the program node
     program = parser.parse_program
+    check_parser_errors parser
     # Check that the program node was successfully parsed
     program.nil?.should be_false
     program.statements.size.should eq 3
 
     # Check the generated identifiers against the expected ones
     expected_identifiers = [
-      "x",
-      "y",
-      "foobar",
+      ["x", "int"],
+      ["y", "int"],
+      ["foobar", "int"],
     ]
 
     expected_identifiers.each.with_index do |expected, i|
       statement = program.statements[i]
-      test_let_statement statement, expected
+      test_let_statement statement, expected[0], expected[1]
     end
   end
 end
