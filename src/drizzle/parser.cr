@@ -24,10 +24,12 @@ module Drizzle
       @infix_parsers = {} of TokenType => InfixParser
     end
 
+    # Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for prefix notation
     def register_prefix(token_type : TokenType, func : PrefixParser)
       @prefix_parsers[token_type] = func
     end
 
+    # Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for infix notation
     def register_infix(token_type : TokenType, func : InfixParser)
       @infix_parsers[token_type] = func
     end
