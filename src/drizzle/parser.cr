@@ -189,6 +189,7 @@ module Drizzle
       prefix_parser = prefix_parser.not_nil!
       left_exp = prefix_parser.call
       return left_exp
+    end
 
     # "Eat" the `@peek` token if the expected type matches the type of `@peek`
     #
