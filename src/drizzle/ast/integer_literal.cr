@@ -6,7 +6,7 @@ module Drizzle
     # Node class representing an Integer.
     class IntegerLiteral < Expression
       @token : Token
-      @value : Int64
+      @value : Int64?
 
       def initialize(@token, @value)
       end

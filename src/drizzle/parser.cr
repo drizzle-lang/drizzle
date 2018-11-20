@@ -50,7 +50,23 @@ module Drizzle
     # Initialize parser methods for the parser to use when parsing expressions
     def initialise_parsers
       # Prefix Parsers
+      # Due to some.. weird... casting rules, I can't put these in as functions of the parser because I can't use Proc(AST::Identifier) for Proc(AST::Expression) type implicitly and I can't find how to fix this
+
+      # self.parse_identifier
       self.register_prefix TokenType::IDENTIFIER, Proc(AST::Expression).new { AST::Identifier.new @current, @current.literal }
+
+      # self.parse_integer
+      self.register_prefix TokenType::INTEGER, Proc(AST::Expression).new {
+        token = @current
+        # Attempt to convert the current token string to an integer
+        int = @current.literal.to_i64 { nil }
+        if int.nil?
+          @errors << "SyntaxError: Could not parse #{@current.literal} as an integer\n\t#{@current.file_name} at line #{@current.line_num}, char #{@current.char_num}"
+          return AST::IntegerLiteral.new token, nil
+        else
+          return AST::IntegerLiteral.new token, int
+        end
+      }
 
       # Infix Parsers
     end
@@ -173,7 +189,6 @@ module Drizzle
       prefix_parser = prefix_parser.not_nil!
       left_exp = prefix_parser.call
       return left_exp
-    end
 
     # "Eat" the `@peek` token if the expected type matches the type of `@peek`
     #
