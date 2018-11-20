@@ -40,6 +40,8 @@ module Drizzle
       case @current.token_type
       when TokenType::LET
         return self.parse_let_statement
+      when TokenType::RETURN
+        return self.parse_return_statement
       end
       # We shouldn't reach this point but just in case
       return nil
@@ -82,6 +84,26 @@ module Drizzle
       expression = nil
 
       return AST::Let.new token, name, datatype, expression
+    end
+
+    # Parse a `Return` statement found at the current token, and return it, or nil if a valid return statement can not be made
+    def parse_return_statement : AST::Return?
+      token = @current
+
+      # Get the next token
+      self.next_token
+
+      # TODO - Parse expressions properly
+      while !@peek.token_type.return?
+        if @current.token_type.eof?
+          break
+        end
+        self.next_token
+      end
+      expression = nil
+
+      # Create and return the node
+      return AST::Return.new token, expression
     end
 
     # "Eat" the `@peek` token if the expected type matches the type of `@peek`
