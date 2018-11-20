@@ -20,6 +20,9 @@ module Drizzle
       def to_s : String
         return @expression.to_s
       end
+
+      getter token
+      getter expression
     end
   end
 end
