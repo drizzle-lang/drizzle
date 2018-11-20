@@ -1,3 +1,4 @@
+require "./ast_spec_helper"
 require "../spec_helper"
 
 # Test helper that tests that a given statement is a let statement, and the identifiers involved are correct
@@ -7,22 +8,6 @@ def test_let_statement(statement : Drizzle::AST::Statement, name : String, datat
   let_statement.name.value.should eq name
   let_statement.datatype.value.should eq datatype
   let_statement.name.literal.should eq name
-end
-
-# Helper function that ensures there are no parser errors.
-#
-# If there are, it will print them out
-def check_parser_errors(parser : Drizzle::Parser)
-  errors = parser.errors
-  if errors.empty?
-    return
-  end
-
-  errors.each do |err|
-    puts err
-  end
-
-  errors.size.should eq 0
 end
 
 describe Drizzle::AST::Let do
