@@ -8,7 +8,7 @@ module Drizzle
     # <expression>
     class ExpressionStatement < Statement
       @token : Token
-      @expression : Expression
+      @expression : Expression?
 
       def initialize(@token, @expression)
       end
