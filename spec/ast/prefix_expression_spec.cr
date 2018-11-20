@@ -34,7 +34,7 @@ describe Drizzle::AST::PrefixExpression do
       stmnt = program.statements[0].as(Drizzle::AST::ExpressionStatement)
       exp = stmnt.expression.as(Drizzle::AST::PrefixExpression)
       exp.operator.should eq operator
-      test_integer_literal exp.right, value
+      test_integer_literal exp.right, value.to_i64
     end
   end
 end
