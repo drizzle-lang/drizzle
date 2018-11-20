@@ -25,9 +25,13 @@ module Drizzle
         return "#{self.literal} #{@name.to_s}: #{@datatype.to_s} = #{@value.to_s}"
       end
 
+      # The token that caused the generation of this node
       getter token
+      # The name of the variable being assigned to
       getter name
+      # The datatype of the variable being assigned to
       getter datatype
+      # The expression that will generate a value to assign to the variable
       getter value
     end
   end

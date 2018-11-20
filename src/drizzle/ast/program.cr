@@ -25,6 +25,7 @@ module Drizzle
         return builder.to_s
       end
 
+      # An array of statements that make up the program
       getter statements
     end
   end

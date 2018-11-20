@@ -21,6 +21,11 @@ module Drizzle
       def to_s : String
         return "#{self.literal} #{@value.to_s}"
       end
+
+      # The token that caused the generation of this node
+      getter token
+      # The expression that will be evaluated to return a result
+      getter value
     end
   end
 end

@@ -21,7 +21,9 @@ module Drizzle
         return @expression.to_s
       end
 
+      # The token that caused the generation of this node
       getter token
+      # The expression that makes up the node
       getter expression
     end
   end

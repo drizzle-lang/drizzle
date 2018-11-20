@@ -24,7 +24,9 @@ module Drizzle
         return @value
       end
 
+      # The token that caused the generation of this node
       getter token
+      # The value of the identifier (e.g. the name of the function / variable)
       getter value
     end
   end
