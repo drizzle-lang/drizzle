@@ -17,6 +17,14 @@ module Drizzle
         end
       end
 
+      def to_s : String
+        builder = String::Builder.new
+        @statements.each do |stmnt|
+          builder << "#{stmnt.to_s}\n"
+        end
+        return builder.to_s
+      end
+
       getter statements
     end
   end

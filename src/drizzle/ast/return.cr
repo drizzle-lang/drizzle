@@ -17,6 +17,10 @@ module Drizzle
       def literal : String
         return @token.literal
       end
+
+      def to_s : String
+        return "#{self.literal} #{@value.to_s}"
+      end
     end
   end
 end

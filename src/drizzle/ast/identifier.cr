@@ -20,6 +20,10 @@ module Drizzle
         return @token.literal
       end
 
+      def to_s : String
+        return @value
+      end
+
       getter token
       getter value
     end

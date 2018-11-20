@@ -4,8 +4,11 @@ module Drizzle
     # Abstract base class that all Nodes inherit from, to give a single parent point
     abstract class Node
       # Returns a string form of the literal for this node.
-      # Used to print out the node in a nice way.
       abstract def literal : String
+
+      # Return a string form of the node
+      # Used to print out the node in a nice way.
+      abstract def to_s : String
     end
   end
 end

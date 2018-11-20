@@ -21,6 +21,10 @@ module Drizzle
         return @token.literal
       end
 
+      def to_s : String
+        return "#{self.literal} #{@name.to_s}: #{@datatype.to_s} = #{@value.to_s}"
+      end
+
       getter token
       getter name
       getter datatype
