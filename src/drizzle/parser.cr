@@ -68,6 +68,16 @@ module Drizzle
         end
       }
 
+      # self.parse_prefix_expression
+      self.register_prefix TokenType::NOT, Proc(AST::Expression).new {
+        token = @current
+        operator = @current.literal
+        self.next_token
+        right = self.parse_expression Precedence::PREFIX
+        return AST::PrefixExpression.new token, operator, right
+      }
+      self.register_prefix TokenType::MINUS, @prefix_parsers[TokenType::NOT]
+
       # Infix Parsers
     end
 
@@ -182,8 +192,9 @@ module Drizzle
     # This method is given a current precedence to compare against when necessary.
     def parse_expression(precedence : Precedence) : AST::Expression?
       # For now, we're only checking prefix expressions
-      prefix_parser = @prefix_parsers[@current.token_type]
+      prefix_parser = @prefix_parsers.fetch @current.token_type, nil
       if prefix_parser.nil?
+        @errors << "SyntaxError: No prefix parser function found for #{@current.token_type}\n\t#{@current.file_name} at line #{@current.line_num}, char #{@current.char_num}"
         return nil
       end
       prefix_parser = prefix_parser.not_nil!
@@ -212,7 +223,7 @@ module Drizzle
       @errors << "SyntaxError: Expected #{expected_type}, got #{@peek.token_type}\n\t#{@peek.file_name} at line #{@peek.line_num}, char #{@peek.char_num}"
     end
 
-    # Getters and setters (writing them myself because I know the tokens will never be nil)
+    # Getters
 
     # The token that is currently being inspected by the parser
     getter current

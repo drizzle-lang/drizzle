@@ -7,7 +7,7 @@ module Drizzle
     class PrefixExpression < Expression
       @token : Token
       @operator : String
-      @right : Expression
+      @right : Expression?
 
       def initialize(@token, @operator, @right)
       end
