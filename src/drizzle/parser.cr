@@ -9,6 +9,11 @@ macro add_prefix(token_type, method_name)
   self.register_prefix TokenType::{{token_type}}, ->{ self.{{method_name}}.as(AST::Expression) }
 end
 
+# Register an infix parser for a given token and method name
+macro add_infix(token_type, method_name)
+  self.register_infix TokenType::{{token_type}}, ->{ self.{{method_name}}.as(AST::Expression) }
+end
+
 module Drizzle
   # # Type alias for Proc objects used in prefix notation parsing
   # alias PrefixParser = Proc(AST::Expression)
@@ -35,7 +40,7 @@ module Drizzle
   end
 
   # Mapping of TokenTypes to Precedence values to use in infix expression parsing
-  PrecedentMap = {
+  PrecedenceMap = {
     TokenType::EQ       => Precedence::EQUALS,
     TokenType::NOT_EQ   => Precedence::EQUALS,
     TokenType::LT       => Precedence::LESSGREATER,
@@ -75,6 +80,14 @@ module Drizzle
       add_prefix MINUS, parse_prefix_expression
 
       # Infix Parsers
+      add_infix PLUS, parse_infix_expression
+      add_infix MINUS, parse_infix_expression
+      add_infix ASTERISK, parse_infix_expression
+      add_infix SLASH, parse_infix_expression
+      add_infix EQ, parse_infix_expression
+      add_infix NOT_EQ, parse_infix_expression
+      add_infix LT, parse_infix_expression
+      add_infix GT, parse_infix_expression
     end
 
     # Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for prefix notation
@@ -229,6 +242,17 @@ module Drizzle
       self.next_token
       right = self.parse_expression Precedence::PREFIX
       return AST::PrefixExpression.new token, operator, right
+    end
+
+    # Parse an infix expression found at the current token
+    # `<expression> <operator> <expression>`
+    def parse_infix_expression(left : AST::Expression) : AST::Expression
+      token = @current
+      operator = @current.literal
+      precedence = PrecedenceMap.fetch @current.token_type, Precedence::LOWEST
+      self.next_token
+      right = self.parse_expression precedence
+      return AST::InfixExpression.new token, left, operator, right
     end
 
     # "Eat" the `@peek` token if the expected type matches the type of `@peek`
