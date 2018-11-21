@@ -208,13 +208,12 @@ module Drizzle
       end
       left_exp = prefix_parser.not_nil!.call
 
-      # Check for infix expression parsing (should be okay without semicolons I hope)
-      peek_precedence = PrecedenceMap.fetch @peek.token_type, Precedence::LOWEST
-      if precedence.value < peek_precedence.value
+      # Check for infix expression parsing
+      while precedence.value < (PrecedenceMap.fetch @peek.token_type, Precedence::LOWEST).value
         # Parse an infix expression given what we've already parsed
         infix_parser = @infix_parsers.fetch @peek.token_type, nil
         if infix_parser.nil?
-          # Just return the left exp, means that the found token isn't an infix operation (which solves my semicolon worries)
+          # Just return the left exp, means that the found token isn't an infix operation
           return left_exp
         end
         # Update the current token and parse the infix expression if we reach this point
