@@ -1,0 +1,32 @@
+require "./spec_helper"
+
+describe Drizzle::Parser do
+  it "correctly parses input with different operators into groups" do
+    tests = [
+      # input, output
+      ["-a * b", "((-a) * b)"],
+      ["not -a", "(not(-a))"],
+      ["a + b + c", "((a + b) + c)"],
+      ["a + b - c", "((a + b) - c)"],
+      ["a * b * c", "((a * b) * c)"],
+      ["a * b / c", "((a * b) / c)"],
+      ["a+b/c", "(a + (b / c))"],
+      ["a + b * c + d / e - f", "(((a + (b * c)) + (d / e)) - f)"],
+      ["3 + 4\n-5 * 5", "(3 + 4)\n((-5) * 5)"],
+      ["5 > 4 == 3 < 4", "((5 > 4) == (3 < 4))"],
+      ["5 < 4 != 3 > 4", "((5 < 4) != (3 > 4))"],
+      ["3 + 4 * 5 == 3 * 1 + 4 * 5", "((3 + (4 * 5)) == ((3 * 1) + (4 * 5)))"],
+    ]
+
+    tests.each do |test|
+      input, output = test
+      lexer = Drizzle::Lexer.new input
+      parser = Drizzle::Parser.new lexer
+      program = parser.parse_program
+      check_parser_errors parser
+
+      result = program.to_s
+      result.should eq output
+    end
+  end
+end
