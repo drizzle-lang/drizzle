@@ -246,15 +246,8 @@ module Drizzle
     # This is to keep the typing in the parser code easier but I might change this later.
     # `<integer>`
     def parse_integer_literal : AST::Expression
-      token = @current
-      # Attempt to convert the current token string to an integer
-      int = @current.literal.to_i64 { nil }
-      if int.nil?
-        @errors << "SyntaxError: Could not parse #{@current.literal} as an integer\n\t#{@current.file_name} at line #{@current.line_num}, char #{@current.char_num}"
-        return AST::IntegerLiteral.new token, nil
-      else
-        return AST::IntegerLiteral.new token, int
-      end
+      # This function only gets called on an INTEGER type token, which we know has to be an integer
+      return AST::IntegerLiteral.new @current, @current.literal.to_i64
     end
 
     # Parse a prefix expression found at the current token
