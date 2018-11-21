@@ -2,11 +2,13 @@ require "./ast/*"
 require "./lexer"
 require "./token"
 
+# TODO: Clean up all the nil issues in the parser
+
 # Macroes
 
 # Register a prefix parser for a given token and method name
 macro add_prefix(token_type, method_name)
-  self.register_prefix TokenType::{{token_type}}, ->{ self.{{method_name}}.as(AST::Expression) }
+  self.register_prefix TokenType::{{token_type}}, ->{ self.{{method_name}}.as(AST::Expression?) }
 end
 
 # Register an infix parser for a given token and method name
@@ -16,7 +18,7 @@ end
 
 module Drizzle
   # # Type alias for Proc objects used in prefix notation parsing
-  alias PrefixParser = Proc(AST::Expression)
+  alias PrefixParser = Proc(AST::Expression?)
   # # Type alias for Proc objects used in infix notation parsing
   alias InfixParser = Proc(AST::Expression, AST::Expression)
 
@@ -80,6 +82,7 @@ module Drizzle
       add_prefix MINUS, parse_prefix_expression
       add_prefix TRUE, parse_boolean_literal
       add_prefix FALSE, parse_boolean_literal
+      add_prefix LEFT_PAREN, parse_grouped_expression
 
       # Infix Parsers
       add_infix PLUS, parse_infix_expression
@@ -230,7 +233,7 @@ module Drizzle
         end
         # Update the current token and parse the infix expression if we reach this point
         self.next_token
-        left_exp = infix_parser.not_nil!.call left_exp
+        left_exp = infix_parser.not_nil!.call(left_exp.not_nil!).not_nil!
       end
 
       return left_exp
@@ -265,6 +268,19 @@ module Drizzle
       self.next_token
       right = self.parse_expression Precedence::PREFIX
       return AST::PrefixExpression.new token, operator, right
+    end
+
+    # Parse a grouped expression found at the current token
+    # (<expression>)
+    def parse_grouped_expression : AST::Expression?
+      self.next_token
+      # Lower the precedence for the next pass so that it all gets grouped inside these parentheses
+      exp = self.parse_expression Precedence::LOWEST
+      # Expect a RIGHT_PAREN token
+      if !self.eat? TokenType::RIGHT_PAREN
+        return nil
+      end
+      return exp
     end
 
     # Parse an infix expression found at the current token
