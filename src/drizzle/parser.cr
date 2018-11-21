@@ -11,7 +11,7 @@ end
 
 # Register an infix parser for a given token and method name
 macro add_infix(token_type, method_name)
-  self.register_infix TokenType::{{token_type}}, ->{ self.{{method_name}}.as(AST::Expression) }
+  self.register_infix TokenType::{{token_type}}, ->(exp : AST::Expression){ self.{{method_name}}(exp).as(AST::Expression) }
 end
 
 module Drizzle
@@ -200,14 +200,28 @@ module Drizzle
     # Attempt to parse an expression.
     # This method is given a current precedence to compare against when necessary.
     def parse_expression(precedence : Precedence) : AST::Expression?
-      # For now, we're only checking prefix expressions
+      # Prefix expressions, or LHS of infix expressions
       prefix_parser = @prefix_parsers.fetch @current.token_type, nil
       if prefix_parser.nil?
         @errors << "SyntaxError: No prefix parser function found for #{@current.token_type}\n\t#{@current.file_name} at line #{@current.line_num}, char #{@current.char_num}"
         return nil
       end
-      prefix_parser = prefix_parser.not_nil!
-      left_exp = prefix_parser.call
+      left_exp = prefix_parser.not_nil!.call
+
+      # Check for infix expression parsing (should be okay without semicolons I hope)
+      peek_precedence = PrecedenceMap.fetch @peek.token_type, Precedence::LOWEST
+      if precedence.value < peek_precedence.value
+        # Parse an infix expression given what we've already parsed
+        infix_parser = @infix_parsers.fetch @peek.token_type, nil
+        if infix_parser.nil?
+          # Just return the left exp, means that the found token isn't an infix operation (which solves my semicolon worries)
+          return left_exp
+        end
+        # Update the current token and parse the infix expression if we reach this point
+        self.next_token
+        left_exp = infix_parser.not_nil!.call left_exp
+      end
+
       return left_exp
     end
 
