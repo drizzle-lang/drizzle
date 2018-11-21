@@ -53,30 +53,14 @@ module Drizzle
       # Due to some.. weird... casting rules, I can't put these in as functions of the parser because I can't use Proc(AST::Identifier) for Proc(AST::Expression) type implicitly and I can't find how to fix this
 
       # self.parse_identifier
-      self.register_prefix TokenType::IDENTIFIER, Proc(AST::Expression).new { AST::Identifier.new @current, @current.literal }
+      self.register_prefix TokenType::IDENTIFIER, ->{ self.parse_identifier.as(AST::Expression) }
 
       # self.parse_integer
-      self.register_prefix TokenType::INTEGER, Proc(AST::Expression).new {
-        token = @current
-        # Attempt to convert the current token string to an integer
-        int = @current.literal.to_i64 { nil }
-        if int.nil?
-          @errors << "SyntaxError: Could not parse #{@current.literal} as an integer\n\t#{@current.file_name} at line #{@current.line_num}, char #{@current.char_num}"
-          return AST::IntegerLiteral.new token, nil
-        else
-          return AST::IntegerLiteral.new token, int
-        end
-      }
+      self.register_prefix TokenType::INTEGER, ->{ self.parse_integer_literal.as(AST::Expression) }
 
       # self.parse_prefix_expression
-      self.register_prefix TokenType::NOT, Proc(AST::Expression).new {
-        token = @current
-        operator = @current.literal
-        self.next_token
-        right = self.parse_expression Precedence::PREFIX
-        return AST::PrefixExpression.new token, operator, right
-      }
-      self.register_prefix TokenType::MINUS, @prefix_parsers[TokenType::NOT]
+      self.register_prefix TokenType::NOT, ->{ self.parse_prefix_expression.as(AST::Expression) }
+      self.register_prefix TokenType::MINUS, ->{ self.parse_prefix_expression.as(AST::Expression) }
 
       # Infix Parsers
     end
@@ -200,6 +184,31 @@ module Drizzle
       prefix_parser = prefix_parser.not_nil!
       left_exp = prefix_parser.call
       return left_exp
+    end
+
+    # Expression parser methods
+    def parse_identifier : AST::Expression
+      return AST::Identifier.new @current, @current.literal
+    end
+
+    def parse_integer_literal : AST::Expression
+      token = @current
+      # Attempt to convert the current token string to an integer
+      int = @current.literal.to_i64 { nil }
+      if int.nil?
+        @errors << "SyntaxError: Could not parse #{@current.literal} as an integer\n\t#{@current.file_name} at line #{@current.line_num}, char #{@current.char_num}"
+        return AST::IntegerLiteral.new token, nil
+      else
+        return AST::IntegerLiteral.new token, int
+      end
+    end
+
+    def parse_prefix_expression : AST::Expression
+      token = @current
+      operator = @current.literal
+      self.next_token
+      right = self.parse_expression Precedence::PREFIX
+      return AST::PrefixExpression.new token, operator, right
     end
 
     # "Eat" the `@peek` token if the expected type matches the type of `@peek`
