@@ -187,10 +187,16 @@ module Drizzle
     end
 
     # Expression parser methods
+
+    # Parse an identifier found at the current token
+    # `<identifier>`
     def parse_identifier : AST::Expression
       return AST::Identifier.new @current, @current.literal
     end
 
+    # Attempt to parse an integer literal found at the current token, returning an Integer node with nil value if it can't.
+    # This is to keep the typing in the parser code easier but I might change this later.
+    # `<integer>`
     def parse_integer_literal : AST::Expression
       token = @current
       # Attempt to convert the current token string to an integer
@@ -203,6 +209,8 @@ module Drizzle
       end
     end
 
+    # Parse a prefix expression found at the current token
+    # `<operator> <expression>`
     def parse_prefix_expression : AST::Expression
       token = @current
       operator = @current.literal
