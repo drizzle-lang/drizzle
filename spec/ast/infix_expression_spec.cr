@@ -98,7 +98,7 @@ describe Drizzle::AST::InfixExpression do
       stmnt = program.statements[0].as(Drizzle::AST::ExpressionStatement)
       exp = stmnt.expression.as(Drizzle::AST::InfixExpression)
       test_integer_literal exp.left, left_val.to_i64
-      exp.operator.should eq operator
+      exp.operator.should eq op
       test_integer_literal exp.right, right_val.to_i64
     end
   end
