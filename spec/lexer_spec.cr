@@ -18,6 +18,7 @@ describe Drizzle::Lexer do
       Drizzle::Token.new(Drizzle::TokenType::RIGHT_BRACE, "}", file_name, 1, 6),
       Drizzle::Token.new(Drizzle::TokenType::COMMA, ",", file_name, 1, 7),
       Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 1, 8),
+      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 1, 9),
       Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 2, 1),
     ]
 
@@ -105,6 +106,7 @@ describe Drizzle::Lexer do
       Drizzle::Token.new(Drizzle::TokenType::COMMA, ",", file_name, 8, 27),
       Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "ten", file_name, 8, 29),
       Drizzle::Token.new(Drizzle::TokenType::RIGHT_PAREN, ")", file_name, 8, 32),
+      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 8, 33),
 
       # EOF
       Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 9, 1),
@@ -246,6 +248,7 @@ describe Drizzle::Lexer do
       Drizzle::Token.new(Drizzle::TokenType::INTEGER, "2", file_name, 17, 15),
       Drizzle::Token.new(Drizzle::TokenType::GT_EQ, ">=", file_name, 17, 17),
       Drizzle::Token.new(Drizzle::TokenType::INTEGER, "1", file_name, 17, 20),
+      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 17, 21),
 
       # EOF
       Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 18, 1),
