@@ -103,6 +103,7 @@ module Drizzle
     # Update the `@current` and `@peek` pointers contained in the Parser instance to the next token generated from the `Lexer`
     def next_token
       @current = @peek
+      # We want EOL tokens in the parser but we want to ignore them for the most part
       @peek = @lexer.get_next_token
     end
 
@@ -121,6 +122,12 @@ module Drizzle
 
     # Parse a statement found at `@current` and return it, or nil if no statement can be parsed
     def parse_statement : AST::Statement?
+      # If we call this method with an EOL token, skip it
+      if @current.token_type.eol?
+        self.next_token
+      end
+
+      # Generate the right kind of statement
       case @current.token_type
       when TokenType::LET
         return self.parse_let_statement
@@ -208,8 +215,8 @@ module Drizzle
       end
       left_exp = prefix_parser.not_nil!.call
 
-      # Check for infix expression parsing
-      while precedence.value < (PrecedenceMap.fetch @peek.token_type, Precedence::LOWEST).value
+      # Check for infix expression parsing until we reach a higher precedence token or the end of the line
+      while !@peek.token_type.eol? && precedence.value < (PrecedenceMap.fetch @peek.token_type, Precedence::LOWEST).value
         # Parse an infix expression given what we've already parsed
         infix_parser = @infix_parsers.fetch @peek.token_type, nil
         if infix_parser.nil?

@@ -6,6 +6,8 @@ module Drizzle
 
     # Token is generated from a string that Drizzle does not recognise
     ILLEGAL
+    # End of line token (usually ignored except for certain cases)
+    EOL
     # End of file token
     EOF
 

@@ -98,6 +98,12 @@ module Drizzle
       no_read = false # If this is false, read the next character after the `case` statement
       # Attempt to generate a Token instance based off of the @current_char value
       case @current_char
+      when '\n'
+        token_type = TokenType::EOL
+        literal = "\n"
+        # Because of weirdness that I currently can't solve, manually set line / char nums for EOL tokens
+        current_line -= 1
+        current_char = @lines[current_line - 1].size + 1
       when '='
         if self.peek_next_char == '='
           token_type = TokenType::EQ
@@ -240,7 +246,7 @@ module Drizzle
     #
     # Whitespace characters include spaces, newlines, tabs, carriage returns, etc.
     def skip_whitespace
-      whitespace_chars = [' ', '\n', '\r', '\t']
+      whitespace_chars = [' ', '\r', '\t']
       while whitespace_chars.includes? @current_char
         self.read_next_char
       end
