@@ -16,9 +16,9 @@ end
 
 module Drizzle
   # # Type alias for Proc objects used in prefix notation parsing
-  # alias PrefixParser = Proc(AST::Expression)
+  alias PrefixParser = Proc(AST::Expression)
   # # Type alias for Proc objects used in infix notation parsing
-  # alias InfixParser = Proc(AST::Expression, AST::Expression)
+  alias InfixParser = Proc(AST::Expression, AST::Expression)
 
   # Enum representing the precedence order of operators in Drizzle.
   # Lower precedence operators will have a lower integer value, allowing for easy comparisons between precedences.
@@ -57,16 +57,16 @@ module Drizzle
     @current : Token
     @peek : Token
     @errors : Array(String)
-    @prefix_parsers : Hash(TokenType, Proc(AST::Expression))
-    @infix_parsers : Hash(TokenType, Proc(AST::Expression, AST::Expression))
+    @prefix_parsers : Hash(TokenType, PrefixParser)
+    @infix_parsers : Hash(TokenType, InfixParser)
 
     def initialize(@lexer : Lexer)
       # Read the first two tokens to set up curr and peek variables
       @current = @lexer.get_next_token
       @peek = @lexer.get_next_token
       @errors = [] of String
-      @prefix_parsers = {} of TokenType => Proc(AST::Expression)
-      @infix_parsers = {} of TokenType => Proc(AST::Expression, AST::Expression)
+      @prefix_parsers = {} of TokenType => PrefixParser
+      @infix_parsers = {} of TokenType => InfixParser
       # Set up known parser procs
       self.initialise_parsers
     end
@@ -91,12 +91,12 @@ module Drizzle
     end
 
     # Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for prefix notation
-    def register_prefix(token_type : TokenType, func : Proc(AST::Expression))
+    def register_prefix(token_type : TokenType, func : PrefixParser)
       @prefix_parsers[token_type] = func
     end
 
     # Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for infix notation
-    def register_infix(token_type : TokenType, func : Proc(AST::Expression, AST::Expression))
+    def register_infix(token_type : TokenType, func : InfixParser)
       @infix_parsers[token_type] = func
     end
 
