@@ -22,7 +22,7 @@ module Drizzle
         @statements.each do |stmnt|
           builder << "#{stmnt.to_s}\n"
         end
-        return builder.to_s
+        return builder.to_s.chomp "\n"
       end
 
       # An array of statements that make up the program

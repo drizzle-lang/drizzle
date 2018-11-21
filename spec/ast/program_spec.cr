@@ -30,7 +30,7 @@ describe Drizzle::AST::Program do
     program = Drizzle::AST::Program.new statements
 
     # Check that the string for this program node matches what we expect
-    expected_string = "let my_var: any = another_var\nreturn my_var\n"
+    expected_string = "let my_var: any = another_var\nreturn my_var"
     program.to_s.should eq expected_string
   end
 end
