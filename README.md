@@ -38,12 +38,15 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
     - [ ] Chapter 4 (Extending the Interpreter)
     - [ ] Chapter 5 (Macro System)
 - [ ] Minor Extras before improving the language again
+    - [ ] Move docs to using [Gitbook](https://www.gitbook.com/?t=2) and make it more in depth / finalize initial languge design
     - [ ] Improve the syntax definition file and convert it into .tmLanguage
+    - [ ] Extend interpreter so that initial design works
     - [ ] Do a simple POC project in Drizzle to show that it does actually work
 - [ ] ANTLR Generated Parser
     - [ ] Write (E)BNF notation for Drizzle
     - [ ] Ensure the generated Parser works as intended
     - [ ] Convert parser to Crystal (probably from Go or Python)
+        - Alternatively, look at writing a Crystal generator for ANTLR to avoid this step
 - [ ] Compiler written in Crystal (using https://compilerbook.com)
     - [ ] Chapter  1 (Compilers & VMs)
     - [ ] Chapter  2 (Hello Bytecode)
@@ -61,6 +64,7 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
     - [ ] Move the compiler to LLVM
     - [ ] Add on extra tools
     - [ ] Extend the drizzle stdlib
+    - [ ] Give repositories for installation instead of doing it from source with Crystal
 
 ### Notes
 - It would be nice if the project could maintain a side-by-side interpreter and compiler so that drizzle could have a fully functional REPL environment built into the language, or maybe provide drizzle-interpreter as a separate package or something idk
