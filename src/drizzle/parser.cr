@@ -2,6 +2,13 @@ require "./ast/*"
 require "./lexer"
 require "./token"
 
+# Macroes
+
+# Register a prefix parser for a given token and method name
+macro add_prefix(token_type, method_name)
+  self.register_prefix TokenType::{{token_type}}, ->{ self.{{method_name}}.as(AST::Expression) }
+end
+
 module Drizzle
   # # Type alias for Proc objects used in prefix notation parsing
   # alias PrefixParser = Proc(AST::Expression)
@@ -50,17 +57,10 @@ module Drizzle
     # Initialize parser methods for the parser to use when parsing expressions
     def initialise_parsers
       # Prefix Parsers
-      # Due to some.. weird... casting rules, I can't put these in as functions of the parser because I can't use Proc(AST::Identifier) for Proc(AST::Expression) type implicitly and I can't find how to fix this
-
-      # self.parse_identifier
-      self.register_prefix TokenType::IDENTIFIER, ->{ self.parse_identifier.as(AST::Expression) }
-
-      # self.parse_integer
-      self.register_prefix TokenType::INTEGER, ->{ self.parse_integer_literal.as(AST::Expression) }
-
-      # self.parse_prefix_expression
-      self.register_prefix TokenType::NOT, ->{ self.parse_prefix_expression.as(AST::Expression) }
-      self.register_prefix TokenType::MINUS, ->{ self.parse_prefix_expression.as(AST::Expression) }
+      add_prefix IDENTIFIER, parse_identifier
+      add_prefix INTEGER, parse_integer_literal
+      add_prefix NOT, parse_prefix_expression
+      add_prefix MINUS, parse_prefix_expression
 
       # Infix Parsers
     end
