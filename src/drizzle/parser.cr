@@ -34,17 +34,17 @@ module Drizzle
   enum Precedence
     # Default
     LOWEST
-    # ==
+    # `==`
     EQUALS
-    # > or <
+    # `>` or `<`
     LESSGREATER
-    # + or -
+    # `+` or `-`
     SUM
-    # * or /
+    # `*` or `/`
     PRODUCT
-    # -x
+    # `-x`
     PREFIX
-    # func(x)
+    # `func(x)`
     CALL
   end
 
@@ -264,7 +264,7 @@ module Drizzle
     end
 
     # Attempt to parse a function found at the current token, returning the node if possible, or nil if not
-    # `def <name>((<name>: <type>)*) -> <type> <block>`
+    # `def name((name: type)*) -> type block`
     def parse_function : AST::Function?
       token = @current
 
@@ -319,7 +319,7 @@ module Drizzle
       return AST::BlockStatement.new token, stmnts
     end
 
-    # Parse the parameter list for a function and return an array of `TypedIdentifier` instances representing the parameters
+    # Parse the parameter list for a function and return an array of `AST::TypedIdentifier` instances representing the parameters
     def parse_function_parameters : Array(AST::TypedIdentifier)?
       params = [] of AST::TypedIdentifier
       # If the param list is empty, return an empty array after moving the token on
@@ -395,13 +395,13 @@ module Drizzle
     # Expression parser methods
 
     # Parse an identifier found at the current token
-    # `<identifier>`
+    # `name`
     def parse_identifier : AST::Expression
       return AST::Identifier.new @current, @current.literal
     end
 
     # Parse a typed identifier found at the current token
-    # `<name>: <datatype>`
+    # `name: datatype`
     def parse_typed_identifier : AST::TypedIdentifier?
       name = @current
       eat_or_return_nil COLON
@@ -412,20 +412,20 @@ module Drizzle
     end
 
     # Parse an integer found at the current token
-    # `<integer>`
+    # `integer`
     def parse_integer_literal : AST::Expression
       # This function only gets called on an INTEGER type token, which we know has to be an integer
       return AST::IntegerLiteral.new @current, @current.literal.to_i64
     end
 
     # Parse a boolean found at the current token
-    # `<boolean>`
+    # `boolean`
     def parse_boolean_literal : AST::Expression
       return AST::BooleanLiteral.new @current, @current.token_type.true?
     end
 
     # Parse a prefix expression found at the current token
-    # `<operator> <expression>`
+    # `operator expression`
     def parse_prefix_expression : AST::Expression
       token = @current
       operator = @current.literal
@@ -435,7 +435,7 @@ module Drizzle
     end
 
     # Parse a grouped expression found at the current token
-    # (<expression>)
+    # `(expression)`
     def parse_grouped_expression : AST::Expression?
       self.next_token
       # Lower the precedence for the next pass so that it all gets grouped inside these parentheses
@@ -446,7 +446,7 @@ module Drizzle
     end
 
     # Parse an infix expression found at the current token
-    # `<expression> <operator> <expression>`
+    # `expression operator expression`
     def parse_infix_expression(left : AST::Expression) : AST::Expression
       token = @current
       operator = @current.literal
@@ -457,7 +457,7 @@ module Drizzle
     end
 
     # Parse a call expression found at the current token
-    # `<identifier> <argument_list>`
+    # `identifier argument_list`
     def parse_call_expression(left : AST::Expression) : AST::Expression
       token = @current
       arguments = self.parse_call_arguments
@@ -465,7 +465,7 @@ module Drizzle
     end
 
     # Parse an argument list for a call expression
-    # `(<expression>*)`
+    # `(expression*)`
     def parse_call_arguments : Array(AST::Expression)
       args = [] of AST::Expression
       if @peek.token_type.right_paren?

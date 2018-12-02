@@ -4,7 +4,7 @@ require "../token"
 module Drizzle
   module AST
     # Node class representing an Identifier with a data type.
-    # `<name>: <type>`
+    # `name: type`
     class TypedIdentifier < Identifier
       @datatype : Identifier
 

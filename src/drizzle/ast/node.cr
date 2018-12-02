@@ -3,7 +3,7 @@ module Drizzle
   module AST
     # Abstract base class that all Nodes inherit from, to give a single parent point
     abstract class Node
-      # Returns a string form of the literal for this node.
+      # Returns the literal for the token that made this node.
       abstract def literal : String
 
       # Return a string form of the node
