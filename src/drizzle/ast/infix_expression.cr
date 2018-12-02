@@ -25,7 +25,7 @@ module Drizzle
       getter token
       # The expression found on the left side of the operator
       getter left
-      # The prefix operator (not, -)
+      # The infix operator (+, -, *, /, etc)
       getter operator
       # The expression found on the right side of the operator
       getter right
