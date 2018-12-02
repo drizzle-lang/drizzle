@@ -146,13 +146,13 @@ module Drizzle
 
       # Generate the right kind of statement
       case @current.token_type
-      when TokenType::LET
+      when .let?
         return self.parse_let_statement
-      when TokenType::RETURN
+      when .return?
         return self.parse_return_statement
-      when TokenType::IF
+      when .if?
         return self.parse_if_statement
-      when TokenType::FUNCTION
+      when .function?
         return self.parse_function
       end
       # Work under the assumption that it could be an expression statement
