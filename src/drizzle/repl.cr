@@ -23,10 +23,20 @@ module Drizzle
 
         # Initialize a Lexer, lex the input and print out the Tokens
         lexer = Lexer.new input
-        token : Token
-        while !(token = lexer.get_next_token).token_type.eof?
-          puts token.to_s
+        parser = Parser.new lexer
+        program = parser.parse_program
+        if parser.errors.size != 0
+          self.print_parser_errors parser
+          next
         end
+        puts program.to_s
+      end
+    end
+
+    # Print parser errors in a nice format
+    def print_parser_errors(parser : Parser)
+      parser.errors.each do |error|
+        puts error
       end
     end
   end
