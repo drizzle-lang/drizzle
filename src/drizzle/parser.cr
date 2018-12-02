@@ -16,6 +16,13 @@ macro add_infix(token_type, method_name)
   self.register_infix TokenType::{{token_type}}, ->(exp : AST::Expression){ self.{{method_name}}(exp).as(AST::Expression) }
 end
 
+# Little bit of code cleanup regarding use of `self.eat?`
+macro eat(token_type)
+  if !self.eat? TokenType::{{token_type}}
+    return nil
+  end
+end
+
 module Drizzle
   # # Type alias for Proc objects used in prefix notation parsing
   alias PrefixParser = Proc(AST::Expression?)
@@ -143,6 +150,8 @@ module Drizzle
         return self.parse_return_statement
       when TokenType::IF
         return self.parse_if_statement
+      when TokenType::FUNCTION
+        return self.parse_function
       end
       # Work under the assumption that it could be an expression statement
       return self.parse_expression_statement
@@ -153,32 +162,24 @@ module Drizzle
       # Ensure that the token setup is how we need it to be for a let statement: let <ident>: <ident> = <exp>
       token = @current
 
-      if !self.eat? TokenType::IDENTIFIER
-        return nil
-      end
+      eat IDENTIFIER
 
       # Generate an Identifier node for the name
       name_token = @current
 
       # Expect a colon token next
-      if !self.eat? TokenType::COLON
-        return nil
-      end
+      eat COLON
       # The COLON token is ignored when building a let statement node but it has to be there
 
       # Expect another identifier here
-      if !self.eat? TokenType::IDENTIFIER
-        return nil
-      end
+      eat IDENTIFIER
 
       # Generate an Identifier node for the type
       datatype = AST::Identifier.new @current, @current.literal
       name = AST::TypedIdentifier.new name_token, name_token.literal, datatype
 
       # Eat the assign token
-      if !self.eat? TokenType::ASSIGN
-        return nil
-      end
+      eat ASSIGN
       # Skip the ASSIGN token also
       self.next_token
 
@@ -214,9 +215,7 @@ module Drizzle
       token = @current
 
       # Expect a left parenthesis containing the condition
-      if !self.eat? TokenType::LEFT_PAREN
-        return nil
-      end
+      eat LEFT_PAREN
       # Move on to the first token of the conditional before parsing it
       self.next_token
 
@@ -224,14 +223,10 @@ module Drizzle
       condition = self.parse_expression(Precedence::LOWEST).not_nil!
 
       # Expect a right parenthesis to close the condition
-      if !self.eat? TokenType::RIGHT_PAREN
-        return nil
-      end
+      eat RIGHT_PAREN
 
       # Expect a LEFT_BRACE to start the block
-      if !self.eat? TokenType::LEFT_BRACE
-        return nil
-      end
+      eat LEFT_BRACE
 
       # Parse the block statement
       consequence = self.parse_block_statement
@@ -260,13 +255,41 @@ module Drizzle
       # Check for handling else
       if @peek.token_type.else?
         self.next_token
-        if !self.eat? TokenType::LEFT_BRACE
-          return nil
-        end
+        eat LEFT_BRACE
         alt = self.parse_block_statement
       end
 
       return AST::IfStatement.new token, condition, consequence, alt_consequences, alt
+    end
+
+    # Attempt to parse a function found at the current token, returning the node if possible, or nil if not
+    # `def <name>((<name>: <type>)*) -> <type> <block>`
+    def parse_function : AST::Function?
+      token = @current
+
+      # Get the name of the function
+      eat IDENTIFIER
+
+      name = AST::Identifier.new @current, @current.literal
+
+      # Get the parameter list
+      eat LEFT_PAREN
+      # This function ensures there is a right paren afterwards so we don't need to check it here
+      params = self.parse_function_parameters
+      if params.nil?
+        return nil
+      end
+
+      # Get the return type
+      eat RETURN_TYPE
+      eat IDENTIFIER
+      return_type = AST::Identifier.new @current, @current.literal
+
+      # Get the function body
+      eat LEFT_BRACE
+      body = self.parse_block_statement
+
+      return AST::Function.new token, name, params, return_type, body
     end
 
     # Attempt to parse a block statement found at the current token, returning the node if possible, or nil if not
@@ -284,8 +307,51 @@ module Drizzle
           stmnts << stmnt
         end
         self.next_token
+        # Ignore EOL tokens here too to avoid running into any issues when checking for the RIGHT_BRACE over multiple lines
+        while @current.token_type.eol?
+          self.next_token
+        end
       end
       return AST::BlockStatement.new token, stmnts
+    end
+
+    # Parse the parameter list for a function and return an array of `TypedIdentifier` instances representing the parameters
+    def parse_function_parameters : Array(AST::TypedIdentifier)?
+      params = [] of AST::TypedIdentifier
+      # If the param list is empty, return an empty array after moving the token on
+      if @peek.token_type.right_paren?
+        self.next_token
+        return params
+      end
+
+      # If not, gather the params into the array and return it
+
+      # Move off the left_paren token onto the first identifier
+      self.next_token
+      # Generate the first typed identifier and add it to the array
+      param = self.parse_typed_identifier
+      if param.nil?
+        return nil
+      end
+      params << param
+
+      # Loop while our peek token is a comma
+      while @peek.token_type.comma?
+        # Move the current token to the start of the next identifier
+        self.next_token
+        self.next_token
+        # Parse the next param
+        param = self.parse_typed_identifier
+        if param.nil?
+          return nil
+        end
+        params << param
+      end
+
+      # Ensure that there is a right paren at the end of the param list
+      eat RIGHT_PAREN
+
+      return params
     end
 
     # Attempt to parse an expression statement found at the current token, returning the node if possible, or nil if not
@@ -330,6 +396,17 @@ module Drizzle
       return AST::Identifier.new @current, @current.literal
     end
 
+    # Parse a typed identifier found at the current token
+    # `<name>: <datatype>`
+    def parse_typed_identifier : AST::TypedIdentifier?
+      name = @current
+      eat COLON
+      # Skip the colon
+      self.next_token
+      datatype = AST::Identifier.new @current, @current.literal
+      return AST::TypedIdentifier.new name, name.literal, datatype
+    end
+
     # Parse an integer found at the current token
     # `<integer>`
     def parse_integer_literal : AST::Expression
@@ -360,9 +437,7 @@ module Drizzle
       # Lower the precedence for the next pass so that it all gets grouped inside these parentheses
       exp = self.parse_expression Precedence::LOWEST
       # Expect a RIGHT_PAREN token
-      if !self.eat? TokenType::RIGHT_PAREN
-        return nil
-      end
+      eat RIGHT_PAREN
       return exp
     end
 

@@ -28,7 +28,7 @@ describe Drizzle::AST::Function do
       name, datatype = values
       param = func.params[i]
       param.value.should eq name
-      param.datatype.should eq datatype
+      param.datatype.value.should eq datatype
     end
 
     # The body should contain 1 statement, which is an expression statement that is the infix expression `x + y`
