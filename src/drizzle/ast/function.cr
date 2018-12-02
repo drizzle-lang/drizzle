@@ -1,6 +1,7 @@
 require "./block"
 require "./identifier"
 require "./statement"
+require "./typed_identifer"
 require "../token"
 
 module Drizzle
@@ -11,11 +12,11 @@ module Drizzle
     class Function < Statement
       @token : Token
       @name : Identifier
-      @params : Array(Identifier)
+      @params : Array(TypedIdentifier)
       @ret_type : Identifier
       @body : BlockStatement
 
-      def initialize(@token : Token, @name : Identifier, @params : Array(Identifier), @ret_type : Identifier, @body : BlockStatement)
+      def initialize(@token : Token, @name : Identifier, @params : Array(TypedIdentifier), @ret_type : Identifier, @body : BlockStatement)
       end
 
       def literal : String
@@ -37,7 +38,7 @@ module Drizzle
       # The Identifier node representing the name of the function
       getter name
 
-      # An array of Identifiers representing parameters to the function
+      # An array of TypedIdentifiers representing parameters to the function
       getter params
 
       # The return type of the function
