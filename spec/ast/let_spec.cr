@@ -6,7 +6,7 @@ def test_let_statement(statement : Drizzle::AST::Statement, name : String, datat
   statement.literal.should eq "let"
   let_statement = statement.as(Drizzle::AST::Let)
   let_statement.name.value.should eq name
-  let_statement.datatype.value.should eq datatype
+  let_statement.name.datatype.value.should eq datatype
   let_statement.name.literal.should eq name
   let_statement.value.as(Drizzle::AST::IntegerLiteral).value.should eq value.to_i64
 end

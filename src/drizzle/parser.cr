@@ -158,7 +158,7 @@ module Drizzle
       end
 
       # Generate an Identifier node for the name
-      name = AST::Identifier.new @current, @current.literal
+      name_token = @current
 
       # Expect a colon token next
       if !self.eat? TokenType::COLON
@@ -173,6 +173,7 @@ module Drizzle
 
       # Generate an Identifier node for the type
       datatype = AST::Identifier.new @current, @current.literal
+      name = AST::TypedIdentifier.new name_token, name_token.literal, datatype
 
       # Eat the assign token
       if !self.eat? TokenType::ASSIGN
@@ -186,7 +187,7 @@ module Drizzle
         return nil
       end
 
-      return AST::Let.new token, name, datatype, expression
+      return AST::Let.new token, name, expression
     end
 
     # Attempt to parse a `return` statement found at the current token, returning the node if possible, or nil if not

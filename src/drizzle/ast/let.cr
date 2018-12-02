@@ -1,5 +1,5 @@
 require "./expression"
-require "./identifier"
+require "./typed_identifier"
 require "./statement"
 require "../token"
 
@@ -9,11 +9,10 @@ module Drizzle
     # `let <identifier>: <identifier> = <expression>``
     class Let < Statement
       @token : Token
-      @name : Identifier
-      @datatype : Identifier
+      @name : TypedIdentifier
       @value : Expression
 
-      def initialize(@token, @name, @datatype, @value)
+      def initialize(@token, @name, @value)
       end
 
       def literal : String
@@ -21,15 +20,13 @@ module Drizzle
       end
 
       def to_s : String
-        return "#{self.literal} #{@name.to_s}: #{@datatype.to_s} = #{@value.to_s}"
+        return "#{self.literal} #{@name.to_s} = #{@value.to_s}"
       end
 
       # The token that caused the generation of this node
       getter token
-      # The name of the variable being assigned to
+      # The name and type of the variable being assigned to
       getter name
-      # The datatype of the variable being assigned to
-      getter datatype
       # The expression that will generate a value to assign to the variable
       getter value
     end

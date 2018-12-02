@@ -6,13 +6,13 @@ describe Drizzle::AST::Program do
     statements : Array(Drizzle::AST::Statement) = [
       Drizzle::AST::Let.new(
         Drizzle::Token.new(Drizzle::TokenType::LET, "let"),
-        Drizzle::AST::Identifier.new(
+        Drizzle::AST::TypedIdentifier.new(
           Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "my_var"),
           "my_var",
-        ),
-        Drizzle::AST::Identifier.new(
-          Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "any"),
-          "any",
+          Drizzle::AST::Identifier.new(
+            Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "any"),
+            "any",
+          ),
         ),
         Drizzle::AST::Identifier.new(
           Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "another_var"),
