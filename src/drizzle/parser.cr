@@ -200,10 +200,9 @@ module Drizzle
       # Get the next token
       self.next_token
 
-      expression = self.parse_expression Precedence::LOWEST
-      if expression.nil?
-        # Empty returns are allowed but for now we'll just return nil
-        return nil
+      expression : AST::Expression? = nil
+      if !@current.token_type.eol?
+        expression = self.parse_expression Precedence::LOWEST
       end
 
       # Create and return the node

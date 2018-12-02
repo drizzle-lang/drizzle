@@ -8,7 +8,8 @@ module Drizzle
     # `return <expression>`
     class Return < Statement
       @token : Token
-      @value : Expression
+      # Return value can be nil
+      @value : Expression?
 
       def initialize(@token, @value)
       end
