@@ -17,11 +17,16 @@ describe Drizzle::AST::Return do
     # Do initial checks of the created program node
     program.statements.size.should eq 3
 
+    expected = ["5", "10", "993322"]
+
     # Check that all the statements are return statements
-    program.statements.each do |statement|
+    expected.each.with_index do |value, i|
+      statement = program.statements[i]
       statement.literal.should eq "return"
       return_statement = statement.as(Drizzle::AST::Return)
       return_statement.literal.should eq "return"
+      # Check the return expression also
+      return_statement.value.as(Drizzle::AST::IntegerLiteral).value.should eq value.to_i64
     end
   end
 end

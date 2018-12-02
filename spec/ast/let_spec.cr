@@ -2,12 +2,13 @@ require "./ast_spec_helper"
 require "../spec_helper"
 
 # Test helper that tests that a given statement is a let statement, and the identifiers involved are correct
-def test_let_statement(statement : Drizzle::AST::Statement, name : String, datatype : String)
+def test_let_statement(statement : Drizzle::AST::Statement, name : String, datatype : String, value : String)
   statement.literal.should eq "let"
   let_statement = statement.as(Drizzle::AST::Let)
   let_statement.name.value.should eq name
   let_statement.datatype.value.should eq datatype
   let_statement.name.literal.should eq name
+  let_statement.value.as(Drizzle::AST::IntegerLiteral).value.should eq value.to_i64
 end
 
 describe Drizzle::AST::Let do
@@ -28,14 +29,14 @@ describe Drizzle::AST::Let do
 
     # Check the generated identifiers against the expected ones
     expected_identifiers = [
-      ["x", "int"],
-      ["y", "int"],
-      ["foobar", "int"],
+      ["x", "int", "5"],
+      ["y", "int", "10"],
+      ["foobar", "int", "838383"],
     ]
 
     expected_identifiers.each.with_index do |expected, i|
       statement = program.statements[i]
-      test_let_statement statement, expected[0], expected[1]
+      test_let_statement statement, expected[0], expected[1], expected[2]
     end
   end
 end
