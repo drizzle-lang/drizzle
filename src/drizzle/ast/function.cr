@@ -1,7 +1,7 @@
 require "./block"
 require "./identifier"
 require "./statement"
-require "./typed_identifer"
+require "./typed_identifier"
 require "../token"
 
 module Drizzle
