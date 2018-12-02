@@ -13,10 +13,10 @@ module Drizzle
       @token : Token
       @name : Identifier
       @params : Array(TypedIdentifier)
-      @ret_type : Identifier
+      @ret_type : Identifier?
       @body : BlockStatement
 
-      def initialize(@token : Token, @name : Identifier, @params : Array(TypedIdentifier), @ret_type : Identifier, @body : BlockStatement)
+      def initialize(@token : Token, @name : Identifier, @params : Array(TypedIdentifier), @ret_type : Identifier?, @body : BlockStatement)
       end
 
       def literal : String

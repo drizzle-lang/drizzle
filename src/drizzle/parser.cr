@@ -280,10 +280,13 @@ module Drizzle
         return nil
       end
 
-      # Get the return type
-      eat RETURN_TYPE
-      eat IDENTIFIER
-      return_type = AST::Identifier.new @current, @current.literal
+      # Get the return type (if one is supplied)
+      return_type : AST::Identifier? = nil
+      if @peek.token_type.return_type?
+        eat RETURN_TYPE
+        eat IDENTIFIER
+        return_type = AST::Identifier.new @current, @current.literal
+      end
 
       # Get the function body
       eat LEFT_BRACE
