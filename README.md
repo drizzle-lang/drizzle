@@ -36,7 +36,6 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
     - [x] Chapter 2 (Parsing)
     - [ ] Chapter 3 (Evaluating)
     - [ ] Chapter 4 (Extending the Interpreter)
-    - [ ] Chapter 5 (Macro System)
 - [ ] Minor Extras before improving the language again
     - [ ] Move docs to using [Gitbook](https://www.gitbook.com/?t=2) and make it more in depth / finalize initial languge design
     - [ ] Improve the syntax definition file and convert it into .tmLanguage
@@ -65,6 +64,7 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
     - [ ] Add on extra tools
     - [ ] Extend the drizzle stdlib
     - [ ] Give repositories for installation instead of doing it from source with Crystal
+    - [ ] Interpreter Book Lost Chapter (Macro System) (I had no initial plans to do this so I'll see)
 
 ### Notes
 - It would be nice if the project could maintain a side-by-side interpreter and compiler so that drizzle could have a fully functional REPL environment built into the language, or maybe provide drizzle-interpreter as a separate package or something idk
