@@ -141,6 +141,8 @@ module Drizzle
         return self.parse_let_statement
       when TokenType::RETURN
         return self.parse_return_statement
+      when TokenType::IF
+        return self.parse_if_statement
       end
       # Work under the assumption that it could be an expression statement
       return self.parse_expression_statement
@@ -172,15 +174,17 @@ module Drizzle
       # Generate an Identifier node for the type
       datatype = AST::Identifier.new @current, @current.literal
 
-      # For now we will skip the expression part (skip to the next let token)
-      while !@peek.token_type.let?
-        if @current.token_type.eof?
-          break
-        end
-        self.next_token
+      # Eat the assign token
+      if !self.eat? TokenType::ASSIGN
+        return nil
       end
-      # TODO - Implement the parsing of expressions
-      expression = nil
+      # Skip the ASSIGN token also
+      self.next_token
+
+      expression = self.parse_expression Precedence::LOWEST
+      if expression.nil?
+        return nil
+      end
 
       return AST::Let.new token, name, datatype, expression
     end
@@ -192,17 +196,95 @@ module Drizzle
       # Get the next token
       self.next_token
 
-      # TODO - Parse expressions properly
-      while !@peek.token_type.return?
-        if @current.token_type.eof?
-          break
-        end
-        self.next_token
+      expression = self.parse_expression Precedence::LOWEST
+      if expression.nil?
+        # Empty returns are allowed but for now we'll just return nil
+        return nil
       end
-      expression = nil
 
       # Create and return the node
       return AST::Return.new token, expression
+    end
+
+    # Attempt to parse an 'if' statement found at the current token, returning the node if possible, or nil if not.
+    #
+    # The `check_alternatives` flag states whether the current call should check for `elsif` and `else` tokens. We can use this to parse `elsif` blocks recursively.
+    def parse_if_statement(check_alternatives : Bool = true) : AST::IfStatement?
+      token = @current
+
+      # Expect a left parenthesis containing the condition
+      if !self.eat? TokenType::LEFT_PAREN
+        return nil
+      end
+      # Move on to the first token of the conditional before parsing it
+      self.next_token
+
+      # Get the expression for the conditional
+      condition = self.parse_expression(Precedence::LOWEST).not_nil!
+
+      # Expect a right parenthesis to close the condition
+      if !self.eat? TokenType::RIGHT_PAREN
+        return nil
+      end
+
+      # Expect a LEFT_BRACE to start the block
+      if !self.eat? TokenType::LEFT_BRACE
+        return nil
+      end
+
+      # Parse the block statement
+      consequence = self.parse_block_statement
+
+      # Return now if we were told not to check alternatives
+      if !check_alternatives
+        return AST::IfStatement.new token, condition, consequence
+      end
+
+      # Otherwise, carry on and check the rest
+
+      # Parse `elsif`s recursively
+      alt_consequences = [] of AST::IfStatement
+      alt : AST::BlockStatement? = nil
+      # If the peek token is an elsif token, then move to it and then start parsing some elsif expressions recursively
+      if @peek.token_type.elsif?
+        self.next_token
+        while @current.token_type.elsif?
+          alt_stmnt = self.parse_if_statement false
+          if !alt_stmnt.nil?
+            alt_consequences << alt_stmnt
+          end
+        end
+      end
+
+      # Check for handling else
+      if @peek.token_type.else?
+        self.next_token
+        if !self.eat? TokenType::LEFT_BRACE
+          return nil
+        end
+        alt = self.parse_block_statement
+      end
+
+      return AST::IfStatement.new token, condition, consequence, alt_consequences, alt
+    end
+
+    # Attempt to parse a block statement found at the current token, returning the node if possible, or nil if not
+    def parse_block_statement : AST::BlockStatement?
+      token = @current
+      stmnts = [] of AST::Statement
+
+      # Skip the left brace token that current should be on right now
+      self.next_token
+
+      # Loop until we find a RIGHT_BRACE or EOF token
+      while !(@current.token_type.right_brace? || @current.token_type.eof?)
+        stmnt = self.parse_statement
+        if !stmnt.nil?
+          stmnts << stmnt
+        end
+        self.next_token
+      end
+      return AST::BlockStatement.new token, stmnts
     end
 
     # Attempt to parse an expression statement found at the current token, returning the node if possible, or nil if not

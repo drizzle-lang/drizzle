@@ -24,7 +24,7 @@ describe Drizzle::AST::IfStatement do
     right.value.should eq "y"
 
     # Check that there is a single consequence, and that it is a return statement returning the identifier 'x'
-    if_stmnt.consequence.statements.should eq 1
+    if_stmnt.consequence.statements.size.should eq 1
     ret = if_stmnt.consequence.statements[0].as Drizzle::AST::Return
     ret.value.as(Drizzle::AST::Identifier).value.should eq "x"
   end
@@ -51,12 +51,12 @@ describe Drizzle::AST::IfStatement do
     right.value.should eq "y"
 
     # Check that there is a single consequence, and that it is a return statement returning the identifier 'x'
-    if_stmnt.consequence.statements.should eq 1
+    if_stmnt.consequence.statements.size.should eq 1
     ret = if_stmnt.consequence.statements[0].as Drizzle::AST::Return
     ret.value.as(Drizzle::AST::Identifier).value.should eq "x"
 
     # Check that there is a single alternative, and that it is a return statement returning the identifier 'y'
-    if_stmnt.alternative.not_nil!.statements.should eq 1
+    if_stmnt.alternative.not_nil!.statements.size.should eq 1
     ret = if_stmnt.alternative.not_nil!.statements[0].as Drizzle::AST::Return
     ret.value.as(Drizzle::AST::Identifier).value.should eq "y"
   end
@@ -83,7 +83,7 @@ describe Drizzle::AST::IfStatement do
     right.value.should eq "y"
 
     # Check that there is a single consequence, and that it is a return statement returning the identifier 'x'
-    if_stmnt.consequence.statements.should eq 1
+    if_stmnt.consequence.statements.size.should eq 1
     ret = if_stmnt.consequence.statements[0].as Drizzle::AST::Return
     ret.value.as(Drizzle::AST::Identifier).value.should eq "x"
 
@@ -101,7 +101,7 @@ describe Drizzle::AST::IfStatement do
     ret.value.as(Drizzle::AST::Identifier).value.should eq "y"
 
     # Check that there is a single alternative, and that it is a return statement returning the identifier 'y'
-    if_stmnt.alternative.not_nil!.statements.should eq 1
+    if_stmnt.alternative.not_nil!.statements.size.should eq 1
     ret = if_stmnt.alternative.not_nil!.statements[0].as Drizzle::AST::Return
     ret.value.as(Drizzle::AST::Identifier).value.should eq "z"
   end

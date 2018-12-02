@@ -10,6 +10,7 @@ def check_parser_errors(parser : Drizzle::Parser)
     return
   end
 
+  puts
   errors.each do |err|
     puts err
   end

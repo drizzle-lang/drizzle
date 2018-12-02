@@ -8,8 +8,7 @@ module Drizzle
     # `return <expression>`
     class Return < Statement
       @token : Token
-      # TODO - Remove nilable after expression parsing is added
-      @value : Expression?
+      @value : Expression
 
       def initialize(@token, @value)
       end

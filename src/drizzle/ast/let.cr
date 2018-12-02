@@ -11,8 +11,7 @@ module Drizzle
       @token : Token
       @name : Identifier
       @datatype : Identifier
-      # TODO - Remove the nilable from this once parsing expressions is added to the parser
-      @value : Expression?
+      @value : Expression
 
       def initialize(@token, @name, @datatype, @value)
       end
