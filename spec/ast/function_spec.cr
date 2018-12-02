@@ -41,4 +41,46 @@ describe Drizzle::AST::Function do
     right = exp.right.as Drizzle::AST::Identifier
     right.value.should eq "y"
   end
+
+  it "properly parses parameter lists" do
+    tests = [
+      [
+        "def test() {}",
+        [] of Array(String),
+      ],
+      [
+        "def test(x: int) {}",
+        [
+          ["x", "int"],
+        ],
+      ],
+      [
+        "def test(x: int, y: str, z: any) {}",
+        [
+          ["x", "int"],
+          ["y", "str"],
+          ["z", "any"],
+        ],
+      ],
+    ]
+
+    tests.each do |test|
+      input, expected = test
+      lexer = Drizzle::Lexer.new input.to_s
+      parser = Drizzle::Parser.new lexer
+      program = parser.parse_program
+      check_parser_errors parser
+
+      # Get the function statement and check its parameter list to ensure it is correct
+      program.statements.size.should eq 1
+      func = program.statements[0].as Drizzle::AST::Function
+      func.params.size.should eq expected.size
+      expected.as(Array(Array(String))).each.with_index do |values, i|
+        name, datatype = values
+        param = func.params[i]
+        param.value.should eq name
+        param.datatype.value.should eq datatype
+      end
+    end
+  end
 end
