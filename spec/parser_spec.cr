@@ -25,6 +25,10 @@ describe Drizzle::Parser do
       ["2 / (5 + 5)", "(2 / (5 + 5))"],
       ["-(5 + 5)", "(-(5 + 5))"],
       ["not (true == true)", "(not(true == true))"],
+      # Adding Call Expressions
+      ["a + add(b * c) + d", "((a + add((b * c))) + d)"],
+      ["add(a, b, 1, 2 * 3, 4 + 5, add(6, 7 * 8))", "add(a, b, 1, (2 * 3), (4 + 5), add(6, (7 * 8)))"],
+      ["add(a + b + c * d / f + g)", "add((((a + b) + ((c * d) / f)) + g))"],
     ]
 
     tests.each do |test|
