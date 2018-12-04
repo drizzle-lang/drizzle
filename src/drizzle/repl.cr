@@ -1,7 +1,7 @@
 module Drizzle
   # Class for handling the Read-Eval-Print-Loop (REPL) environment for Drizzle.
   #
-  # Currently, since we can't exactly 'Eval' yet, the REPL environment simply lexes and prints out the tokens that were created.
+  # Currently, since we can't exactly 'Eval' yet, the REPL environment simply parses the input and prints back out the string form of the program node made
   class REPL
     @@prompt = ">>> "
 
@@ -19,14 +19,22 @@ module Drizzle
           next
         end
 
-        puts "Input: '#{input}'"
-
         # Initialize a Lexer, lex the input and print out the Tokens
         lexer = Lexer.new input
-        token : Token
-        while !(token = lexer.get_next_token).token_type.eof?
-          puts token.to_s
+        parser = Parser.new lexer
+        program = parser.parse_program
+        if parser.errors.size != 0
+          self.print_parser_errors parser
+          next
         end
+        puts program.to_s
+      end
+    end
+
+    # Print parser errors in a nice format
+    def print_parser_errors(parser : Parser)
+      parser.errors.each do |error|
+        puts error.colorize(:red)
       end
     end
   end

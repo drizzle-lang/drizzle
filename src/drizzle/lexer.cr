@@ -50,11 +50,14 @@ module Drizzle
         @read_char_num = 0
 
         # Now check to see if we have gone past the last line in the file or not
-        if @line_num >= @lines.size
+        if @line_num > @lines.size
           # If so, set both the current line and character values to be the Char::ZERO.
           # The line is set to this as making it empty will cause `skip_whitespace` to loop infinitely.
           @current_line = Char::ZERO.to_s
           @current_char = Char::ZERO
+        elsif @line_num == @lines.size
+          @current_line = ""
+          @current_char = '\n'
         else
           # If not, update the current line and character values to be the actual current line and the newline character.
           @current_line = @lines[@line_num]
@@ -98,6 +101,12 @@ module Drizzle
       no_read = false # If this is false, read the next character after the `case` statement
       # Attempt to generate a Token instance based off of the @current_char value
       case @current_char
+      when '\n'
+        token_type = TokenType::EOL
+        literal = "\n"
+        # Because of weirdness that I currently can't solve, manually set line / char nums for EOL tokens
+        current_line -= 1
+        current_char = @lines[current_line - 1].size + 1
       when '='
         if self.peek_next_char == '='
           token_type = TokenType::EQ
@@ -180,6 +189,8 @@ module Drizzle
       when Char::ZERO
         token_type = TokenType::EOF
         literal = Char::ZERO.to_s
+        # Also because of weirdness, EOF tokens are put 2 lines after where they are meant to be
+        current_line -= 1
       else
         # There are some checks to be made here, as this could possibly be a keyword, identifier or number
         if @current_char.letter?
@@ -240,7 +251,7 @@ module Drizzle
     #
     # Whitespace characters include spaces, newlines, tabs, carriage returns, etc.
     def skip_whitespace
-      whitespace_chars = [' ', '\n', '\r', '\t']
+      whitespace_chars = [' ', '\r', '\t']
       while whitespace_chars.includes? @current_char
         self.read_next_char
       end
