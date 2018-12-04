@@ -19,18 +19,18 @@ describe Drizzle::AST::CallExpression do
     exp.arguments.size.should eq 3
 
     # Argument 1: 1
-    exp.arguments[0].as(Drizzle::AST::IntegerLiteral).value.should eq 1_i64
+    test_integer_literal exp.arguments[0], 1_i64
 
     # Argument 2: 2 * 3
     mul_arg = exp.arguments[1].as Drizzle::AST::InfixExpression
-    mul_arg.left.not_nil!.as(Drizzle::AST::IntegerLiteral).value.should eq 2_i64
+    test_integer_literal mul_arg.left, 2_i64
     mul_arg.operator.should eq "*"
-    mul_arg.right.not_nil!.as(Drizzle::AST::IntegerLiteral).value.should eq 3_i64
+    test_integer_literal mul_arg.right, 3_i64
 
     # Argument 3: 4 + 5
     add_arg = exp.arguments[2].as Drizzle::AST::InfixExpression
-    add_arg.left.not_nil!.as(Drizzle::AST::IntegerLiteral).value.should eq 4_i64
+    test_integer_literal add_arg.left, 4_i64
     add_arg.operator.should eq "+"
-    add_arg.right.not_nil!.as(Drizzle::AST::IntegerLiteral).value.should eq 5_i64
+    test_integer_literal add_arg.right, 5_i64
   end
 end
