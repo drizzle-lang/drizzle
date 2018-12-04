@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/drizzle-lang/drizzle">
-  <title>Drizzle::REPL - github.com/drizzle-lang/drizzle</title>
+  <title>Drizzle::InfixParser - github.com/drizzle-lang/drizzle</title>
 </head>
 <body>
 
@@ -136,7 +136,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/InfixParser" data-name="drizzle::infixparser">
+  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/InfixParser" data-name="drizzle::infixparser">
       <a href="../Drizzle/InfixParser.html">InfixParser</a>
       
     </li>
@@ -161,7 +161,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
       <a href="../Drizzle/REPL.html">REPL</a>
       
     </li>
@@ -190,23 +190,22 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Drizzle::REPL
+  <span class="kind">alias</span> Drizzle::InfixParser
 
 </h1>
 
-
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Drizzle/REPL.html">Drizzle::REPL</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
   <h2>Overview</h2>
 
-  <p>Class for handling the Read-Eval-Print-Loop (REPL) environment for Drizzle.</p>
-
-<p>Currently, since we can't exactly 'Eval' yet, the REPL environment simply parses the input and prints back out the string form of the program node made</p>
+  <h1>Type alias for Proc objects used in infix notation parsing</h1>
 
 
+
+  <h2>Alias Definition</h2>
+  <code><a href="../Drizzle/AST/Expression.html">Drizzle::AST::Expression</a> -> <a href="../Drizzle/AST/Expression.html">Drizzle::AST::Expression</a></code>
 
 
 
@@ -222,8 +221,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/repl.cr#L5" target="_blank">
-        drizzle/repl.cr
+      <a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L30" target="_blank">
+        drizzle/parser.cr
       </a>
     
     <br/>
@@ -233,33 +232,9 @@
 
 
 
-  <h2>Constructors</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
-        
-          <div class="summary"><p>Start the REPL environment.</p></div>
-        
-      </li>
-    
-  </ul>
 
 
 
-
-
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#print_parser_errors%28parser%3AParser%29-instance-method" class="signature"><strong>#print_parser_errors</strong>(parser : Parser)</a>
-        
-          <div class="summary"><p>Print parser errors in a nice format</p></div>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -267,76 +242,12 @@
 
 <div class="methods-inherited">
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
-  <h2>Constructor Detail</h2>
-  
-    <div class="entry-detail" id="new-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>
-
-        <a class="method-permalink" href="#new-class-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Start the REPL environment.</p>
-
-<p>REPL ends on an empty input.</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/repl.cr#L11" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
-
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="print_parser_errors(parser:Parser)-instance-method">
-      <div class="signature">
-        
-        def <strong>print_parser_errors</strong>(parser : <a href="../Drizzle/Parser.html">Parser</a>)
-
-        <a class="method-permalink" href="#print_parser_errors%28parser%3AParser%29-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Print parser errors in a nice format</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/repl.cr#L35" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

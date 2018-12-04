@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/drizzle-lang/drizzle">
+  <title>Drizzle::Parser - github.com/drizzle-lang/drizzle</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/drizzle-lang/drizzle/Drizzle" data-name="drizzle">
+      <a href="../Drizzle.html">Drizzle</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST" data-name="drizzle::ast">
+      <a href="../Drizzle/AST.html">AST</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/BlockStatement" data-name="drizzle::ast::blockstatement">
+      <a href="../Drizzle/AST/BlockStatement.html">BlockStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/BooleanLiteral" data-name="drizzle::ast::booleanliteral">
+      <a href="../Drizzle/AST/BooleanLiteral.html">BooleanLiteral</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/CallExpression" data-name="drizzle::ast::callexpression">
+      <a href="../Drizzle/AST/CallExpression.html">CallExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Expression" data-name="drizzle::ast::expression">
+      <a href="../Drizzle/AST/Expression.html">Expression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/ExpressionStatement" data-name="drizzle::ast::expressionstatement">
+      <a href="../Drizzle/AST/ExpressionStatement.html">ExpressionStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Function" data-name="drizzle::ast::function">
+      <a href="../Drizzle/AST/Function.html">Function</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Identifier" data-name="drizzle::ast::identifier">
+      <a href="../Drizzle/AST/Identifier.html">Identifier</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/IfStatement" data-name="drizzle::ast::ifstatement">
+      <a href="../Drizzle/AST/IfStatement.html">IfStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/InfixExpression" data-name="drizzle::ast::infixexpression">
+      <a href="../Drizzle/AST/InfixExpression.html">InfixExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/IntegerLiteral" data-name="drizzle::ast::integerliteral">
+      <a href="../Drizzle/AST/IntegerLiteral.html">IntegerLiteral</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Let" data-name="drizzle::ast::let">
+      <a href="../Drizzle/AST/Let.html">Let</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Node" data-name="drizzle::ast::node">
+      <a href="../Drizzle/AST/Node.html">Node</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/PrefixExpression" data-name="drizzle::ast::prefixexpression">
+      <a href="../Drizzle/AST/PrefixExpression.html">PrefixExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Program" data-name="drizzle::ast::program">
+      <a href="../Drizzle/AST/Program.html">Program</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Return" data-name="drizzle::ast::return">
+      <a href="../Drizzle/AST/Return.html">Return</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Statement" data-name="drizzle::ast::statement">
+      <a href="../Drizzle/AST/Statement.html">Statement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/TypedIdentifier" data-name="drizzle::ast::typedidentifier">
+      <a href="../Drizzle/AST/TypedIdentifier.html">TypedIdentifier</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/InfixParser" data-name="drizzle::infixparser">
+      <a href="../Drizzle/InfixParser.html">InfixParser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Lexer" data-name="drizzle::lexer">
+      <a href="../Drizzle/Lexer.html">Lexer</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/Parser" data-name="drizzle::parser">
+      <a href="../Drizzle/Parser.html">Parser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Precedence" data-name="drizzle::precedence">
+      <a href="../Drizzle/Precedence.html">Precedence</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/PrefixParser" data-name="drizzle::prefixparser">
+      <a href="../Drizzle/PrefixParser.html">PrefixParser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
+      <a href="../Drizzle/REPL.html">REPL</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Token" data-name="drizzle::token">
+      <a href="../Drizzle/Token.html">Token</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/TokenType" data-name="drizzle::tokentype">
+      <a href="../Drizzle/TokenType.html">TokenType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Drizzle::Parser
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Drizzle/Parser.html">Drizzle::Parser</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>A Parser reads in the tokens generated by a <code><a href="../Drizzle/Lexer.html">Lexer</a></code> and constructs an Abstract Syntax Tree (AST) built from what it finds.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L65" target="_blank">
+        drizzle/parser.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28lexer%3ALexer%29-class-method" class="signature"><strong>.new</strong>(lexer : Lexer)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#current%3ADrizzle%3A%3AToken-instance-method" class="signature"><strong>#current</strong> : Drizzle::Token</a>
+        
+          <div class="summary"><p>The token that is currently being inspected by the parser</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eat%3F%28expected_type%3ATokenType%29%3ABool-instance-method" class="signature"><strong>#eat?</strong>(expected_type : TokenType) : Bool</a>
+        
+          <div class="summary"><p>"Eat" the <code>@peek</code> token if the expected type matches the type of <code>@peek</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eat_error%28expected_type%3ATokenType%29-instance-method" class="signature"><strong>#eat_error</strong>(expected_type : TokenType)</a>
+        
+          <div class="summary"><p>Add an error when <code><a href="../Drizzle/Parser.html#eat%3F%28expected_type%3ATokenType%29%3ABool-instance-method">#eat?</a></code> gets an incorrect token type</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#errors%3AArray%28String%29-instance-method" class="signature"><strong>#errors</strong> : Array(String)</a>
+        
+          <div class="summary"><p>Maintain an array of errors that are generated during the parsing step</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#initialise_parsers-instance-method" class="signature"><strong>#initialise_parsers</strong></a>
+        
+          <div class="summary"><p>Initialize parser methods for the parser to use when parsing expressions</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#next_token-instance-method" class="signature"><strong>#next_token</strong></a>
+        
+          <div class="summary"><p>Update the <code>@current</code> and <code>@peek</code> pointers contained in the Parser instance to the next token generated from the <code><a href="../Drizzle/Lexer.html">Lexer</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_block_statement%3AAST%3A%3ABlockStatement%3F-instance-method" class="signature"><strong>#parse_block_statement</strong> : AST::BlockStatement?</a>
+        
+          <div class="summary"><p>Attempt to parse a block statement found at the current token, returning the node if possible, or nil if not</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_boolean_literal%3AAST%3A%3AExpression-instance-method" class="signature"><strong>#parse_boolean_literal</strong> : AST::Expression</a>
+        
+          <div class="summary"><p>Parse a boolean found at the current token <code>boolean</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_call_arguments%3AArray%28AST%3A%3AExpression%29-instance-method" class="signature"><strong>#parse_call_arguments</strong> : Array(AST::Expression)</a>
+        
+          <div class="summary"><p>Parse an argument list for a call expression <code>(expression*)</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_call_expression%28left%3AAST%3A%3AExpression%29%3AAST%3A%3AExpression-instance-method" class="signature"><strong>#parse_call_expression</strong>(left : AST::Expression) : AST::Expression</a>
+        
+          <div class="summary"><p>Parse a call expression found at the current token <code>identifier argument_list</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_expression%28precedence%3APrecedence%29%3AAST%3A%3AExpression%3F-instance-method" class="signature"><strong>#parse_expression</strong>(precedence : Precedence) : AST::Expression?</a>
+        
+          <div class="summary"><p>Attempt to parse an expression.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_expression_statement%3AAST%3A%3AExpressionStatement%3F-instance-method" class="signature"><strong>#parse_expression_statement</strong> : AST::ExpressionStatement?</a>
+        
+          <div class="summary"><p>Attempt to parse an expression statement found at the current token, returning the node if possible, or nil if not</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_function%3AAST%3A%3AFunction%3F-instance-method" class="signature"><strong>#parse_function</strong> : AST::Function?</a>
+        
+          <div class="summary"><p>Attempt to parse a function found at the current token, returning the node if possible, or nil if not <code>def name((name: type)*) -> type block</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_function_parameters%3AArray%28AST%3A%3ATypedIdentifier%29%3F-instance-method" class="signature"><strong>#parse_function_parameters</strong> : Array(AST::TypedIdentifier)?</a>
+        
+          <div class="summary"><p>Parse the parameter list for a function and return an array of <code><a href="../Drizzle/AST/TypedIdentifier.html">AST::TypedIdentifier</a></code> instances representing the parameters</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_grouped_expression%3AAST%3A%3AExpression%3F-instance-method" class="signature"><strong>#parse_grouped_expression</strong> : AST::Expression?</a>
+        
+          <div class="summary"><p>Parse a grouped expression found at the current token <code>(expression)</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_identifier%3AAST%3A%3AExpression-instance-method" class="signature"><strong>#parse_identifier</strong> : AST::Expression</a>
+        
+          <div class="summary"><p>Parse an identifier found at the current token <code>name</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_if_statement%28check_alternatives%3ABool%3Dtrue%29%3AAST%3A%3AIfStatement%3F-instance-method" class="signature"><strong>#parse_if_statement</strong>(check_alternatives : Bool = <span class="n">true</span>) : AST::IfStatement?</a>
+        
+          <div class="summary"><p>Attempt to parse an 'if' statement found at the current token, returning the node if possible, or nil if not.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_infix_expression%28left%3AAST%3A%3AExpression%29%3AAST%3A%3AExpression-instance-method" class="signature"><strong>#parse_infix_expression</strong>(left : AST::Expression) : AST::Expression</a>
+        
+          <div class="summary"><p>Parse an infix expression found at the current token <code>expression operator expression</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_integer_literal%3AAST%3A%3AExpression-instance-method" class="signature"><strong>#parse_integer_literal</strong> : AST::Expression</a>
+        
+          <div class="summary"><p>Parse an integer found at the current token <code>integer</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_let_statement%3AAST%3A%3ALet%3F-instance-method" class="signature"><strong>#parse_let_statement</strong> : AST::Let?</a>
+        
+          <div class="summary"><p>Attempt to parse a <code>let</code> statement found at the current token, returning the node if possible, or nil if not</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_prefix_expression%3AAST%3A%3AExpression-instance-method" class="signature"><strong>#parse_prefix_expression</strong> : AST::Expression</a>
+        
+          <div class="summary"><p>Parse a prefix expression found at the current token <code>operator expression</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_program%3AAST%3A%3AProgram-instance-method" class="signature"><strong>#parse_program</strong> : AST::Program</a>
+        
+          <div class="summary"><p>Parse a program and build a program node from it, and return it</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_return_statement%3AAST%3A%3AReturn%3F-instance-method" class="signature"><strong>#parse_return_statement</strong> : AST::Return?</a>
+        
+          <div class="summary"><p>Attempt to parse a <code>return</code> statement found at the current token, returning the node if possible, or nil if not</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_statement%3AAST%3A%3AStatement%3F-instance-method" class="signature"><strong>#parse_statement</strong> : AST::Statement?</a>
+        
+          <div class="summary"><p>Parse a statement found at <code>@current</code> and return it, or nil if no statement can be parsed</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_typed_identifier%3AAST%3A%3ATypedIdentifier%3F-instance-method" class="signature"><strong>#parse_typed_identifier</strong> : AST::TypedIdentifier?</a>
+        
+          <div class="summary"><p>Parse a typed identifier found at the current token <code>name: datatype</code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#peek%3ADrizzle%3A%3AToken-instance-method" class="signature"><strong>#peek</strong> : Drizzle::Token</a>
+        
+          <div class="summary"><p>A pointer to the next token coming up in the stream.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#register_infix%28token_type%3ATokenType%2Cfunc%3AInfixParser%29-instance-method" class="signature"><strong>#register_infix</strong>(token_type : TokenType, func : InfixParser)</a>
+        
+          <div class="summary"><p>Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for infix notation</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#register_prefix%28token_type%3ATokenType%2Cfunc%3APrefixParser%29-instance-method" class="signature"><strong>#register_prefix</strong>(token_type : TokenType, func : PrefixParser)</a>
+        
+          <div class="summary"><p>Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for prefix notation</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(lexer:Lexer)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(lexer : <a href="../Drizzle/Lexer.html">Lexer</a>)
+
+        <a class="method-permalink" href="#new%28lexer%3ALexer%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L73" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="current:Drizzle::Token-instance-method">
+      <div class="signature">
+        
+        def <strong>current</strong> : <a href="../Drizzle/Token.html">Drizzle::Token</a>
+
+        <a class="method-permalink" href="#current%3ADrizzle%3A%3AToken-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>The token that is currently being inspected by the parser</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L530" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eat?(expected_type:TokenType):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>eat?</strong>(expected_type : <a href="../Drizzle/TokenType.html">TokenType</a>) : Bool
+
+        <a class="method-permalink" href="#eat%3F%28expected_type%3ATokenType%29%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>"Eat" the <code>@peek</code> token if the expected type matches the type of <code>@peek</code></p>
+
+<p>Eating a token involves passing in the type of token that <code>@peek</code> is expected to be.
+If it is the expected type, this method will advance the parser to the next token</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L510" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eat_error(expected_type:TokenType)-instance-method">
+      <div class="signature">
+        
+        def <strong>eat_error</strong>(expected_type : <a href="../Drizzle/TokenType.html">TokenType</a>)
+
+        <a class="method-permalink" href="#eat_error%28expected_type%3ATokenType%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Add an error when <code><a href="../Drizzle/Parser.html#eat%3F%28expected_type%3ATokenType%29%3ABool-instance-method">#eat?</a></code> gets an incorrect token type</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L523" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="errors:Array(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>errors</strong> : Array(String)
+
+        <a class="method-permalink" href="#errors%3AArray%28String%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Maintain an array of errors that are generated during the parsing step</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L537" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="initialise_parsers-instance-method">
+      <div class="signature">
+        
+        def <strong>initialise_parsers</strong>
+
+        <a class="method-permalink" href="#initialise_parsers-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initialize parser methods for the parser to use when parsing expressions</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L85" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="next_token-instance-method">
+      <div class="signature">
+        
+        def <strong>next_token</strong>
+
+        <a class="method-permalink" href="#next_token-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Update the <code>@current</code> and <code>@peek</code> pointers contained in the Parser instance to the next token generated from the <code><a href="../Drizzle/Lexer.html">Lexer</a></code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L118" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_block_statement:AST::BlockStatement?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_block_statement</strong> : <a href="../Drizzle/AST/BlockStatement.html">AST::BlockStatement</a>?
+
+        <a class="method-permalink" href="#parse_block_statement%3AAST%3A%3ABlockStatement%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Attempt to parse a block statement found at the current token, returning the node if possible, or nil if not</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L300" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_boolean_literal:AST::Expression-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_boolean_literal</strong> : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>
+
+        <a class="method-permalink" href="#parse_boolean_literal%3AAST%3A%3AExpression-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse a boolean found at the current token
+<code>boolean</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L423" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_call_arguments:Array(AST::Expression)-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_call_arguments</strong> : Array(<a href="../Drizzle/AST/Expression.html">AST::Expression</a>)
+
+        <a class="method-permalink" href="#parse_call_arguments%3AArray%28AST%3A%3AExpression%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse an argument list for a call expression
+<code>(expression*)</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L469" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_call_expression(left:AST::Expression):AST::Expression-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_call_expression</strong>(left : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>) : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>
+
+        <a class="method-permalink" href="#parse_call_expression%28left%3AAST%3A%3AExpression%29%3AAST%3A%3AExpression-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse a call expression found at the current token
+<code>identifier argument_list</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L461" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_expression(precedence:Precedence):AST::Expression?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_expression</strong>(precedence : <a href="../Drizzle/Precedence.html">Precedence</a>) : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>?
+
+        <a class="method-permalink" href="#parse_expression%28precedence%3APrecedence%29%3AAST%3A%3AExpression%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Attempt to parse an expression.
+This method is given a current precedence to compare against when necessary.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L370" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_expression_statement:AST::ExpressionStatement?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_expression_statement</strong> : <a href="../Drizzle/AST/ExpressionStatement.html">AST::ExpressionStatement</a>?
+
+        <a class="method-permalink" href="#parse_expression_statement%3AAST%3A%3AExpressionStatement%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Attempt to parse an expression statement found at the current token, returning the node if possible, or nil if not</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L362" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_function:AST::Function?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_function</strong> : <a href="../Drizzle/AST/Function.html">AST::Function</a>?
+
+        <a class="method-permalink" href="#parse_function%3AAST%3A%3AFunction%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Attempt to parse a function found at the current token, returning the node if possible, or nil if not
+<code>def name((name: type)*) -> type block</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L268" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_function_parameters:Array(AST::TypedIdentifier)?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_function_parameters</strong> : Array(<a href="../Drizzle/AST/TypedIdentifier.html">AST::TypedIdentifier</a>)?
+
+        <a class="method-permalink" href="#parse_function_parameters%3AArray%28AST%3A%3ATypedIdentifier%29%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse the parameter list for a function and return an array of <code><a href="../Drizzle/AST/TypedIdentifier.html">AST::TypedIdentifier</a></code> instances representing the parameters</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L323" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_grouped_expression:AST::Expression?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_grouped_expression</strong> : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>?
+
+        <a class="method-permalink" href="#parse_grouped_expression%3AAST%3A%3AExpression%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse a grouped expression found at the current token
+<code>(expression)</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L439" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_identifier:AST::Expression-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_identifier</strong> : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>
+
+        <a class="method-permalink" href="#parse_identifier%3AAST%3A%3AExpression-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse an identifier found at the current token
+<code>name</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L399" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_if_statement(check_alternatives:Bool=true):AST::IfStatement?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_if_statement</strong>(check_alternatives : Bool = <span class="n">true</span>) : <a href="../Drizzle/AST/IfStatement.html">AST::IfStatement</a>?
+
+        <a class="method-permalink" href="#parse_if_statement%28check_alternatives%3ABool%3Dtrue%29%3AAST%3A%3AIfStatement%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Attempt to parse an 'if' statement found at the current token, returning the node if possible, or nil if not.</p>
+
+<p>The <code>check_alternatives</code> flag states whether the current call should check for <code>elsif</code> and <code>else</code> tokens. We can use this to parse <code>elsif</code> blocks recursively.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L215" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_infix_expression(left:AST::Expression):AST::Expression-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_infix_expression</strong>(left : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>) : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>
+
+        <a class="method-permalink" href="#parse_infix_expression%28left%3AAST%3A%3AExpression%29%3AAST%3A%3AExpression-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse an infix expression found at the current token
+<code>expression operator expression</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L450" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_integer_literal:AST::Expression-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_integer_literal</strong> : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>
+
+        <a class="method-permalink" href="#parse_integer_literal%3AAST%3A%3AExpression-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse an integer found at the current token
+<code>integer</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L416" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_let_statement:AST::Let?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_let_statement</strong> : <a href="../Drizzle/AST/Let.html">AST::Let</a>?
+
+        <a class="method-permalink" href="#parse_let_statement%3AAST%3A%3ALet%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Attempt to parse a <code>let</code> statement found at the current token, returning the node if possible, or nil if not</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L163" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_prefix_expression:AST::Expression-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_prefix_expression</strong> : <a href="../Drizzle/AST/Expression.html">AST::Expression</a>
+
+        <a class="method-permalink" href="#parse_prefix_expression%3AAST%3A%3AExpression-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse a prefix expression found at the current token
+<code>operator expression</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L429" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_program:AST::Program-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_program</strong> : <a href="../Drizzle/AST/Program.html">AST::Program</a>
+
+        <a class="method-permalink" href="#parse_program%3AAST%3A%3AProgram-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse a program and build a program node from it, and return it</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L124" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_return_statement:AST::Return?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_return_statement</strong> : <a href="../Drizzle/AST/Return.html">AST::Return</a>?
+
+        <a class="method-permalink" href="#parse_return_statement%3AAST%3A%3AReturn%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Attempt to parse a <code>return</code> statement found at the current token, returning the node if possible, or nil if not</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L197" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_statement:AST::Statement?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_statement</strong> : <a href="../Drizzle/AST/Statement.html">AST::Statement</a>?
+
+        <a class="method-permalink" href="#parse_statement%3AAST%3A%3AStatement%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse a statement found at <code>@current</code> and return it, or nil if no statement can be parsed</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L137" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_typed_identifier:AST::TypedIdentifier?-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_typed_identifier</strong> : <a href="../Drizzle/AST/TypedIdentifier.html">AST::TypedIdentifier</a>?
+
+        <a class="method-permalink" href="#parse_typed_identifier%3AAST%3A%3ATypedIdentifier%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Parse a typed identifier found at the current token
+<code>name: datatype</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L405" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="peek:Drizzle::Token-instance-method">
+      <div class="signature">
+        
+        def <strong>peek</strong> : <a href="../Drizzle/Token.html">Drizzle::Token</a>
+
+        <a class="method-permalink" href="#peek%3ADrizzle%3A%3AToken-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>A pointer to the next token coming up in the stream.
+This is used to help guide what kind of node will be built from <code>@current</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L534" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="register_infix(token_type:TokenType,func:InfixParser)-instance-method">
+      <div class="signature">
+        
+        def <strong>register_infix</strong>(token_type : <a href="../Drizzle/TokenType.html">TokenType</a>, func : <a href="../Drizzle/InfixParser.html">InfixParser</a>)
+
+        <a class="method-permalink" href="#register_infix%28token_type%3ATokenType%2Cfunc%3AInfixParser%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for infix notation</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L113" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="register_prefix(token_type:TokenType,func:PrefixParser)-instance-method">
+      <div class="signature">
+        
+        def <strong>register_prefix</strong>(token_type : <a href="../Drizzle/TokenType.html">TokenType</a>, func : <a href="../Drizzle/PrefixParser.html">PrefixParser</a>)
+
+        <a class="method-permalink" href="#register_prefix%28token_type%3ATokenType%2Cfunc%3APrefixParser%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Register a TokenType with a parser function that is run when the TokenType is discovered in a spot for prefix notation</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/parser.cr#L108" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

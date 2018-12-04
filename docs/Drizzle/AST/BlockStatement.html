@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.0">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../";
+</script>
+
+  <meta id="repository-name" content="github.com/drizzle-lang/drizzle">
+  <title>Drizzle::AST::BlockStatement - github.com/drizzle-lang/drizzle</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/drizzle-lang/drizzle/Drizzle" data-name="drizzle">
+      <a href="../../Drizzle.html">Drizzle</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="github.com/drizzle-lang/drizzle/Drizzle/AST" data-name="drizzle::ast">
+      <a href="../../Drizzle/AST.html">AST</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/BlockStatement" data-name="drizzle::ast::blockstatement">
+      <a href="../../Drizzle/AST/BlockStatement.html">BlockStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/BooleanLiteral" data-name="drizzle::ast::booleanliteral">
+      <a href="../../Drizzle/AST/BooleanLiteral.html">BooleanLiteral</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/CallExpression" data-name="drizzle::ast::callexpression">
+      <a href="../../Drizzle/AST/CallExpression.html">CallExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Expression" data-name="drizzle::ast::expression">
+      <a href="../../Drizzle/AST/Expression.html">Expression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/ExpressionStatement" data-name="drizzle::ast::expressionstatement">
+      <a href="../../Drizzle/AST/ExpressionStatement.html">ExpressionStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Function" data-name="drizzle::ast::function">
+      <a href="../../Drizzle/AST/Function.html">Function</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Identifier" data-name="drizzle::ast::identifier">
+      <a href="../../Drizzle/AST/Identifier.html">Identifier</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/IfStatement" data-name="drizzle::ast::ifstatement">
+      <a href="../../Drizzle/AST/IfStatement.html">IfStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/InfixExpression" data-name="drizzle::ast::infixexpression">
+      <a href="../../Drizzle/AST/InfixExpression.html">InfixExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/IntegerLiteral" data-name="drizzle::ast::integerliteral">
+      <a href="../../Drizzle/AST/IntegerLiteral.html">IntegerLiteral</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Let" data-name="drizzle::ast::let">
+      <a href="../../Drizzle/AST/Let.html">Let</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Node" data-name="drizzle::ast::node">
+      <a href="../../Drizzle/AST/Node.html">Node</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/PrefixExpression" data-name="drizzle::ast::prefixexpression">
+      <a href="../../Drizzle/AST/PrefixExpression.html">PrefixExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Program" data-name="drizzle::ast::program">
+      <a href="../../Drizzle/AST/Program.html">Program</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Return" data-name="drizzle::ast::return">
+      <a href="../../Drizzle/AST/Return.html">Return</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Statement" data-name="drizzle::ast::statement">
+      <a href="../../Drizzle/AST/Statement.html">Statement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/TypedIdentifier" data-name="drizzle::ast::typedidentifier">
+      <a href="../../Drizzle/AST/TypedIdentifier.html">TypedIdentifier</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/InfixParser" data-name="drizzle::infixparser">
+      <a href="../../Drizzle/InfixParser.html">InfixParser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Lexer" data-name="drizzle::lexer">
+      <a href="../../Drizzle/Lexer.html">Lexer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Parser" data-name="drizzle::parser">
+      <a href="../../Drizzle/Parser.html">Parser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Precedence" data-name="drizzle::precedence">
+      <a href="../../Drizzle/Precedence.html">Precedence</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/PrefixParser" data-name="drizzle::prefixparser">
+      <a href="../../Drizzle/PrefixParser.html">PrefixParser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
+      <a href="../../Drizzle/REPL.html">REPL</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Token" data-name="drizzle::token">
+      <a href="../../Drizzle/Token.html">Token</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/TokenType" data-name="drizzle::tokentype">
+      <a href="../../Drizzle/TokenType.html">TokenType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Drizzle::AST::BlockStatement
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Drizzle/AST/BlockStatement.html">Drizzle::AST::BlockStatement</a></li><li class="superclass"><a href="../../Drizzle/AST/Statement.html">Drizzle::AST::Statement</a></li><li class="superclass"><a href="../../Drizzle/AST/Node.html">Drizzle::AST::Node</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>Node defining a block. A block is a set of statements contained within braces.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/ast/block.cr#L7" target="_blank">
+        drizzle/ast/block.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28token%3AToken%2Cstatements%3AArray%28Statement%29%29-class-method" class="signature"><strong>.new</strong>(token : Token, statements : Array(Statement))</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#literal%3AString-instance-method" class="signature"><strong>#literal</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#statements%3AArray%28Drizzle%3A%3AAST%3A%3AStatement%29-instance-method" class="signature"><strong>#statements</strong> : Array(Drizzle::AST::Statement)</a>
+        
+          <div class="summary"><p>The array of statements contained within the block</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_s%3AString-instance-method" class="signature"><strong>#to_s</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#token%3ADrizzle%3A%3AToken-instance-method" class="signature"><strong>#token</strong> : Drizzle::Token</a>
+        
+          <div class="summary"><p>The token that led to the creation of the node</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../Drizzle/AST/Node.html">Drizzle::AST::Node</a></code></h3>
+  
+  
+    <a href="../../Drizzle/AST/Node.html#literal%3AString-instance-method" class="tooltip">
+      <span>literal : String</span>
+    literal</a>, 
+    
+  
+    <a href="../../Drizzle/AST/Node.html#to_s%3AString-instance-method" class="tooltip">
+      <span>to_s : String</span>
+    to_s</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(token:Token,statements:Array(Statement))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(token : <a href="../../Drizzle/Token.html">Token</a>, statements : Array(<a href="../../Drizzle/AST/Statement.html">Statement</a>))
+
+        <a class="method-permalink" href="#new%28token%3AToken%2Cstatements%3AArray%28Statement%29%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/ast/block.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="literal:String-instance-method">
+      <div class="signature">
+        
+        def <strong>literal</strong> : String
+
+        <a class="method-permalink" href="#literal%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/ast/block.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="statements:Array(Drizzle::AST::Statement)-instance-method">
+      <div class="signature">
+        
+        def <strong>statements</strong> : Array(<a href="../../Drizzle/AST/Statement.html">Drizzle::AST::Statement</a>)
+
+        <a class="method-permalink" href="#statements%3AArray%28Drizzle%3A%3AAST%3A%3AStatement%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>The array of statements contained within the block</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/ast/block.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_s:String-instance-method">
+      <div class="signature">
+        
+        def <strong>to_s</strong> : String
+
+        <a class="method-permalink" href="#to_s%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/ast/block.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="token:Drizzle::Token-instance-method">
+      <div class="signature">
+        
+        def <strong>token</strong> : <a href="../../Drizzle/Token.html">Drizzle::Token</a>
+
+        <a class="method-permalink" href="#token%3ADrizzle%3A%3AToken-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>The token that led to the creation of the node</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/76be61fe505b243351526822011277b3aea07e7e/src/drizzle/ast/block.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
