@@ -12,10 +12,10 @@ let my_list: list[int] = [1, 2, 3, 4, 5]
 println(my_list[0])  # Prints '1'
 
 # Dictionaries
-let me: dict[str, str | int] = {'name': 'crnbrdrck', 'age': 22}
+let me: dict[str, str | int] = {'name': 'freya', 'age': 22}
 # Could also be typed as `dict` which would have less static checking
 # Explicitly stating types will allow the interpreter to run some static analysis
-println(my_dict["name"])  # Prints 'crnbrdrck'
+println(my_dict["name"])  # Prints 'freya'
 # Also allows double quote strings
 
 # Function definitions

@@ -2,7 +2,7 @@ name: drizzle
 version: 0.1.0
 
 authors:
-  - Broderick <crn@crnbrdrck.xyz>
+  - freyamade
 
 targets:
   drizzle:
