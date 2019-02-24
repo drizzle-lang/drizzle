@@ -26,6 +26,13 @@ module Drizzle
       return eval_prefix_expression node.operator, right
     end
 
+    # eval method for infix expression nodes
+    def self.eval(node : AST::InfixExpression) : Object::Object
+      left = eval node.left
+      right = eval node.right
+      return eval_infix_expression node.operator, left, right
+    end
+
     # eval method for integer literal nodes
     def self.eval(node : AST::IntegerLiteral) : Object::Object
       return Object::Integer.new node.value
@@ -64,6 +71,15 @@ module Drizzle
       end
     end
 
+    # eval method for infix stuff
+    def self.eval_infix_expression(op : String, left : Object::Object, right : Object::Object) : Object::Object
+      if left.object_type == Object::INTEGER_TYPE && right.object_type == Object::INTEGER_TYPE
+        return eval_arithmetic_infix_expression op, left, right
+      else
+        return @@NULL
+      end
+    end
+
     # eval method for handling boolean negation
     def self.eval_boolean_negation(value : Object::Object) : Object::Object
       case value
@@ -86,6 +102,25 @@ module Drizzle
       # Cast to an integer and get the value
       int_value = value.as(Object::Integer).value
       return Object::Integer.new -int_value
+    end
+
+    # eval method for handling arithmetic based infix expressions (expressions that result in a number)
+    def self.eval_arithmetic_infix_expression(op : String, left : Object::Object, right : Object::Object) : Object::Object
+      left_val = left.as(Object::Integer).value
+      right_val = right.as(Object::Integer).value
+
+      case op
+      when "+"
+        return Object::Integer.new left_val + right_val
+      when "-"
+        return Object::Integer.new left_val - right_val
+      when "*"
+        return Object::Integer.new left_val * right_val
+      when "/"
+        return Object::Integer.new left_val / right_val
+      else
+        return @@NULL
+      end
     end
   end
 end
