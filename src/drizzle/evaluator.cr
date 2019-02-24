@@ -71,6 +71,12 @@ module Drizzle
     def self.eval_infix_expression(op : String, left : Object::Object, right : Object::Object) : Object::Object
       if left.object_type == Object::INTEGER_TYPE && right.object_type == Object::INTEGER_TYPE
         return eval_arithmetic_infix_expression op, left, right
+        # Because there is only two comparison operators for booleans, we can handle them here
+        # These comparisons use pointer arithmetic because we can since we only have one instance of true, false or null
+      elsif op == "=="
+        return convert_native_bool_to_object(left == right)
+      elsif op == "!="
+        return convert_native_bool_to_object(left != right)
       else
         return @@NULL
       end
