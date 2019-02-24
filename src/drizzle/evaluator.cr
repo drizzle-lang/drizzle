@@ -1,6 +1,5 @@
 require "./ast/*"
-require "./object/object"
-require "./object/null"
+require "./object/*"
 
 module Drizzle
   # Module containing an overloaded evaluation function that evaluates all the various node types

@@ -1,7 +1,7 @@
 module Drizzle
   # Class for handling the Read-Eval-Print-Loop (REPL) environment for Drizzle.
   #
-  # Currently, since we can't exactly 'Eval' yet, the REPL environment simply parses the input and prints back out the string form of the program node made
+  # I'm finally able to add Evaluation to the REPL environment
   class REPL
     @@prompt = ">>> "
 
@@ -27,7 +27,8 @@ module Drizzle
           self.print_parser_errors parser
           next
         end
-        puts program.to_s
+        evaluated = Evaluator.eval program
+        puts evaluated.inspect
       end
     end
 
