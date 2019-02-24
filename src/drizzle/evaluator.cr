@@ -7,6 +7,8 @@ module Drizzle
     # Since there are only two possible options for booleans, create them both here and reuse these instances
     @@TRUE = Object::Boolean.new true
     @@FALSE = Object::Boolean.new false
+    # Same can be said for NULL
+    @@NULL = Object::Null.new
 
     # eval method for program nodes, the starting point of any drizzle program
     def self.eval(node : AST::Program) : Object::Object
