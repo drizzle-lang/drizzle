@@ -56,14 +56,16 @@ module Drizzle
     def self.eval_prefix_expression(op : String, value : Object::Object) : Object::Object
       case op
       when "not"
-        return eval_negation value
+        return eval_boolean_negation value
+      when "-"
+        return eval_arithmetic_negation value
       else
         return @@NULL
       end
     end
 
-    # eval method for handling negation
-    def self.eval_negation(value : Object::Object) : Object::Object
+    # eval method for handling boolean negation
+    def self.eval_boolean_negation(value : Object::Object) : Object::Object
       case value
       when @@TRUE
         return @@FALSE
@@ -74,6 +76,16 @@ module Drizzle
       else
         return @@FALSE
       end
+    end
+
+    # eval method for handling arithmetic negation
+    def self.eval_arithmetic_negation(value : Object::Object) : Object::Object
+      if value.object_type != Object::INTEGER_TYPE
+        return @@NULL
+      end
+      # Cast to an integer and get the value
+      int_value = value.as(Object::Integer).value
+      return Object::Integer.new -int_value
     end
   end
 end
