@@ -3,7 +3,7 @@ require "./object"
 module Drizzle
   module Object
     class Integer < Object
-      @value : Intd64
+      @value : Int64
 
       def initialize(@value)
         @object_type = "INTEGER"

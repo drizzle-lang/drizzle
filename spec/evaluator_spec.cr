@@ -10,8 +10,8 @@ def test_eval(input : String)
 end
 
 # helper for testing integer values
-def test_integer(output, expected : Int64)
-  output.i64?.should be_true
+def test_integer(output : Drizzle::Object::Object, expected : Int64)
+  output = output.as(Drizzle::Object::Integer).value
   output.to_i64.should eq expected
 end
 
