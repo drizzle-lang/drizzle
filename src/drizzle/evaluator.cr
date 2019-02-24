@@ -12,12 +12,18 @@ module Drizzle
 
     # eval method for program nodes, the starting point of any drizzle program
     def self.eval(node : AST::Program) : Object::Object
-      return Evaluator.eval node.statements[0]
+      return eval node.statements[0]
     end
 
     # eval method for expression statement nodes, which represent expressions on their own (e.g. an integer literal on its own)
     def self.eval(node : AST::ExpressionStatement) : Object::Object
-      return Evaluator.eval node.expression
+      return eval node.expression
+    end
+
+    # eval method for prefix expression nddes
+    def self.eval(node : AST::PrefixExpression) : Object::Object
+      right = Evaluator.eval node.right
+      return eval_prefix_expression node.operator, right
     end
 
     # eval method for integer literal nodes
@@ -36,12 +42,38 @@ module Drizzle
 
     # temp catchall method
     def self.eval(node : AST::Node) : Object::Object
-      return Object::Null.new
+      return @@NULL
     end
 
     # temp handling for nil nodes since expressionstatement can have a nil expression
     def self.eval(node : Nil) : Object::Object
-      return Object::Null.new
+      return @@NULL
+    end
+
+    # non-node evaluation methods
+
+    # eval method for prefix stuff
+    def self.eval_prefix_expression(op : String, value : Object::Object) : Object::Object
+      case op
+      when "not"
+        return eval_negation value
+      else
+        return @@NULL
+      end
+    end
+
+    # eval method for handling negation
+    def self.eval_negation(value : Object::Object) : Object::Object
+      case value
+      when @@TRUE
+        return @@FALSE
+      when @@FALSE
+        return @@TRUE
+      when @@NULL
+        return @@TRUE
+      else
+        return @@FALSE
+      end
     end
   end
 end
