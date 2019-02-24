@@ -19,6 +19,11 @@ module Drizzle
       return Object::Integer.new node.value
     end
 
+    # eval method for boolean literal nodes
+    def self.eval(node : AST::BooleanLiteral) : Object::Object
+      return Object::Boolean.new node.value
+    end
+
     # temp catchall method
     def self.eval(node : AST::Node) : Object::Object
       return Object::Null.new
