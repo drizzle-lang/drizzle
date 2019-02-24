@@ -46,4 +46,20 @@ describe Drizzle::Evaluator do
       test_boolean evaluated, test[1]
     end
   end
+
+  it "correctly evaluates prefix not operators" do
+    tests = {
+      {"not true", false},
+      {"not false", true},
+      {"not 5", false},
+      {"not not true", true},
+      {"not not false", false},
+      {"not not 5", true},
+    }
+
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      test_boolean evaluated, test[1]
+    end
+  end
 end
