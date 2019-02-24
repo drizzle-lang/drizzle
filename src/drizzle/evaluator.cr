@@ -40,11 +40,7 @@ module Drizzle
 
     # eval method for boolean literal nodes
     def self.eval(node : AST::BooleanLiteral) : Object::Object
-      if node.value
-        return @@TRUE
-      else
-        return @@FALSE
-      end
+      return convert_native_bool_to_object node.value
     end
 
     # temp catchall method
@@ -118,8 +114,27 @@ module Drizzle
         return Object::Integer.new left_val * right_val
       when "/"
         return Object::Integer.new left_val / right_val
+      when "<"
+        return convert_native_bool_to_object left_val < right_val
+      when ">"
+        return convert_native_bool_to_object left_val > right_val
+      when "=="
+        return convert_native_bool_to_object left_val == right_val
+      when "!="
+        return convert_native_bool_to_object left_val != right_val
       else
         return @@NULL
+      end
+    end
+
+    # other helpers
+
+    # convert crystal bool to drizzle object representation
+    def self.convert_native_bool_to_object(value : Bool) : Object::Object
+      if value
+        return @@TRUE
+      else
+        return @@FALSE
       end
     end
   end
