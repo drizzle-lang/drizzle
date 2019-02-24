@@ -27,6 +27,8 @@ describe Drizzle::Evaluator do
     tests = {
       {"5", 5_i64},
       {"10", 10_i64},
+      {"-5", -5_i64},
+      {"-10", -10_i64},
     }
 
     tests.each do |test|
