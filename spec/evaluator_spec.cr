@@ -11,9 +11,8 @@ end
 
 # helper for testing integer values
 def test_integer(output, expected : Int64)
-  output.nil?.should be_false
-  output.not_nil!.i64?.should be_true
-  output.not_nil!.to_i64.should eq expected
+  output.i64?.should be_true
+  output.to_i64.should eq expected
 end
 
 # Spec for the evaluator
