@@ -20,10 +20,10 @@ describe Drizzle::AST::Function do
 
     # There should be 2 parameters, named x and y, both of type int
     func.params.size.should eq 2
-    expected = [
-      ["x", "int"],
-      ["y", "int"],
-    ]
+    expected = {
+      {"x", "int"},
+      {"y", "int"},
+    }
     expected.each.with_index do |values, i|
       name, datatype = values
       param = func.params[i]
@@ -43,26 +43,26 @@ describe Drizzle::AST::Function do
   end
 
   it "properly parses parameter lists" do
-    tests = [
-      [
+    tests = {
+      {
         "def test() {}",
         [] of Array(String),
-      ],
-      [
+      },
+      {
         "def test(x: int) {}",
-        [
+        {
           ["x", "int"],
-        ],
-      ],
-      [
+        },
+      },
+      {
         "def test(x: int, y: str, z: any) {}",
-        [
+        {
           ["x", "int"],
           ["y", "str"],
           ["z", "any"],
-        ],
-      ],
-    ]
+        },
+      },
+    }
 
     tests.each do |test|
       input, expected = test
@@ -75,7 +75,7 @@ describe Drizzle::AST::Function do
       program.statements.size.should eq 1
       func = program.statements[0].as Drizzle::AST::Function
       func.params.size.should eq expected.size
-      expected.as(Array(Array(String))).each.with_index do |values, i|
+      expected.each.with_index do |values, i|
         name, datatype = values
         param = func.params[i]
         param.value.should eq name
