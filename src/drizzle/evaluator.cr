@@ -4,6 +4,10 @@ require "./object/*"
 module Drizzle
   # Module containing an overloaded evaluation function that evaluates all the various node types
   class Evaluator
+    # Since there are only two possible options for booleans, create them both here and reuse these instances
+    @@TRUE = Object::Boolean.new true
+    @@FALSE = Object::Boolean.new false
+
     # eval method for program nodes, the starting point of any drizzle program
     def self.eval(node : AST::Program) : Object::Object
       return Evaluator.eval node.statements[0]
@@ -21,7 +25,11 @@ module Drizzle
 
     # eval method for boolean literal nodes
     def self.eval(node : AST::BooleanLiteral) : Object::Object
-      return Object::Boolean.new node.value
+      if node.value
+        return @@TRUE
+      else
+        return @@FALSE
+      end
     end
 
     # temp catchall method
