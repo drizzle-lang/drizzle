@@ -3,7 +3,7 @@ require "./object"
 module Drizzle
   module Object
     class Boolean < Object
-      @value : Boolean
+      @value : Bool
 
       def initialize(@value)
         @object_type = "Boolean"

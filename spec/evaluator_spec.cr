@@ -12,7 +12,13 @@ end
 # helper for testing integer values
 def test_integer(output : Drizzle::Object::Object, expected : Int64)
   output = output.as(Drizzle::Object::Integer).value
-  output.to_i64.should eq expected
+  output.should eq expected
+end
+
+# helper for testing boolean values
+def test_boolean(output : Drizzle::Object::Object, expected : Bool)
+  output = output.as(Drizzle::Object::Boolean).value
+  output.should eq expected
 end
 
 # Spec for the evaluator
@@ -26,6 +32,18 @@ describe Drizzle::Evaluator do
     tests.each do |test|
       evaluated = test_eval test[0]
       test_integer evaluated, test[1]
+    end
+  end
+
+  it "correctly evaluates self evaluating boolean expressions" do
+    tests = {
+      {"true", true},
+      {"false", false},
+    }
+
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      test_boolean evaluated, test[1]
     end
   end
 end
