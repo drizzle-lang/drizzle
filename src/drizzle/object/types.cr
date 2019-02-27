@@ -14,6 +14,8 @@ module Drizzle
       RETURN_VALUE
       # Error Type
       ERROR
+      # Function types
+      FUNCTION
     end
   end
 end

@@ -28,8 +28,13 @@ module Drizzle
         @params.each do |param|
           param_strings << param.to_s
         end
-
-        return "#{@token.literal} #{@name.to_s} (#{param_strings.join ", "}) #{@body.to_s}"
+        builder = String::Builder.new
+        builder << "#{@token.literal} #{@name.to_s} (#{param_strings.join ", "})"
+        if !@ret_type.nil?
+          builder << " -> #{@ret_type.to_s}"
+        end
+        builder << " {\n#{@body.to_s}\n}"
+        return builder.to_s
       end
 
       # The token that led to the creation of the node
