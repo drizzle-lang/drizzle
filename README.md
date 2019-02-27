@@ -70,6 +70,8 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
 - It would be nice if the project could maintain a side-by-side interpreter and compiler so that drizzle could have a fully functional REPL environment built into the language, or maybe provide drizzle-interpreter as a separate package or something idk
 - The more I go through the interpreter book, the more I realise that translating the ANTLR parser every time I add something new might not be worth the hassle.
     - However, if I can do it in a smart way, I should only have to translate the whole thing once, and figure out how to add stuff manually going forward in the same style to keep the benefits
+- Could generate the parser in a different language and commit that to source control
+- Then whenever I make updates, I do it in a separate branch and use the PR to update the Crystal version
 
 ## Contributing
 This project is open to anyone who wants to learn anything about creating programming languages!
