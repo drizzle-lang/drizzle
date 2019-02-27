@@ -30,14 +30,18 @@ module Drizzle
           next
         end
         evaluated = Evaluator.eval program, env
-        puts evaluated.inspect
+        if evaluated.object_type.error?
+          puts evaluated.inspect.colorize :red
+        else
+          puts evaluated.inspect
+        end
       end
     end
 
     # Print parser errors in a nice format
     def print_parser_errors(parser : Parser)
       parser.errors.each do |error|
-        puts error.colorize(:red)
+        puts error.colorize :red
       end
     end
   end
