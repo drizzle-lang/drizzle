@@ -49,10 +49,15 @@ else
     file = ARGV[-1]
     begin
       lexer = Drizzle::Lexer.new File.open file
-      token : Drizzle::Token
-      while !(token = lexer.get_next_token).token_type.eof?
-        puts token.to_s
+      parser = Drizzle::Parser.new lexer
+      program = parser.parse_program
+      if parser.errors.size != 0
+        parser.errors.each do |error|
+          puts error.colorize(:red)
+        end
       end
+      evaluated = Drizzle::Evaluator.eval program
+      puts evaluated.inspect
     rescue
       puts "File #{file} could not be read.".colorize(:red)
     end
