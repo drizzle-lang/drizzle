@@ -22,7 +22,7 @@ def test_boolean(output : Drizzle::Object::Object, expected : Bool)
 end
 
 def test_null(output : Drizzle::Object::Object)
-  output.object_type.should eq "NULL"
+  output.object_type.should eq Drizzle::Object::ObjectType::NULL
 end
 
 # Spec for the evaluator
@@ -177,8 +177,9 @@ describe Drizzle::Evaluator do
     }
 
     tests.each do |test|
+      puts test
       evaluated = test_eval test[0]
-      evaluated.object_type.should eq Drizzle::Object::ERROR_TYPE
+      evaluated.object_type.should eq Drizzle::Object::ObjectType::ERROR
       evaluated.as(Drizzle::Object::Error).message.should eq test[1]
     end
   end

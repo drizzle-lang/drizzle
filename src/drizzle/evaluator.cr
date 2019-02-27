@@ -18,9 +18,9 @@ module Drizzle
       node.statements.each do |statement|
         result = eval statement
         case result.object_type
-        when Object::RETURN_VALUE_TYPE
+        when .return_value?
           return result.as(Object::ReturnValue).value
-        when Object::ERROR_TYPE
+        when .error?
           return result
         end
       end
@@ -33,7 +33,7 @@ module Drizzle
       # found before that point
       node.statements.each do |statement|
         result = eval statement
-        if result.object_type == Object::RETURN_VALUE_TYPE || result.object_type == Object::ERROR_TYPE
+        if result.object_type.return_value? || result.object_type.error?
           # Unlike the program block, don't unwrap here
           return result
         end
@@ -49,6 +49,12 @@ module Drizzle
     # eval method for return statements
     def self.eval(node : AST::Return) : Object::Object
       return_value = eval node.value
+
+      # check for errors
+      if return_value.object_type.error?
+        return return_value
+      end
+
       return Object::ReturnValue.new return_value
     end
 
@@ -60,13 +66,31 @@ module Drizzle
     # eval method for prefix expression nddes
     def self.eval(node : AST::PrefixExpression) : Object::Object
       right = Evaluator.eval node.right
+
+      # check for errors
+      if right.object_type.error?
+        return right
+      end
+
       return eval_prefix_expression node.operator, right
     end
 
     # eval method for infix expression nodes
     def self.eval(node : AST::InfixExpression) : Object::Object
       left = eval node.left
+
+      # check for errors
+      if left.object_type.error?
+        return left
+      end
+
       right = eval node.right
+
+      # check for errors
+      if right.object_type.error?
+        return right
+      end
+
       return eval_infix_expression node.operator, left, right
     end
 
@@ -106,7 +130,7 @@ module Drizzle
 
     # eval method for infix stuff
     private def self.eval_infix_expression(op : String, left : Object::Object, right : Object::Object) : Object::Object
-      if left.object_type == Object::INTEGER_TYPE && right.object_type == Object::INTEGER_TYPE
+      if left.object_type.integer? && right.object_type.integer?
         return eval_arithmetic_infix_expression op, left, right
         # Because there is only two comparison operators for booleans, we can handle them here
         # These comparisons use pointer arithmetic because we can since we only have one instance of true, false or null
@@ -124,9 +148,15 @@ module Drizzle
     # eval method for conditionals
     private def self.eval_if_expression(node : AST::IfStatement) : Object::Object
       condition = eval node.condition
+
+      # check for errors
+      if condition.object_type.error?
+        return condition
+      end
+
       if truthy? condition
         result = eval node.consequence
-        if result.object_type == Object::RETURN_VALUE_TYPE
+        if result.object_type.return_value?
           # return the inner value
           return result
         else
@@ -136,9 +166,14 @@ module Drizzle
       # Now check if there are alt consequences
       node.alt_consequences.each do |alt|
         condition = eval alt.condition
+
+        if condition.object_type.error?
+          return condition
+        end
+
         if truthy? condition
           result = eval alt.consequence
-          if result.object_type == Object::RETURN_VALUE_TYPE
+          if result.object_type.return_value?
             # return the inner value
             return result
           else
@@ -150,7 +185,7 @@ module Drizzle
       # If we get here, evaluate the else if there is one
       if !node.alternative.nil?
         result = eval node.alternative
-        if result.object_type == Object::RETURN_VALUE_TYPE
+        if result.object_type.return_value?
           # return the inner value
           return result
         else
@@ -177,7 +212,7 @@ module Drizzle
 
     # eval method for handling arithmetic negation
     private def self.eval_arithmetic_negation(value : Object::Object) : Object::Object
-      if value.object_type != Object::INTEGER_TYPE
+      if !value.object_type.integer?
         return new_error "unknown operator: -#{value.object_type}"
       end
       # Cast to an integer and get the value

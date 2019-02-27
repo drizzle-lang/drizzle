@@ -2,13 +2,11 @@ require "./object"
 
 module Drizzle
   module Object
-    ERROR_TYPE = "ERROR"
-
     class Error < Object
       @message : String
 
       def initialize(@message)
-        @object_type = ERROR_TYPE
+        @object_type = ObjectType::ERROR
       end
 
       def inspect : String

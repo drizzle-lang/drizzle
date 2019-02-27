@@ -2,13 +2,11 @@ require "./object"
 
 module Drizzle
   module Object
-    RETURN_VALUE_TYPE = "RETURN_VALUE"
-
     class ReturnValue < Object
       @value : Object
 
       def initialize(@value)
-        @object_type = RETURN_VALUE_TYPE
+        @object_type = ObjectType::RETURN_VALUE
       end
 
       def inspect : String
