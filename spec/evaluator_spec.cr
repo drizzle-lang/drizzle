@@ -182,4 +182,17 @@ describe Drizzle::Evaluator do
       evaluated.as(Drizzle::Object::Error).message.should eq test[1]
     end
   end
+
+  it "correctly handles let statements and bindings" do
+    tests = {
+      {"let a = 5\n return a\n", 5_i64},
+      {"let a = 5 * 5\n return a\n", 25_i64},
+      {"let a = 5\n let b = a\n return b\n", 5_i64},
+      {"let a = 5\n let b = a\n let c = a + b + 5\n return c\n", 15_i64},
+    }
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      test_integer evaluated, test[1]
+    end
+  end
 end
