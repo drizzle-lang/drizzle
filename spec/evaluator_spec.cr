@@ -174,6 +174,7 @@ describe Drizzle::Evaluator do
         }",
         "unknown operator: BOOLEAN + BOOLEAN",
       },
+      {"foobar", "unidentifier not found: foobar"},
     }
 
     tests.each do |test|
