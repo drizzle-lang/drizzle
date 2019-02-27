@@ -15,6 +15,16 @@ module Drizzle
       return eval_statements node.statements
     end
 
+    # eval method for block nodes, which represent a collection of statements
+    def self.eval(node : AST::BlockStatement) : Object::Object
+      return eval_statements node.statements
+    end
+
+    # eval method for if statements
+    def self.eval(node : AST::IfStatement) : Object::Object
+      return eval_if_expression node
+    end
+
     # eval method for expression statement nodes, which represent expressions on their own (e.g. an integer literal on its own)
     def self.eval(node : AST::ExpressionStatement) : Object::Object
       return eval node.expression
@@ -88,6 +98,31 @@ module Drizzle
         return convert_native_bool_to_object(left == right)
       elsif op == "!="
         return convert_native_bool_to_object(left != right)
+      else
+        return @@NULL
+      end
+    end
+
+    # eval method for conditionals
+    private def self.eval_if_expression(node : AST::IfStatement) : Object::Object
+      condition = eval node.condition
+      if truthy? condition
+        # don't implicitly return on future
+        return eval node.consequence
+      end
+      # Now check if there are alt consequences
+      node.alt_consequences.each do |alt|
+        condition = eval alt.condition
+        if truthy? condition
+          # again, don't implicitly return in future
+          return eval alt.consequence
+        end
+      end
+
+      # If we get here, evaluate the else if there is one
+      if !node.alternative.nil?
+        # one last time, don't implicitly return in future
+        return eval node.alternative
       else
         return @@NULL
       end
