@@ -189,5 +189,20 @@ module Drizzle
         return @@FALSE
       end
     end
+
+    # helper for determining truthiness of an object
+    private def self.truthy?(value : Object::Object) : Bool
+      # There's a bit missing from here imo but for now it should be fine
+      case value
+      when @@NULL
+        return false
+      when @@TRUE
+        return true
+      when @@FALSE
+        return false
+      else
+        return true
+      end
+    end
   end
 end
