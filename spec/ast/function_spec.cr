@@ -33,8 +33,8 @@ describe Drizzle::AST::Function do
 
     # The body should contain 1 statement, which is an expression statement that is the infix expression `x + y`
     func.body.statements.size.should eq 1
-    body = func.body.statements[0].as Drizzle::AST::ExpressionStatement
-    exp = body.expression.as Drizzle::AST::InfixExpression
+    body = func.body.statements[0].as Drizzle::AST::Return
+    exp = body.value.not_nil!.as Drizzle::AST::InfixExpression
     left = exp.left.as Drizzle::AST::Identifier
     left.value.should eq "x"
     exp.operator.should eq "+"
