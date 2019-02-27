@@ -96,6 +96,19 @@ describe Drizzle::Evaluator do
     end
   end
 
+  it "correctly evaluates return statements" do
+    tests = {
+      {"return 10", 10_i64},
+      {"return 10\n9", 10_i64},
+      {"return 2 * 5\n9", 10_i64},
+      {"9\nreturn 2 * 5\n9", 10_i64},
+    }
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      test_integer evaluated, test[1]
+    end
+  end
+
   it "correctly evaluates conditionals" do
     # This one could cause an issue because of monkey's implicit returns
     tests = {
@@ -116,19 +129,6 @@ describe Drizzle::Evaluator do
       else
         test_integer evaluated, test[1].not_nil!
       end
-    end
-  end
-
-  it "correctly evaluates return statements" do
-    tests = {
-      {"return 10", 10_i64},
-      {"return 10\n9", 10_i64},
-      {"return 2 * 5\n9", 10_i64},
-      {"9\nreturn 2 * 5\n9", 10_i64},
-    }
-    tests.each do |test|
-      evaluated = test_eval test[0]
-      test_integer evaluated, test[1]
     end
   end
 end
