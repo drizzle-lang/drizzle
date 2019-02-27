@@ -70,9 +70,11 @@ module Drizzle
       end
 
       # now bind the stuff to the environment
+      env.set node.name.value, value
 
-      # placeholder
-      return @@NULL
+      # in Drizzle, assignment will return the value as well (assignment is an expression, not a statement)
+      # TODO - refactor let to be an expression and not a statement
+      return value
     end
 
     # eval method for expression statement nodes, which represent expressions on their own (e.g. an integer literal on its own)
@@ -119,6 +121,17 @@ module Drizzle
     # eval method for boolean literal nodes
     def self.eval(node : AST::BooleanLiteral, env : Environment) : Object::Object
       return convert_native_bool_to_object node.value
+    end
+
+    # eval method for identifiers
+    def self.eval(node : AST::Identifier, env : Environment) : Object::Object
+      # Check if the name is in the env, if its not throw an error
+      val = env.get node.value
+      if val.nil?
+        return new_error "identifier not found: #{node.value}"
+      else
+        return val
+      end
     end
 
     # temp catchall method

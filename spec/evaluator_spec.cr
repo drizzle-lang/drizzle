@@ -6,7 +6,8 @@ def test_eval(input : String)
   lexer = Drizzle::Lexer.new input
   parser = Drizzle::Parser.new lexer
   program = parser.parse_program
-  return Drizzle::Evaluator.eval program
+  env = Drizzle::Environment.new
+  return Drizzle::Evaluator.eval program, env
 end
 
 # helper for testing integer values
@@ -174,7 +175,7 @@ describe Drizzle::Evaluator do
         }",
         "unknown operator: BOOLEAN + BOOLEAN",
       },
-      {"foobar", "unidentifier not found: foobar"},
+      {"foobar", "identifier not found: foobar"},
     }
 
     tests.each do |test|
@@ -186,10 +187,10 @@ describe Drizzle::Evaluator do
 
   it "correctly handles let statements and bindings" do
     tests = {
-      {"let a = 5\n return a\n", 5_i64},
-      {"let a = 5 * 5\n return a\n", 25_i64},
-      {"let a = 5\n let b = a\n return b\n", 5_i64},
-      {"let a = 5\n let b = a\n let c = a + b + 5\n return c\n", 15_i64},
+      {"let a: int = 5\n return a\n", 5_i64},
+      {"let a: int = 5 * 5\n return a\n", 25_i64},
+      {"let a: int = 5\n let b: int = a\n return b\n", 5_i64},
+      {"let a: int = 5\n let b: int = a\n let c: int = a + b + 5\n return c\n", 15_i64},
     }
     tests.each do |test|
       evaluated = test_eval test[0]
