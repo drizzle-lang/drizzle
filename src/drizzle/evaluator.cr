@@ -25,6 +25,12 @@ module Drizzle
       return eval_if_expression node
     end
 
+    # eval method for return statements
+    def self.eval(node : AST::Return) : Object::Object
+      return_value = eval node.value
+      return Object::ReturnValue.new return_value
+    end
+
     # eval method for expression statement nodes, which represent expressions on their own (e.g. an integer literal on its own)
     def self.eval(node : AST::ExpressionStatement) : Object::Object
       return eval node.expression
@@ -67,11 +73,15 @@ module Drizzle
 
     # eval method for a list of statements
     private def self.eval_statements(statements : Array(AST::Statement)) : Object::Object
-      # currently loop through the block evalutaing statements and return the last one
-      # return the last one should only be done if the last one is explicitly a return but I don't know how to do that yet
+      # loop through a block of statements, returning a specified return value or the final value encountered
+      # this is to allow single statement programs to still work
+      # need to avoid implicit returns later though
       result = @@NULL
       statements.each do |statement|
-        result = eval(statement)
+        result = eval statement
+        if result.object_type == Object::RETURN_VALUE_TYPE
+          return result.as(Object::ReturnValue).value
+        end
       end
       return result
     end
