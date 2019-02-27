@@ -80,7 +80,10 @@ module Drizzle
     # eval statement for function definitions
     def self.eval(node : AST::Function, env : Environment) : Object::Object
       # Just construct a function object wrapper around the AST node
-      return Object::Function.new node.name, node.params, node.ret_type, node.body, env
+      obj = Object::Function.new node.name, node.params, node.ret_type, node.body, env
+      # Monkey defines functions with `let`s, we don't, so add the function to the symbol table
+      env.set node.name.value, obj
+      return obj
     end
 
     # eval method for expression statement nodes, which represent expressions on their own (e.g. an integer literal on its own)
