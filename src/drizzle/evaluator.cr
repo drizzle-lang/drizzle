@@ -35,7 +35,6 @@ module Drizzle
         result = eval statement
         if result.object_type.return_value? || result.object_type.error?
           # Unlike the program block, don't unwrap here
-          puts "found #{result.object_type} in block statement"
           return result
         end
       end
@@ -53,7 +52,6 @@ module Drizzle
 
       # check for errors
       if return_value.object_type.error?
-        puts "found error in return statement"
         return return_value
       end
 
@@ -143,7 +141,6 @@ module Drizzle
       elsif left.object_type != right.object_type
         return new_error "type mismatch: #{left.object_type} #{op} #{right.object_type}"
       else
-        puts "unknown infix operator found"
         return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
       end
     end
