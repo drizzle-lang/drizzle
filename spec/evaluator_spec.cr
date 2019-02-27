@@ -177,7 +177,6 @@ describe Drizzle::Evaluator do
     }
 
     tests.each do |test|
-      puts test
       evaluated = test_eval test[0]
       evaluated.object_type.should eq Drizzle::Object::ObjectType::ERROR
       evaluated.as(Drizzle::Object::Error).message.should eq test[1]
