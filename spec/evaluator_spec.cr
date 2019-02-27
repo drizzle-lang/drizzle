@@ -21,6 +21,10 @@ def test_boolean(output : Drizzle::Object::Object, expected : Bool)
   output.should eq expected
 end
 
+def test_null(output : Drizzle::Object::Object)
+  output.object_type.should eq "NULL"
+end
+
 # Spec for the evaluator
 describe Drizzle::Evaluator do
   it "correctly evaluates self evaluating integer expressions" do
@@ -89,6 +93,28 @@ describe Drizzle::Evaluator do
     tests.each do |test|
       evaluated = test_eval test[0]
       test_boolean evaluated, test[1]
+    end
+  end
+
+  it "correctly evaluates conditionals" do
+    # This one could cause an issue because of monkey's implicit returns
+    tests = {
+      {"if (true) { 10 }", 10_i64},
+      {"if (false) { 10 }", nil},
+      {"if (1) { 10 }", 10_i64},
+      {"if (1 < 2) { 10 }", 10_i64},
+      {"if (1 > 2) { 10 }", nil},
+      {"if (1 > 2) { 10 } else { 20 }", 20_i64},
+      {"if (1 < 2) { 10 } else { 20 }", 10_i64},
+    }
+
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      if test[1].nil?
+        test_null evaluated
+      else
+        test_integer evaluated, test[1].not_nil!
+      end
     end
   end
 end
