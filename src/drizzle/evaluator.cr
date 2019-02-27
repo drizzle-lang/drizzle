@@ -66,7 +66,7 @@ module Drizzle
     # non-node evaluation methods
 
     # eval method for a list of statements
-    def self.eval_statements(statements : Array(AST::Statement)) : Object::Object
+    private def self.eval_statements(statements : Array(AST::Statement)) : Object::Object
       # currently loop through the block evalutaing statements and return the last one
       # return the last one should only be done if the last one is explicitly a return but I don't know how to do that yet
       result = @@NULL
@@ -77,7 +77,7 @@ module Drizzle
     end
 
     # eval method for prefix stuff
-    def self.eval_prefix_expression(op : String, value : Object::Object) : Object::Object
+    private def self.eval_prefix_expression(op : String, value : Object::Object) : Object::Object
       case op
       when "not"
         return eval_boolean_negation value
@@ -89,7 +89,7 @@ module Drizzle
     end
 
     # eval method for infix stuff
-    def self.eval_infix_expression(op : String, left : Object::Object, right : Object::Object) : Object::Object
+    private def self.eval_infix_expression(op : String, left : Object::Object, right : Object::Object) : Object::Object
       if left.object_type == Object::INTEGER_TYPE && right.object_type == Object::INTEGER_TYPE
         return eval_arithmetic_infix_expression op, left, right
         # Because there is only two comparison operators for booleans, we can handle them here
@@ -129,7 +129,7 @@ module Drizzle
     end
 
     # eval method for handling boolean negation
-    def self.eval_boolean_negation(value : Object::Object) : Object::Object
+    private def self.eval_boolean_negation(value : Object::Object) : Object::Object
       case value
       when @@TRUE
         return @@FALSE
@@ -143,7 +143,7 @@ module Drizzle
     end
 
     # eval method for handling arithmetic negation
-    def self.eval_arithmetic_negation(value : Object::Object) : Object::Object
+    private def self.eval_arithmetic_negation(value : Object::Object) : Object::Object
       if value.object_type != Object::INTEGER_TYPE
         return @@NULL
       end
@@ -153,7 +153,7 @@ module Drizzle
     end
 
     # eval method for handling arithmetic based infix expressions (expressions that result in a number)
-    def self.eval_arithmetic_infix_expression(op : String, left : Object::Object, right : Object::Object) : Object::Object
+    private def self.eval_arithmetic_infix_expression(op : String, left : Object::Object, right : Object::Object) : Object::Object
       left_val = left.as(Object::Integer).value
       right_val = right.as(Object::Integer).value
 
@@ -182,7 +182,7 @@ module Drizzle
     # other helpers
 
     # convert crystal bool to drizzle object representation
-    def self.convert_native_bool_to_object(value : Bool) : Object::Object
+    private def self.convert_native_bool_to_object(value : Bool) : Object::Object
       if value
         return @@TRUE
       else
