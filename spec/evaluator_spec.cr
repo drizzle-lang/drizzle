@@ -208,4 +208,19 @@ describe Drizzle::Evaluator do
     function.return_type.to_s.should eq "num"
     function.body.to_s.should eq "return (x + 2)"
   end
+
+  it "correctly handles function invocation" do
+    tests = {
+      {"def identity(x: any) -> any { return x }\nidentity(5)", 5_i64},
+      {"def double(x: num) -> num { return x * 2 }\ndouble(5)", 10_i64},
+      {"def add(x: num, y: num) -> num { return x + y }\nadd(5, 5)", 10_i64},
+      {"def add(x: num, y: num) -> num { return x + y }\nadd(5 + 5, add(5, 5))", 20_i64},
+      # First Class function test because why not
+      {"def double(x: num) -> num { return x * 2 }\ndef apply(x: num, f: (num -> num)) -> num { return f(x) }\napply(5, double)", 10_i64},
+    }
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      test_integer evaluated, test[1]
+    end
+  end
 end
