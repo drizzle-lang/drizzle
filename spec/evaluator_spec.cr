@@ -138,4 +138,48 @@ describe Drizzle::Evaluator do
       test_integer evaluated, test[1]
     end
   end
+
+  it "correctly handles and displays error messages (without checking stack trace)" do
+    tests = {
+      {
+        "5 + true;",
+        "type mismatch: INTEGER + BOOLEAN",
+      },
+      {
+        "5 + true; 5;",
+        "type mismatch: INTEGER + BOOLEAN",
+      },
+      {
+        "-true",
+        "unknown operator: -BOOLEAN",
+      },
+      {
+        "true + false;",
+        "unknown operator: BOOLEAN + BOOLEAN",
+      },
+      {
+        "5; true + false; 5",
+        "unknown operator: BOOLEAN + BOOLEAN",
+      },
+      {
+        "if (10 > 1) { true + false; }",
+        "unknown operator: BOOLEAN + BOOLEAN",
+      },
+      {
+        "if (10 > 1) {
+          if (10 > 1) {
+            return true + false;
+          }
+          return 1;
+        }",
+        "unknown operator: BOOLEAN + BOOLEAN",
+      },
+    }
+
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      evaluated.object_type.should eq Drizzle::Object::ERROR_TYPE
+      evaluated.as(Drizzle::Object::Error).message.should eq test[1]
+    end
+  end
 end
