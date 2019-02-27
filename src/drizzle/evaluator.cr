@@ -12,7 +12,7 @@ module Drizzle
 
     # eval method for program nodes, the starting point of any drizzle program
     def self.eval(node : AST::Program) : Object::Object
-      return eval node.statements[0]
+      return eval_statements node.statements
     end
 
     # eval method for expression statement nodes, which represent expressions on their own (e.g. an integer literal on its own)
@@ -54,6 +54,17 @@ module Drizzle
     end
 
     # non-node evaluation methods
+
+    # eval method for a list of statements
+    def self.eval_statements(statements : Array(AST::Statement)) : Object::Object
+      # currently loop through the block evalutaing statements and return the last one
+      # return the last one should only be done if the last one is explicitly a return but I don't know how to do that yet
+      result = @@NULL
+      statements.each do |statement|
+        result = eval(statement)
+      end
+      return result
+    end
 
     # eval method for prefix stuff
     def self.eval_prefix_expression(op : String, value : Object::Object) : Object::Object
