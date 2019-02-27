@@ -77,6 +77,12 @@ module Drizzle
       return value
     end
 
+    # eval statement for function definitions
+    def self.eval(node : AST::Function, env : Environment) : Object::Object
+      # Just construct a function object wrapper around the AST node
+      return Object::Function.new node.name, node.params, node.ret_type, node.body, env
+    end
+
     # eval method for expression statement nodes, which represent expressions on their own (e.g. an integer literal on its own)
     def self.eval(node : AST::ExpressionStatement, env : Environment) : Object::Object
       return eval node.expression, env

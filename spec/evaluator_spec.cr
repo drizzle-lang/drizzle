@@ -197,4 +197,15 @@ describe Drizzle::Evaluator do
       test_integer evaluated, test[1]
     end
   end
+
+  it "correctly evaluates function declarations" do
+    input = "def add_two(x: num) -> num { return x + 2 }"
+    evaluated = test_eval input
+    evaluated.object_type.should eq Drizzle::Object::ObjectType::FUNCTION
+    function = evaluated.as Drizzle::Object::Function
+    function.parameters.size.should eq 1
+    function.parameters[0].to_s.should eq "x: num"
+    function.return_type.to_s.should eq "num"
+    function.body.to_s.should eq "return (x + 2)"
+  end
 end
