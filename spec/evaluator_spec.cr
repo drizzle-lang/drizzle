@@ -118,4 +118,17 @@ describe Drizzle::Evaluator do
       end
     end
   end
+
+  it "correctly evaluates return statements" do
+    tests = {
+      {"return 10", 10},
+      {"return 10\n9", 10},
+      {"return 2 * 5\n9", 10},
+      {"9\nreturn 2 * 5\n9", 10},
+    }
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      test_integer evaluated, test[1]
+    end
+  end
 end
