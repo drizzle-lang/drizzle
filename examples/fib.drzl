@@ -1,0 +1,18 @@
+def fib(n: int) -> int {
+    # Return the nth fibonacci number because this is always a benchmark /shrug
+    if (n == 0) {
+        return 0
+    } elsif (n == 1) {
+        return 1
+    } else {
+        return fib(n - 1) + fib(n - 2)
+    }
+}
+
+fib(20)
+
+# I'm legitimately so proud of this
+# time bin/drizzle examples/fib.drzl
+# 6765
+# 0.04user 0.00system 0:00.06elapsed 88%CPU (0avgtext+0avgdata 5048maxresident)k
+# 0inputs+0outputs (0major+510minor)pagefaults 0swaps
