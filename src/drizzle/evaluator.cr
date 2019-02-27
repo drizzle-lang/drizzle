@@ -17,8 +17,11 @@ module Drizzle
       result = @@NULL
       node.statements.each do |statement|
         result = eval statement
-        if result.object_type == Object::RETURN_VALUE_TYPE
+        case result.object_type
+        when Object::RETURN_VALUE_TYPE
           return result.as(Object::ReturnValue).value
+        when Object::ERROR_TYPE
+          return result
         end
       end
       return result
@@ -30,7 +33,7 @@ module Drizzle
       # found before that point
       node.statements.each do |statement|
         result = eval statement
-        if result.object_type == Object::RETURN_VALUE_TYPE
+        if result.object_type == Object::RETURN_VALUE_TYPE || result.object_type == Object::ERROR_TYPE
           # Unlike the program block, don't unwrap here
           return result
         end
@@ -97,7 +100,7 @@ module Drizzle
       when "-"
         return eval_arithmetic_negation value
       else
-        return @@NULL
+        return new_error "unknown operator: #{op}#{value.object_type}"
       end
     end
 
@@ -111,8 +114,10 @@ module Drizzle
         return convert_native_bool_to_object(left == right)
       elsif op == "!="
         return convert_native_bool_to_object(left != right)
+      elsif left.object_type != right.object_type
+        return new_error "type mismatch: #{left.object_type} #{op} #{right.object_type}"
       else
-        return @@NULL
+        return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
       end
     end
 
@@ -173,7 +178,7 @@ module Drizzle
     # eval method for handling arithmetic negation
     private def self.eval_arithmetic_negation(value : Object::Object) : Object::Object
       if value.object_type != Object::INTEGER_TYPE
-        return @@NULL
+        return new_error "unknown operator: -#{value.object_type}"
       end
       # Cast to an integer and get the value
       int_value = value.as(Object::Integer).value
@@ -203,7 +208,7 @@ module Drizzle
       when "!="
         return convert_native_bool_to_object left_val != right_val
       else
-        return @@NULL
+        return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
       end
     end
 
@@ -231,6 +236,12 @@ module Drizzle
       else
         return true
       end
+    end
+
+    # helper for generating new tokens given a message
+    private def self.new_error(message : String) : Object::Object
+      # Extend this by adding the token that caused it to add more detail
+      return Object::Error.new message
     end
   end
 end

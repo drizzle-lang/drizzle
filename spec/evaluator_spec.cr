@@ -142,11 +142,11 @@ describe Drizzle::Evaluator do
   it "correctly handles and displays error messages (without checking stack trace)" do
     tests = {
       {
-        "5 + true;",
+        "5 + true",
         "type mismatch: INTEGER + BOOLEAN",
       },
       {
-        "5 + true; 5;",
+        "5 + true\n5",
         "type mismatch: INTEGER + BOOLEAN",
       },
       {
@@ -154,23 +154,23 @@ describe Drizzle::Evaluator do
         "unknown operator: -BOOLEAN",
       },
       {
-        "true + false;",
+        "true + false",
         "unknown operator: BOOLEAN + BOOLEAN",
       },
       {
-        "5; true + false; 5",
+        "5\ntrue + false\n5",
         "unknown operator: BOOLEAN + BOOLEAN",
       },
       {
-        "if (10 > 1) { true + false; }",
+        "if (10 > 1) { return true + false }",
         "unknown operator: BOOLEAN + BOOLEAN",
       },
       {
         "if (10 > 1) {
           if (10 > 1) {
-            return true + false;
+            return true + false
           }
-          return 1;
+          return 1
         }",
         "unknown operator: BOOLEAN + BOOLEAN",
       },
