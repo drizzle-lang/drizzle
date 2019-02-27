@@ -225,4 +225,19 @@ describe Drizzle::Evaluator do
       test_integer evaluated, test[1]
     end
   end
+
+  it "correctly handles closures" do
+    input = "
+    def new_adder(x: num) -> func {
+      def wrapped(y: num) -> num {
+        return x + y
+      }
+      return wrapped
+    }
+
+    let add_two: func = new_adder(2)
+    add_two(2)"
+    evaluated = test_eval input
+    test_integer evaluated, 4_i64
+  end
 end
