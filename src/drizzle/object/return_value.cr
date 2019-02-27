@@ -4,7 +4,7 @@ module Drizzle
   module Object
     RETURN_VALUE_TYPE = "RETURN_VALUE"
 
-    class Integer < Object
+    class ReturnValue < Object
       @value : Object
 
       def initialize(@value)
