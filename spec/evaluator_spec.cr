@@ -125,6 +125,7 @@ describe Drizzle::Evaluator do
       {"return 10\n9", 10_i64},
       {"return 2 * 5\n9", 10_i64},
       {"9\nreturn 2 * 5\n9", 10_i64},
+      {"if (10 > 1) { if (10 > 1) { return 10 } return 1 }", 10_i64},
     }
     tests.each do |test|
       evaluated = test_eval test[0]
