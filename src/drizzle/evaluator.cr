@@ -12,12 +12,30 @@ module Drizzle
 
     # eval method for program nodes, the starting point of any drizzle program
     def self.eval(node : AST::Program) : Object::Object
-      return eval_statements node.statements
+      # loop through the program's statements, returning a specified return value or the final value encountered
+      # this is to allow single statement programs to still work
+      result = @@NULL
+      node.statements.each do |statement|
+        result = eval statement
+        if result.object_type == Object::RETURN_VALUE_TYPE
+          return result.as(Object::ReturnValue).value
+        end
+      end
+      return result
     end
 
     # eval method for block nodes, which represent a collection of statements
     def self.eval(node : AST::BlockStatement) : Object::Object
-      return eval_statements node.statements
+      # loop through the block, returning a specified return statement and evaluating any other statements
+      # found before that point
+      node.statements.each do |statement|
+        result = eval statement
+        if result.object_type == Object::RETURN_VALUE_TYPE
+          # Unlike the program block, don't unwrap here
+          return result
+        end
+      end
+      return @@NULL
     end
 
     # eval method for if statements
@@ -71,21 +89,6 @@ module Drizzle
 
     # non-node evaluation methods
 
-    # eval method for a list of statements
-    private def self.eval_statements(statements : Array(AST::Statement)) : Object::Object
-      # loop through a block of statements, returning a specified return value or the final value encountered
-      # this is to allow single statement programs to still work
-      # need to avoid implicit returns later though
-      result = @@NULL
-      statements.each do |statement|
-        result = eval statement
-        if result.object_type == Object::RETURN_VALUE_TYPE
-          return result.as(Object::ReturnValue).value
-        end
-      end
-      return result
-    end
-
     # eval method for prefix stuff
     private def self.eval_prefix_expression(op : String, value : Object::Object) : Object::Object
       case op
@@ -117,22 +120,37 @@ module Drizzle
     private def self.eval_if_expression(node : AST::IfStatement) : Object::Object
       condition = eval node.condition
       if truthy? condition
-        # don't implicitly return on future
-        return eval node.consequence
+        result = eval node.consequence
+        if result.object_type == Object::RETURN_VALUE_TYPE
+          # return the inner value
+          return result
+        else
+          return @@NULL
+        end
       end
       # Now check if there are alt consequences
       node.alt_consequences.each do |alt|
         condition = eval alt.condition
         if truthy? condition
-          # again, don't implicitly return in future
-          return eval alt.consequence
+          result = eval alt.consequence
+          if result.object_type == Object::RETURN_VALUE_TYPE
+            # return the inner value
+            return result
+          else
+            return @@NULL
+          end
         end
       end
 
       # If we get here, evaluate the else if there is one
       if !node.alternative.nil?
-        # one last time, don't implicitly return in future
-        return eval node.alternative
+        result = eval node.alternative
+        if result.object_type == Object::RETURN_VALUE_TYPE
+          # return the inner value
+          return result
+        else
+          return @@NULL
+        end
       else
         return @@NULL
       end

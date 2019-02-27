@@ -99,14 +99,15 @@ describe Drizzle::Evaluator do
   it "correctly evaluates conditionals" do
     # This one could cause an issue because of monkey's implicit returns
     tests = {
-      {"if (true) { 10 }", 10_i64},
-      {"if (false) { 10 }", nil},
-      {"if (1) { 10 }", 10_i64},
-      {"if (1 < 2) { 10 }", 10_i64},
+      {"if (true) { return 10 }", 10_i64},
+      {"if (false) { return 10 }", nil},
+      {"if (1) { return 10 }", 10_i64},
+      {"if (1 < 2) { return 10 }", 10_i64},
+      {"if (1 > 2) { return 10 }", nil},
+      {"if (1 > 2) { return 10 } else { return 20 }", 20_i64},
+      {"if (1 < 2) { return 10 } else { return 20 }", 10_i64},
+      {"if (1 > 2) { return 10 } elsif (2 == 2) { return 15 } else { return 20 }", 15_i64},
       {"if (1 > 2) { 10 }", nil},
-      {"if (1 > 2) { 10 } else { 20 }", 20_i64},
-      {"if (1 < 2) { 10 } else { 20 }", 10_i64},
-      {"if (1 > 2) { 10 } elsif (2 == 2) { 15 } else { 20 }", 15_i64},
     }
 
     tests.each do |test|
@@ -125,7 +126,12 @@ describe Drizzle::Evaluator do
       {"return 10\n9", 10_i64},
       {"return 2 * 5\n9", 10_i64},
       {"9\nreturn 2 * 5\n9", 10_i64},
-      {"if (10 > 1) { if (10 > 1) { return 10 } return 1 }", 10_i64},
+      {"if (10 > 1) {
+          if (10 > 1) {
+            return 10
+          }
+          return 1
+        }", 10_i64},
     }
     tests.each do |test|
       evaluated = test_eval test[0]
