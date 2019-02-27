@@ -10,6 +10,8 @@ module Drizzle
     # REPL ends on an empty input.
     def initialize
       running = true
+      # Create a single environment here to maintain state
+      env = Environment.new
       while running
         print @@prompt
         input = gets(chomp: true)
@@ -27,7 +29,7 @@ module Drizzle
           self.print_parser_errors parser
           next
         end
-        evaluated = Evaluator.eval program
+        evaluated = Evaluator.eval program, env
         puts evaluated.inspect
       end
     end

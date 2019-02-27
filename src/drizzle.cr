@@ -56,7 +56,7 @@ else
           puts error.colorize(:red)
         end
       end
-      evaluated = Drizzle::Evaluator.eval program
+      evaluated = Drizzle::Evaluator.eval program, Drizzle::Environment.new
       puts evaluated.inspect
     rescue
       puts "File #{file} could not be read.".colorize(:red)
