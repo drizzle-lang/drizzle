@@ -216,10 +216,12 @@ describe Drizzle::Evaluator do
       {"def add(x: num, y: num) -> num { return x + y }\nadd(5, 5)", 10_i64},
       {"def add(x: num, y: num) -> num { return x + y }\nadd(5 + 5, add(5, 5))", 20_i64},
       # First Class function test because why not
-      {"def double(x: num) -> num { return x * 2 }\ndef apply(x: num, f: (num -> num)) -> num { return f(x) }\napply(5, double)", 10_i64},
+      {"def double(x: num) -> num { return x * 2 }\ndef apply(x: num, f: (a -> b)) -> num { return f(x) }\napply(5, double)", 10_i64},
     }
     tests.each do |test|
+      puts test
       evaluated = test_eval test[0]
+      puts evaluated.inspect
       test_integer evaluated, test[1]
     end
   end

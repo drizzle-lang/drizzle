@@ -122,6 +122,28 @@ module Drizzle
       return eval_infix_expression node.operator, left, right, env
     end
 
+    # eval method for call expressions, formed as a result of calling a function
+    def self.eval(node : AST::CallExpression, env : Environment) : Object::Object
+      # First get the function we want to call
+      function = eval node.function, env
+
+      # check for errors
+      if function.object_type.error?
+        return function
+      end
+
+      # next, evaluate the expressions
+      args = eval_expressions node.arguments, env
+
+      # check for errors
+      if args.size == 1 && args[0].object_type.error?
+        return args[0]
+      end
+
+      # apply the function and return the result
+      return apply_function function, args
+    end
+
     # eval method for integer literal nodes
     def self.eval(node : AST::IntegerLiteral, env : Environment) : Object::Object
       return Object::Integer.new node.value
@@ -154,6 +176,20 @@ module Drizzle
     end
 
     # non-node evaluation methods
+
+    # evaluate an array of expressions
+    private def self.eval_expressions(expressions : Array(AST::Expression), env : Environment) : Array(Object::Object)
+      # iterate through the expressions and add the evaluated objects to an array
+      result = [] of Object::Object
+      expressions.each do |exp|
+        evaluated = eval exp, env
+        if evaluated.object_type.error?
+          return [evaluated]
+        end
+        result << evaluated
+      end
+      return result
+    end
 
     # eval method for prefix stuff
     private def self.eval_prefix_expression(op : String, value : Object::Object, env : Environment) : Object::Object
@@ -286,6 +322,25 @@ module Drizzle
       end
     end
 
+    # helper that manages setting up the env for a function, running it and returning the result
+    private def self.apply_function(obj : Object::Object, args : Array(Object::Object)) : Object::Object
+      # cast the function to a function object
+      if !obj.object_type.function?
+        return new_error "not a function: #{obj.object_type}"
+      end
+      function = obj.as Object::Function
+      # create an extended environment for the function
+      extended_env = extend_function_env function, args
+      # now evaluate the body of the function using the extended environment
+      evaluated = eval function.body, extended_env
+      # check if there was a return within the function and return either its value or null
+      if evaluated.object_type.return_value?
+        return evaluated.as(Object::ReturnValue).value
+      else
+        return @@NULL
+      end
+    end
+
     # other helpers
 
     # convert crystal bool to drizzle object representation
@@ -316,6 +371,18 @@ module Drizzle
     private def self.new_error(message : String) : Object::Object
       # Extend this by adding the token that caused it to add more detail
       return Object::Error.new message
+    end
+
+    # helper for extending a function's environment with the values of its arguments
+    private def self.extend_function_env(function : Object::Function, args : Array(Object::Object)) : Environment
+      # Create a new env wrapped by the one stored in the function
+      env = Environment.new function.env
+      # for each of the supplied params, add the passed values to the new env
+      function.parameters.each.with_index do |param, index|
+        env.set param.value, args[index]
+      end
+
+      return env
     end
   end
 end
