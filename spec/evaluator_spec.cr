@@ -106,6 +106,7 @@ describe Drizzle::Evaluator do
       {"if (1 > 2) { 10 }", nil},
       {"if (1 > 2) { 10 } else { 20 }", 20_i64},
       {"if (1 < 2) { 10 } else { 20 }", 10_i64},
+      {"if (1 > 2) { 10 } elsif (2 == 2) { 15 } else { 20 }", 15_i64},
     }
 
     tests.each do |test|
