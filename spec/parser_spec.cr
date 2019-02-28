@@ -130,4 +130,27 @@ describe Drizzle::Parser do
     exp = statement.expression.as Drizzle::AST::IndexExpression
     exp.to_s.should eq "(lst[(1 + 1)])"
   end
+
+  it "correctly parses dictionaries" do
+    input = "{'one': 1, 'two': 2, 'three': 3}"
+    lexer = Drizzle::Lexer.new input
+    parser = Drizzle::Parser.new lexer
+    program = parser.parse_program
+    check_parser_errors parser
+    statement = program.statements[0].as Drizzle::AST::ExpressionStatement
+    dict = statement.expression.as Drizzle::AST::DictLiteral
+    dict.pairs.size.should eq 3
+    dict.to_s.should eq "{'one': 1, 'two': 2, 'three': 3}"
+  end
+
+  it "correctly parses empty dictionaries" do
+    input = "{}"
+    lexer = Drizzle::Lexer.new input
+    parser = Drizzle::Parser.new lexer
+    program = parser.parse_program
+    check_parser_errors parser
+    statement = program.statements[0].as Drizzle::AST::ExpressionStatement
+    dict = statement.expression.as Drizzle::AST::DictLiteral
+    dict.pairs.size.should eq 0
+  end
 end
