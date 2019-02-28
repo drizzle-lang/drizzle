@@ -332,7 +332,7 @@ describe Drizzle::Evaluator do
       },
       {
         "[1, 2, 3][-1]",
-        nil,
+        3_i64,
       },
     }
     tests.each do |test|

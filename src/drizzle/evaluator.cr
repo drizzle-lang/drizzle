@@ -304,11 +304,15 @@ module Drizzle
     private def self.eval_list_index_expression(left : Object::Object, index : Object::Object) : Object::Object
       list = left.as Object::List
       index_val = index.as(Object::Integer).value
+      min_index = -list.elements.size
       max_index = list.elements.size - 1
 
-      # No support for negative indexing (for now anyway)
-      if index_val < 0 || index_val > max_index
+      if index_val < min_index || index_val > max_index
         return @@NULL
+      end
+      # handle negative indexing
+      if index_val < 0
+        index_val += list.elements.size
       end
       return list.elements[index_val]
     end
