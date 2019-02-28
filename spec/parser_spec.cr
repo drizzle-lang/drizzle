@@ -53,4 +53,16 @@ describe Drizzle::Parser do
     string = statement.expression.as Drizzle::AST::StringLiteral
     string.value.should eq "hello, world"
   end
+
+  it "correctly parses lists" do
+    input = "[1, 2 * 2, 3 + 3]"
+    lexer = Drizzle::Lexer.new input
+    parser = Drizzle::Parser.new lexer
+    program = parser.parse_program
+    check_parser_errors parser
+    statement = program.statements[0].as Drizzle::AST::ExpressionStatement
+    list = statement.expression.as Drizzle::AST::ListLiteral
+    list.elements.size.should eq 3
+    list.to_s.should eq "[1, (2 * 2), (3 + 3)]"
+  end
 end
