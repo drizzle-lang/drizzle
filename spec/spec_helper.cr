@@ -1,5 +1,7 @@
 require "spec"
 require "../src/drizzle/*"
+require "../src/drizzle/ast/*"
+require "../src/drizzle/object/*"
 
 # Helper function that ensures there are no parser errors.
 #

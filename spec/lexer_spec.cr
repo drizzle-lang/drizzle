@@ -41,7 +41,7 @@ describe Drizzle::Lexer do
     input_file = File.open file_name
 
     # Generate an array of expected Tokens
-    expected_tokens = [
+    expected_tokens = {
       # let five: int = 5
       Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 1, 1),
       Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "five", file_name, 1, 5),
@@ -110,7 +110,7 @@ describe Drizzle::Lexer do
 
       # EOF
       Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 9, 1),
-    ]
+    }
 
     # Create a lexer for this file
     lexer = Drizzle::Lexer.new input_file
@@ -130,7 +130,7 @@ describe Drizzle::Lexer do
     input_file = File.open file_name
 
     # Generate an array of expected Tokens
-    expected_tokens = [
+    expected_tokens = {
       # <comment> Given the way newlines are made, this is unavoidable for now
       Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 1, 45),
 
@@ -252,7 +252,7 @@ describe Drizzle::Lexer do
 
       # EOF
       Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 18, 1),
-    ]
+    }
 
     # Create a lexer for this file
     lexer = Drizzle::Lexer.new input_file

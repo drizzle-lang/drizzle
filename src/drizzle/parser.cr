@@ -250,6 +250,11 @@ module Drizzle
           if !alt_stmnt.nil?
             alt_consequences << alt_stmnt
           end
+          # we should now be on the right brace of the elsif, we can eat if the next token is another elsif, else we'll move to the else checks
+          # currently this doesn't allow newlines between if, elsif and else blocks... but I'll fix that when the antlr parser is done
+          if @peek.token_type.elsif?
+            self.next_token
+          end
         end
       end
 
