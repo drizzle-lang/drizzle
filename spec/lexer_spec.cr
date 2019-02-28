@@ -135,8 +135,21 @@ describe Drizzle::Lexer do
       Drizzle::Token.new(Drizzle::TokenType::ILLEGAL, Char::ZERO.to_s, file_name, 11, 16), # \n in string makes string illegal
       Drizzle::Token.new(Drizzle::TokenType::ILLEGAL, Char::ZERO.to_s, file_name, 12, 1),  # single quote on its own line is also illegal
 
+      # let lst: list = [1, 2]
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 13, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "lst", file_name, 13, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 13, 8),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "list", file_name, 13, 10),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 13, 15),
+      Drizzle::Token.new(Drizzle::TokenType::LEFT_BRACKET, "[", file_name, 13, 17),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "1", file_name, 13, 18),
+      Drizzle::Token.new(Drizzle::TokenType::COMMA, ",", file_name, 13, 19),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "2", file_name, 13, 21),
+      Drizzle::Token.new(Drizzle::TokenType::RIGHT_BRACKET, "]", file_name, 13, 22),
+      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 13, 23),
+
       # EOF
-      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 13, 1),
+      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 14, 1),
     }
 
     # Create a lexer for this file

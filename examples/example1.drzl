@@ -10,3 +10,4 @@ let message: str = 'hello world'
 let other_message: str = "hello, world"
 let err: str = 'hi
 '
+let lst: list = [1, 2]
