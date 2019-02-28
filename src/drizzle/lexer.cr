@@ -107,6 +107,17 @@ module Drizzle
         # Because of weirdness that I currently can't solve, manually set line / char nums for EOL tokens
         current_line -= 1
         current_char = @lines[current_line - 1].size + 1
+      when '"', '\''
+        # strings
+        token_type = TokenType::STRING
+        val = read_string @current_char
+        # Check to make sure we have a valid string
+        if val.nil?
+          token_type = TokenType::ILLEGAL
+          literal = Char::ZERO.to_s
+        else
+          literal = val
+        end
       when '='
         if self.peek_next_char == '='
           token_type = TokenType::EQ
@@ -245,6 +256,23 @@ module Drizzle
       end
       # Return the characters in `line` from `start_pos` to `end_pos`
       return @lines[line_num][start_pos...end_pos]
+    end
+
+    # Builds up a string from the source code
+    #
+    # Takes in the character that was used to open the string, to ensure we close the string with the same character
+    def read_string(opener : Char) : String?
+      # move on to the first character of the string before doing anything
+      self.read_next_char
+      start_pos = @char_num
+      while @current_char != opener
+        # Check for new lines in the string, they are not allowed currently
+        if @current_char == '\n'
+          return nil
+        end
+        self.read_next_char
+      end
+      return @lines[@line_num][start_pos...@char_num]
     end
 
     # Skip whitespace characters in the input as it is unnecessary to turn them into Tokens for Drizzle
