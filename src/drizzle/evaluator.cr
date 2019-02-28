@@ -40,7 +40,6 @@ module Drizzle
           return new_error "ArgumentError: First argument to `push` should be a list, received #{args[0].object_type}"
         end
         args[0].as(Drizzle::Object::List).elements << args[1]
-        # return Drizzle::Object::List.new elements
         return @@NULL
       }),
       "println" => (Object::Builtin.new ->(args : Array(Object::Object)) {
