@@ -11,6 +11,25 @@ module Drizzle
     # Same can be said for NULL
     @@NULL = Object::Null.new
 
+    # Builtins definition
+    # an alternative is to wrap the `env` arg in #eval(Program) with a builtins env
+    # but this is the way the book does it so that's how I'll leave it for now
+    @@BUILTINS : Hash(String, Object::Builtin) = {
+      "len" => Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's .size method for iterables
+        if args.size != 1
+          return new_error "ArgumentError: Incorrect number of arguments to `len`, expected 1, received #{args.size}"
+        end
+        # Do stuff based on the type of the object
+        case args[0].object_type
+        when .string?
+          return Object::Integer.new args[0].as(Object::StringObj).value.size.to_i64
+        else
+          return new_error "ArgumentError: `len` received an unsupported argument of type #{args[0].object_type}"
+        end
+      },
+    }
+
     # eval method for program nodes, the starting point of any drizzle program
     def self.eval(node : AST::Program, env : Environment) : Object::Object
       # loop through the program's statements, returning a specified return value or the final value encountered
@@ -164,7 +183,13 @@ module Drizzle
       # Check if the name is in the env, if its not throw an error
       val = env.get node.value
       if val.nil?
-        return new_error "identifier not found: #{node.value}"
+        # check the builtin map before assuming there's an error
+        val = @@BUILTINS[node.value]?
+        if val.nil?
+          return new_error "identifier not found: #{node.value}"
+        else
+          return val
+        end
       else
         return val
       end
@@ -345,20 +370,25 @@ module Drizzle
 
     # helper that manages setting up the env for a function, running it and returning the result
     private def self.apply_function(obj : Object::Object, args : Array(Object::Object)) : Object::Object
-      # cast the function to a function object
-      if !obj.object_type.function?
-        return new_error "not a function: #{obj.object_type}"
-      end
-      function = obj.as Object::Function
-      # create an extended environment for the function
-      extended_env = extend_function_env function, args
-      # now evaluate the body of the function using the extended environment
-      evaluated = eval function.body, extended_env
-      # check if there was a return within the function and return either its value or null
-      if evaluated.object_type.return_value?
-        return evaluated.as(Object::ReturnValue).value
+      # cast the function to either a function or builtin object
+      case obj.object_type
+      when .function?
+        function = obj.as Object::Function
+        # create an extended environment for the function
+        extended_env = extend_function_env function, args
+        # now evaluate the body of the function using the extended environment
+        evaluated = eval function.body, extended_env
+        # check if there was a return within the function and return either its value or null
+        if evaluated.object_type.return_value?
+          return evaluated.as(Object::ReturnValue).value
+        else
+          return @@NULL
+        end
+      when .builtin?
+        function = obj.as(Object::Builtin).function
+        return function.call args
       else
-        return @@NULL
+        return new_error "not a function: #{obj.object_type}"
       end
     end
 

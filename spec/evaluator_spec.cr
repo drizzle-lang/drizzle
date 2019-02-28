@@ -264,8 +264,8 @@ describe Drizzle::Evaluator do
       {"len('')", 0_i64},
       {"len('four')", 4_i64},
       {"len('hello world')", 11_i64},
-      {"len(1)", "argument to `len` not supported, got INTEGER"},
-      {"len('one', 'two')", "wrong number of arguments. got=2, want=1"},
+      {"len(1)", "ArgumentError: `len` received an unsupported argument of type INTEGER"},
+      {"len('one', 'two')", "ArgumentError: Incorrect number of arguments to `len`, expected 1, received 2"},
     }
 
     tests.each do |test|
