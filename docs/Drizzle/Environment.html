@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/drizzle-lang/drizzle">
-  <title>Drizzle::REPL - github.com/drizzle-lang/drizzle</title>
+  <title>Drizzle::Environment - github.com/drizzle-lang/drizzle</title>
 </head>
 <body>
 
@@ -141,7 +141,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Environment" data-name="drizzle::environment">
+  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/Environment" data-name="drizzle::environment">
       <a href="../Drizzle/Environment.html">Environment</a>
       
     </li>
@@ -226,7 +226,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
       <a href="../Drizzle/REPL.html">REPL</a>
       
     </li>
@@ -255,21 +255,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Drizzle::REPL
+  <span class="kind">class</span> Drizzle::Environment
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Drizzle/REPL.html">Drizzle::REPL</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Drizzle/Environment.html">Drizzle::Environment</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
   <h2>Overview</h2>
 
-  <p>Class for handling the Read-Eval-Print-Loop (REPL) environment for Drizzle.</p>
-
-<p>I'm finally able to add Evaluation to the REPL environment</p>
+  <p>A class that maintains the state of the interpreter (i.e variables and such)</p>
 
 
 
@@ -287,8 +285,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/repl.cr#L5" target="_blank">
-        drizzle/repl.cr
+      <a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/environment.cr#L3" target="_blank">
+        drizzle/environment.cr
       </a>
     
     <br/>
@@ -302,9 +300,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
-        
-          <div class="summary"><p>Start the REPL environment.</p></div>
+        <a href="#new%28outer%3Dnil%29-class-method" class="signature"><strong>.new</strong>(outer = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -318,9 +314,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#print_parser_errors%28parser%3AParser%29-instance-method" class="signature"><strong>#print_parser_errors</strong>(parser : Parser)</a>
+        <a href="#get%28key%3AString%29%3ADrizzle%3A%3AObject%3A%3AObject%3F-instance-method" class="signature"><strong>#get</strong>(key : String) : Drizzle::Object::Object?</a>
         
-          <div class="summary"><p>Print parser errors in a nice format</p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set%28key%3AString%2Cvalue%3ADrizzle%3A%3AObject%3A%3AObject%29-instance-method" class="signature"><strong>#set</strong>(key : String, value : Drizzle::Object::Object)</a>
         
       </li>
     
@@ -357,22 +356,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new-class-method">
+    <div class="entry-detail" id="new(outer=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>
+        def self.<strong>new</strong>(outer = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new-class-method">#</a>
+        <a class="method-permalink" href="#new%28outer%3Dnil%29-class-method">#</a>
       </div>
-      
-        <div class="doc"><p>Start the REPL environment.</p>
-
-<p>REPL ends on an empty input.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/repl.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/environment.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -384,20 +379,34 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="print_parser_errors(parser:Parser)-instance-method">
+    <div class="entry-detail" id="get(key:String):Drizzle::Object::Object?-instance-method">
       <div class="signature">
         
-        def <strong>print_parser_errors</strong>(parser : <a href="../Drizzle/Parser.html">Parser</a>)
+        def <strong>get</strong>(key : String) : <a href="../Drizzle/Object/Object.html">Drizzle::Object::Object</a>?
 
-        <a class="method-permalink" href="#print_parser_errors%28parser%3AParser%29-instance-method">#</a>
+        <a class="method-permalink" href="#get%28key%3AString%29%3ADrizzle%3A%3AObject%3A%3AObject%3F-instance-method">#</a>
       </div>
-      
-        <div class="doc"><p>Print parser errors in a nice format</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/repl.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/environment.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set(key:String,value:Drizzle::Object::Object)-instance-method">
+      <div class="signature">
+        
+        def <strong>set</strong>(key : String, value : <a href="../Drizzle/Object/Object.html">Drizzle::Object::Object</a>)
+
+        <a class="method-permalink" href="#set%28key%3AString%2Cvalue%3ADrizzle%3A%3AObject%3A%3AObject%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/environment.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>

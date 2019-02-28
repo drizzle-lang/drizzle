@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/drizzle-lang/drizzle">
-  <title>Drizzle::AST::PrefixExpression - github.com/drizzle-lang/drizzle</title>
+  <title>Drizzle::Object::Function - github.com/drizzle-lang/drizzle</title>
 </head>
 <body>
 
@@ -46,7 +46,7 @@
       
         <ul>
   
-  <li class="parent open current" data-id="github.com/drizzle-lang/drizzle/Drizzle/AST" data-name="drizzle::ast">
+  <li class="parent " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST" data-name="drizzle::ast">
       <a href="../../Drizzle/AST.html">AST</a>
       
         <ul>
@@ -111,7 +111,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/PrefixExpression" data-name="drizzle::ast::prefixexpression">
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/PrefixExpression" data-name="drizzle::ast::prefixexpression">
       <a href="../../Drizzle/AST/PrefixExpression.html">PrefixExpression</a>
       
     </li>
@@ -161,7 +161,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object" data-name="drizzle::object">
+  <li class="parent open current" data-id="github.com/drizzle-lang/drizzle/Drizzle/Object" data-name="drizzle::object">
       <a href="../../Drizzle/Object.html">Object</a>
       
         <ul>
@@ -176,7 +176,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Function" data-name="drizzle::object::function">
+  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Function" data-name="drizzle::object::function">
       <a href="../../Drizzle/Object/Function.html">Function</a>
       
     </li>
@@ -255,19 +255,15 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Drizzle::AST::PrefixExpression
+  <span class="kind">class</span> Drizzle::Object::Function
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Drizzle/AST/PrefixExpression.html">Drizzle::AST::PrefixExpression</a></li><li class="superclass"><a href="../../Drizzle/AST/Expression.html">Drizzle::AST::Expression</a></li><li class="superclass"><a href="../../Drizzle/AST/Node.html">Drizzle::AST::Node</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Drizzle/Object/Function.html">Drizzle::Object::Function</a></li><li class="superclass"><a href="../../Drizzle/Object/Object.html">Drizzle::Object::Object</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
-
-  <h2>Overview</h2>
-
-  <p>Node class representing a Prefix Expression, such as unary <code>-</code>, or <code>not</code></p>
 
 
 
@@ -285,8 +281,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/ast/prefix_expression.cr#L7" target="_blank">
-        drizzle/ast/prefix_expression.cr
+      <a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/object/function.cr#L8" target="_blank">
+        drizzle/object/function.cr
       </a>
     
     <br/>
@@ -300,7 +296,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28token%2Coperator%2Cright%29-class-method" class="signature"><strong>.new</strong>(token, operator, right)</a>
+        <a href="#new%28name%2Cparameters%2Creturn_type%2Cbody%2Cenv%29-class-method" class="signature"><strong>.new</strong>(name, parameters, return_type, body, env)</a>
         
       </li>
     
@@ -314,33 +310,32 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#literal%3AString-instance-method" class="signature"><strong>#literal</strong> : String</a>
+        <a href="#body%3ADrizzle%3A%3AAST%3A%3ABlockStatement-instance-method" class="signature"><strong>#body</strong> : Drizzle::AST::BlockStatement</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#operator%3AString-instance-method" class="signature"><strong>#operator</strong> : String</a>
-        
-          <div class="summary"><p>The prefix operator (not, -)</p></div>
+        <a href="#env%3ADrizzle%3A%3AEnvironment-instance-method" class="signature"><strong>#env</strong> : Drizzle::Environment</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#right%3ADrizzle%3A%3AAST%3A%3AExpression%3F-instance-method" class="signature"><strong>#right</strong> : Drizzle::AST::Expression?</a>
-        
-          <div class="summary"><p>The expression that is bound by the prefix operator</p></div>
+        <a href="#inspect%3AString-instance-method" class="signature"><strong>#inspect</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#to_s%3AString-instance-method" class="signature"><strong>#to_s</strong> : String</a>
+        <a href="#name%3ADrizzle%3A%3AAST%3A%3AIdentifier-instance-method" class="signature"><strong>#name</strong> : Drizzle::AST::Identifier</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#token%3ADrizzle%3A%3AToken-instance-method" class="signature"><strong>#token</strong> : Drizzle::Token</a>
+        <a href="#parameters%3AArray%28Drizzle%3A%3AAST%3A%3ATypedIdentifier%29-instance-method" class="signature"><strong>#parameters</strong> : Array(Drizzle::AST::TypedIdentifier)</a>
         
-          <div class="summary"><p>The token that caused the generation of this node</p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#return_type%3ADrizzle%3A%3AAST%3A%3AIdentifier%3F-instance-method" class="signature"><strong>#return_type</strong> : Drizzle::AST::Identifier?</a>
         
       </li>
     
@@ -354,32 +349,31 @@
   
     
 
-
-    
-
-
-    
-
-
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Drizzle/AST/Node.html">Drizzle::AST::Node</a></code></h3>
+  <h3>Instance methods inherited from class <code><a href="../../Drizzle/Object/Object.html">Drizzle::Object::Object</a></code></h3>
   
   
-    <a href="../../Drizzle/AST/Node.html#literal%3AString-instance-method" class="tooltip">
-      <span>literal : String</span>
-    literal</a>, 
+    <a href="../../Drizzle/Object/Object.html#inspect%3AString-instance-method" class="tooltip">
+      <span>inspect : String</span>
+    inspect</a>, 
     
   
-    <a href="../../Drizzle/AST/Node.html#to_s%3AString-instance-method" class="tooltip">
-      <span>to_s : String</span>
-    to_s</a>
+    <a href="../../Drizzle/Object/Object.html#object_type%3ADrizzle%3A%3AObject%3A%3AObjectType-instance-method" class="tooltip">
+      <span>object_type : Drizzle::Object::ObjectType</span>
+    object_type</a>
     
   
 
 
     
+
+  <h3>Constructor methods inherited from class <code><a href="../../Drizzle/Object/Object.html">Drizzle::Object::Object</a></code></h3>
+  
+  
+    <a href="../../Drizzle/Object/Object.html#new-class-method" class="tooltip">
+      <span>new</span>
+    new</a>
+    
+  
 
 
     
@@ -411,18 +405,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(token,operator,right)-class-method">
+    <div class="entry-detail" id="new(name,parameters,return_type,body,env)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(token, operator, right)
+        def self.<strong>new</strong>(name, parameters, return_type, body, env)
 
-        <a class="method-permalink" href="#new%28token%2Coperator%2Cright%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28name%2Cparameters%2Creturn_type%2Cbody%2Cenv%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/ast/prefix_expression.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/object/function.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -434,88 +428,98 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="literal:String-instance-method">
+    <div class="entry-detail" id="body:Drizzle::AST::BlockStatement-instance-method">
       <div class="signature">
         
-        def <strong>literal</strong> : String
+        def <strong>body</strong> : <a href="../../Drizzle/AST/BlockStatement.html">Drizzle::AST::BlockStatement</a>
 
-        <a class="method-permalink" href="#literal%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#body%3ADrizzle%3A%3AAST%3A%3ABlockStatement-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/ast/prefix_expression.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/object/function.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="operator:String-instance-method">
+    <div class="entry-detail" id="env:Drizzle::Environment-instance-method">
       <div class="signature">
         
-        def <strong>operator</strong> : String
+        def <strong>env</strong> : <a href="../../Drizzle/Environment.html">Drizzle::Environment</a>
 
-        <a class="method-permalink" href="#operator%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#env%3ADrizzle%3A%3AEnvironment-instance-method">#</a>
       </div>
-      
-        <div class="doc"><p>The prefix operator (not, -)</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/ast/prefix_expression.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/object/function.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="right:Drizzle::AST::Expression?-instance-method">
+    <div class="entry-detail" id="inspect:String-instance-method">
       <div class="signature">
         
-        def <strong>right</strong> : <a href="../../Drizzle/AST/Expression.html">Drizzle::AST::Expression</a>?
+        def <strong>inspect</strong> : String
 
-        <a class="method-permalink" href="#right%3ADrizzle%3A%3AAST%3A%3AExpression%3F-instance-method">#</a>
+        <a class="method-permalink" href="#inspect%3AString-instance-method">#</a>
       </div>
-      
-        <div class="doc"><p>The expression that is bound by the prefix operator</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/ast/prefix_expression.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/object/function.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="to_s:String-instance-method">
+    <div class="entry-detail" id="name:Drizzle::AST::Identifier-instance-method">
       <div class="signature">
         
-        def <strong>to_s</strong> : String
+        def <strong>name</strong> : <a href="../../Drizzle/AST/Identifier.html">Drizzle::AST::Identifier</a>
 
-        <a class="method-permalink" href="#to_s%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#name%3ADrizzle%3A%3AAST%3A%3AIdentifier-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/ast/prefix_expression.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/object/function.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="token:Drizzle::Token-instance-method">
+    <div class="entry-detail" id="parameters:Array(Drizzle::AST::TypedIdentifier)-instance-method">
       <div class="signature">
         
-        def <strong>token</strong> : <a href="../../Drizzle/Token.html">Drizzle::Token</a>
+        def <strong>parameters</strong> : Array(<a href="../../Drizzle/AST/TypedIdentifier.html">Drizzle::AST::TypedIdentifier</a>)
 
-        <a class="method-permalink" href="#token%3ADrizzle%3A%3AToken-instance-method">#</a>
+        <a class="method-permalink" href="#parameters%3AArray%28Drizzle%3A%3AAST%3A%3ATypedIdentifier%29-instance-method">#</a>
       </div>
-      
-        <div class="doc"><p>The token that caused the generation of this node</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/ast/prefix_expression.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/object/function.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="return_type:Drizzle::AST::Identifier?-instance-method">
+      <div class="signature">
+        
+        def <strong>return_type</strong> : <a href="../../Drizzle/AST/Identifier.html">Drizzle::AST::Identifier</a>?
+
+        <a class="method-permalink" href="#return_type%3ADrizzle%3A%3AAST%3A%3AIdentifier%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/object/function.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.2">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/drizzle-lang/drizzle">
+  <title>Drizzle::Evaluator - github.com/drizzle-lang/drizzle</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/toplevel" data-name="top level namespace">
+      <a href="../toplevel.html">Top Level Namespace</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/drizzle-lang/drizzle/Drizzle" data-name="drizzle">
+      <a href="../Drizzle.html">Drizzle</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST" data-name="drizzle::ast">
+      <a href="../Drizzle/AST.html">AST</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/BlockStatement" data-name="drizzle::ast::blockstatement">
+      <a href="../Drizzle/AST/BlockStatement.html">BlockStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/BooleanLiteral" data-name="drizzle::ast::booleanliteral">
+      <a href="../Drizzle/AST/BooleanLiteral.html">BooleanLiteral</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/CallExpression" data-name="drizzle::ast::callexpression">
+      <a href="../Drizzle/AST/CallExpression.html">CallExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Expression" data-name="drizzle::ast::expression">
+      <a href="../Drizzle/AST/Expression.html">Expression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/ExpressionStatement" data-name="drizzle::ast::expressionstatement">
+      <a href="../Drizzle/AST/ExpressionStatement.html">ExpressionStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Function" data-name="drizzle::ast::function">
+      <a href="../Drizzle/AST/Function.html">Function</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Identifier" data-name="drizzle::ast::identifier">
+      <a href="../Drizzle/AST/Identifier.html">Identifier</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/IfStatement" data-name="drizzle::ast::ifstatement">
+      <a href="../Drizzle/AST/IfStatement.html">IfStatement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/InfixExpression" data-name="drizzle::ast::infixexpression">
+      <a href="../Drizzle/AST/InfixExpression.html">InfixExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/IntegerLiteral" data-name="drizzle::ast::integerliteral">
+      <a href="../Drizzle/AST/IntegerLiteral.html">IntegerLiteral</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Let" data-name="drizzle::ast::let">
+      <a href="../Drizzle/AST/Let.html">Let</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Node" data-name="drizzle::ast::node">
+      <a href="../Drizzle/AST/Node.html">Node</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/PrefixExpression" data-name="drizzle::ast::prefixexpression">
+      <a href="../Drizzle/AST/PrefixExpression.html">PrefixExpression</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Program" data-name="drizzle::ast::program">
+      <a href="../Drizzle/AST/Program.html">Program</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Return" data-name="drizzle::ast::return">
+      <a href="../Drizzle/AST/Return.html">Return</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/Statement" data-name="drizzle::ast::statement">
+      <a href="../Drizzle/AST/Statement.html">Statement</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/AST/TypedIdentifier" data-name="drizzle::ast::typedidentifier">
+      <a href="../Drizzle/AST/TypedIdentifier.html">TypedIdentifier</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Environment" data-name="drizzle::environment">
+      <a href="../Drizzle/Environment.html">Environment</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/drizzle-lang/drizzle/Drizzle/Evaluator" data-name="drizzle::evaluator">
+      <a href="../Drizzle/Evaluator.html">Evaluator</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/InfixParser" data-name="drizzle::infixparser">
+      <a href="../Drizzle/InfixParser.html">InfixParser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Lexer" data-name="drizzle::lexer">
+      <a href="../Drizzle/Lexer.html">Lexer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object" data-name="drizzle::object">
+      <a href="../Drizzle/Object.html">Object</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Boolean" data-name="drizzle::object::boolean">
+      <a href="../Drizzle/Object/Boolean.html">Boolean</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Error" data-name="drizzle::object::error">
+      <a href="../Drizzle/Object/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Function" data-name="drizzle::object::function">
+      <a href="../Drizzle/Object/Function.html">Function</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Integer" data-name="drizzle::object::integer">
+      <a href="../Drizzle/Object/Integer.html">Integer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Null" data-name="drizzle::object::null">
+      <a href="../Drizzle/Object/Null.html">Null</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Object" data-name="drizzle::object::object">
+      <a href="../Drizzle/Object/Object.html">Object</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/ObjectType" data-name="drizzle::object::objecttype">
+      <a href="../Drizzle/Object/ObjectType.html">ObjectType</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/ReturnValue" data-name="drizzle::object::returnvalue">
+      <a href="../Drizzle/Object/ReturnValue.html">ReturnValue</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Parser" data-name="drizzle::parser">
+      <a href="../Drizzle/Parser.html">Parser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Precedence" data-name="drizzle::precedence">
+      <a href="../Drizzle/Precedence.html">Precedence</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/PrefixParser" data-name="drizzle::prefixparser">
+      <a href="../Drizzle/PrefixParser.html">PrefixParser</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/REPL" data-name="drizzle::repl">
+      <a href="../Drizzle/REPL.html">REPL</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Token" data-name="drizzle::token">
+      <a href="../Drizzle/Token.html">Token</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/TokenType" data-name="drizzle::tokentype">
+      <a href="../Drizzle/TokenType.html">TokenType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Drizzle::Evaluator
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Drizzle/Evaluator.html">Drizzle::Evaluator</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>Module containing an overloaded evaluation function that evaluates all the various node types</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L7" target="_blank">
+        drizzle/evaluator.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3AProgram%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::Program, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for program nodes, the starting point of any drizzle program</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3ABlockStatement%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::BlockStatement, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for block nodes, which represent a collection of statements</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3AIfStatement%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::IfStatement, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for if statements</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3AReturn%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::Return, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for return statements</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3ALet%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::Let, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for let statements</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3AFunction%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::Function, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval statement for function definitions</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3AExpressionStatement%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::ExpressionStatement, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for expression statement nodes, which represent expressions on their own (e.g.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3APrefixExpression%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::PrefixExpression, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for prefix expression nddes</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3AInfixExpression%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::InfixExpression, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for infix expression nodes</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3ACallExpression%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::CallExpression, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for call expressions, formed as a result of calling a function</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3AIntegerLiteral%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::IntegerLiteral, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for integer literal nodes</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3ABooleanLiteral%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::BooleanLiteral, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for boolean literal nodes</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3AIdentifier%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::Identifier, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>eval method for identifiers</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3AAST%3A%3ANode%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : AST::Node, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>temp catchall method</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#eval%28node%3ANil%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method" class="signature"><strong>.eval</strong>(node : Nil, env : Environment) : Object::Object</a>
+        
+          <div class="summary"><p>temp handling for nil nodes since expressionstatement can have a nil expression</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="eval(node:AST::Program,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/Program.html">AST::Program</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3AProgram%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for program nodes, the starting point of any drizzle program</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::BlockStatement,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/BlockStatement.html">AST::BlockStatement</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3ABlockStatement%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for block nodes, which represent a collection of statements</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::IfStatement,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/IfStatement.html">AST::IfStatement</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3AIfStatement%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for if statements</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L46" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::Return,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/Return.html">AST::Return</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3AReturn%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for return statements</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::Let,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/Let.html">AST::Let</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3ALet%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for let statements</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L63" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::Function,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/Function.html">AST::Function</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3AFunction%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval statement for function definitions</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L81" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::ExpressionStatement,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/ExpressionStatement.html">AST::ExpressionStatement</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3AExpressionStatement%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for expression statement nodes, which represent expressions on their own (e.g. an integer literal on its own)</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L90" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::PrefixExpression,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/PrefixExpression.html">AST::PrefixExpression</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3APrefixExpression%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for prefix expression nddes</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L95" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::InfixExpression,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/InfixExpression.html">AST::InfixExpression</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3AInfixExpression%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for infix expression nodes</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L107" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::CallExpression,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/CallExpression.html">AST::CallExpression</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3ACallExpression%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for call expressions, formed as a result of calling a function</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L126" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::IntegerLiteral,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/IntegerLiteral.html">AST::IntegerLiteral</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3AIntegerLiteral%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for integer literal nodes</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L148" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::BooleanLiteral,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/BooleanLiteral.html">AST::BooleanLiteral</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3ABooleanLiteral%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for boolean literal nodes</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L153" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::Identifier,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/Identifier.html">AST::Identifier</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3AIdentifier%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>eval method for identifiers</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L158" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:AST::Node,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : <a href="../Drizzle/AST/Node.html">AST::Node</a>, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3AAST%3A%3ANode%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>temp catchall method</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L169" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="eval(node:Nil,env:Environment):Object::Object-class-method">
+      <div class="signature">
+        
+        def self.<strong>eval</strong>(node : Nil, env : <a href="../Drizzle/Environment.html">Environment</a>) : <a href="../Drizzle/Object/Object.html">Object::Object</a>
+
+        <a class="method-permalink" href="#eval%28node%3ANil%2Cenv%3AEnvironment%29%3AObject%3A%3AObject-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>temp handling for nil nodes since expressionstatement can have a nil expression</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/drizzle-lang/drizzle/blob/6c4c83495d715da343a2d26aae981a14bf3466be/src/drizzle/evaluator.cr#L174" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.27.1">
+<meta name="generator" content="Crystal Docs 0.27.2">
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -141,6 +141,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Environment" data-name="drizzle::environment">
+      <a href="Drizzle/Environment.html">Environment</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Evaluator" data-name="drizzle::evaluator">
+      <a href="Drizzle/Evaluator.html">Evaluator</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/InfixParser" data-name="drizzle::infixparser">
       <a href="Drizzle/InfixParser.html">InfixParser</a>
       
@@ -148,6 +158,56 @@
   
   <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Lexer" data-name="drizzle::lexer">
       <a href="Drizzle/Lexer.html">Lexer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object" data-name="drizzle::object">
+      <a href="Drizzle/Object.html">Object</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Boolean" data-name="drizzle::object::boolean">
+      <a href="Drizzle/Object/Boolean.html">Boolean</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Error" data-name="drizzle::object::error">
+      <a href="Drizzle/Object/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Function" data-name="drizzle::object::function">
+      <a href="Drizzle/Object/Function.html">Function</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Integer" data-name="drizzle::object::integer">
+      <a href="Drizzle/Object/Integer.html">Integer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Null" data-name="drizzle::object::null">
+      <a href="Drizzle/Object/Null.html">Null</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/Object" data-name="drizzle::object::object">
+      <a href="Drizzle/Object/Object.html">Object</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/ObjectType" data-name="drizzle::object::objecttype">
+      <a href="Drizzle/Object/ObjectType.html">ObjectType</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/drizzle-lang/drizzle/Drizzle/Object/ReturnValue" data-name="drizzle::object::returnvalue">
+      <a href="Drizzle/Object/ReturnValue.html">ReturnValue</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -193,6 +253,8 @@
 
 
 <div class="main-content">
+<p><img src="https://raw.githubusercontent.com/drizzle-lang/drizzle/master/img/banner.png" alt="drizzle banner"/></p>
+
 <h1>Drizzle</h1>
 
 <p>Drizzle is my very own programming language, simultaneously developed as a language I would like to use and a never-ending source of things to learn.</p>
@@ -216,21 +278,9 @@ From there I thought of his ability <em>Drizzle</em>, which I thought was a nice
 
 <ul><li>Create a language with a nice syntax that I would like to use.</li><li>Constantly learn ways to improve the language.</li><li>Learn about the kind of work that goes into developing production grade languages.</li><li>Eventually get Drizzle to the point where it can interpret / compile itself.</li></ul>
 
-<h2>Extensions</h2>
-
-<p>Some basic extensions that I would like to see built in to the language itself;</p>
-
-<ul><li><code>drizzle docs</code>: Similar to how crystal generates documentation I would like to have Drizzle being able to parse code and generate doc pages</li><li><code>drizzle fmt</code>: Similar to tools like <code>gofmt</code> or <code>crystal tool format</code>, I would like it for Drizzle to have a built-in formatter (once we have a style guide in place)</li><li><code>drizzle drops</code>: When the language starts to grow, we would need to have some kind of dependency manager built in. Dependencies will be called <code>drops</code></li><li><code>drizzle playground</code>: Seems to be a common thing nowadays, so drizzle could do with one</li></ul>
-
-<h2>Roadmap</h2>
-
-<p>Here's a basic roadmap for anyone who is interested in what's going on with this project;</p>
-
-<ul><li>[ ] Interpreter written in Crystal (using https://interpreterbook.com)</li><ul><li>[x] Chapter 1 (Lexing)</li><li>[x] Chapter 2 (Parsing)</li><li>[ ] Chapter 3 (Evaluating)</li><li>[ ] Chapter 4 (Extending the Interpreter)</li></ul><li>[ ] Minor Extras before improving the language again</li><ul><li>[ ] Move docs to using <a href="https://www.gitbook.com/?t=2" target="_blank">Gitbook</a> and make it more in depth / finalize initial languge design</li><li>[ ] Improve the syntax definition file and convert it into .tmLanguage</li><li>[ ] Extend interpreter so that initial design works</li><li>[ ] Do a simple POC project in Drizzle to show that it does actually work</li></ul><li>[ ] ANTLR Generated Parser</li><ul><li>[ ] Write (E)BNF notation for Drizzle</li><li>[ ] Ensure the generated Parser works as intended</li><li>[ ] Convert parser to Crystal (probably from Go or Python)</li><li>Alternatively, look at writing a Crystal generator for ANTLR to avoid this step</li></ul><li>[ ] Compiler written in Crystal (using https://compilerbook.com)</li><ul><li>[ ] Chapter  1 (Compilers & VMs)</li><li>[ ] Chapter  2 (Hello Bytecode)</li><li>[ ] Chapter  3 (Compiling Expressions)</li><li>[ ] Chapter  4 (Conditionals)</li><li>[ ] Chapter  5 (Keeping Track of Names)</li><li>[ ] Chapter  6 (String, Array and Hash)</li><li>[ ] Chapter  7 (Functions)</li><li>[ ] Chapter  8 (Built-in Functions)</li><li>[ ] Chapter  9 (Closures)</li><li>[ ] Chapter 10 (Taking Time)</li></ul><li>[ ] Plans for after in no particular order;</li><ul><li>[ ] Self host the interpreter</li><li>[ ] Self host the compiler</li><li>[ ] Move the compiler to LLVM</li><li>[ ] Add on extra tools</li><li>[ ] Extend the drizzle stdlib</li><li>[ ] Give repositories for installation instead of doing it from source with Crystal</li><li>[ ] Interpreter Book Lost Chapter (Macro System) (I had no initial plans to do this so I'll see)</li></ul></ul>
-
 <h3>Notes</h3>
 
-<ul><li>It would be nice if the project could maintain a side-by-side interpreter and compiler so that drizzle could have a fully functional REPL environment built into the language, or maybe provide drizzle-interpreter as a separate package or something idk</li><li>The more I go through the interpreter book, the more I realise that translating the ANTLR parser every time I add something new might not be worth the hassle.</li><ul><li>However, if I can do it in a smart way, I should only have to translate the whole thing once, and figure out how to add stuff manually going forward in the same style to keep the benefits</li></ul></ul>
+<ul><li>It would be nice if the project could maintain a side-by-side interpreter and compiler so that drizzle could have a fully functional REPL environment built into the language, or maybe provide drizzle-interpreter as a separate package or something idk</li><li>The more I go through the interpreter book, the more I realise that translating the ANTLR parser every time I add something new might not be worth the hassle.</li><ul><li>However, if I can do it in a smart way, I should only have to translate the whole thing once, and figure out how to add stuff manually going forward in the same style to keep the benefits</li></ul><li>Could generate the parser in a different language and commit that to source control</li><li>Then whenever I make updates, I do it in a separate branch and use the PR to update the Crystal version</li></ul>
 
 <h2>Contributing</h2>
 
