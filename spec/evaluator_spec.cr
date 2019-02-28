@@ -248,4 +248,12 @@ describe Drizzle::Evaluator do
     string = evaluated.as Drizzle::Object::StringObj
     string.value.should eq "Hello World!"
   end
+
+  it "can handle string concatenation using the `+` operator" do
+    input = "'Hello' + ' ' + 'World!'"
+    evaluated = test_eval input
+    evaluated.object_type.should eq Drizzle::Object::ObjectType::STRING
+    string = evaluated.as Drizzle::Object::StringObj
+    string.value.should eq "Hello World!"
+  end
 end
