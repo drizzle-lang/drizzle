@@ -17,6 +17,8 @@ module Drizzle
     IDENTIFIER
     # Integer literal
     INTEGER
+    # String literal
+    STRING
 
     # Operators
 
