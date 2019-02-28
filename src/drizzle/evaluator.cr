@@ -331,13 +331,16 @@ module Drizzle
 
     # eval method for handling infix expressions for strings
     private def self.eval_string_infix_expression(op : String, left : Object::Object, right : Object::Object, env : Environment) : Object::Object
-      if op != "+"
+      left_val = left.as(Object::StringObj).value
+      right_val = right.as(Object::StringObj).value
+      case op
+      when "+"
+        return Object::StringObj.new "#{left_val}#{right_val}"
+        # can add * handling later
+      else
         return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
       end
       # unwrap the values between left and right, concatenate them and wrap them in a new string obj
-      left_val = left.as(Object::StringObj).value
-      right_val = right.as(Object::StringObj).value
-      return Object::StringObj.new "#{left_val}#{right_val}"
     end
 
     # helper that manages setting up the env for a function, running it and returning the result
