@@ -96,6 +96,7 @@ module Drizzle
       add_prefix FALSE, parse_boolean_literal
       add_prefix LEFT_PAREN, parse_grouped_expression
       add_prefix LEFT_BRACKET, parse_list_literal
+      add_prefix LEFT_BRACE, parse_dict_literal
 
       # Infix Parsers
       add_infix PLUS, parse_infix_expression
@@ -447,6 +448,27 @@ module Drizzle
       token = @current
       elements = parse_expression_list TokenType::RIGHT_BRACKET
       return AST::ListLiteral.new token, elements
+    end
+
+    # Parse a dict literal found at the current token
+    # {(expression: expression)*}
+    def parse_dict_literal : AST::Expression?
+      token = @current
+      pairs = {} of AST::Expression => AST::Expression
+      while !@peek.token_type.right_brace?
+        self.next_token
+        # parse the key expression
+        key = parse_expression Precedence::LOWEST
+        eat_or_return_nil COLON
+        self.next_token
+        value = parse_expression Precedence::LOWEST
+        pairs[key.not_nil!] = value.not_nil!
+        if !@peek.token_type.right_brace?
+          eat_or_return_nil COMMA
+        end
+      end
+      eat_or_return_nil RIGHT_BRACE
+      return AST::DictLiteral.new token, pairs
     end
 
     # Parse a prefix expression found at the current token

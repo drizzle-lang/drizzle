@@ -18,7 +18,7 @@ module Drizzle
       def to_s : String
         pairs = [] of String
         @pairs.each do |k, v|
-          pairs << "#{k}: #{v}"
+          pairs << "#{k.to_s}: #{v.to_s}"
         end
 
         return "{#{pairs.join ", "}}"

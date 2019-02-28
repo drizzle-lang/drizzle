@@ -16,7 +16,7 @@ module Drizzle
       end
 
       def to_s : String
-        return @token.literal
+        return "'#{@token.literal}'"
       end
 
       # The token that caused the generation of this node
