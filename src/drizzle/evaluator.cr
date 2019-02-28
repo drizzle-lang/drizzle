@@ -188,6 +188,15 @@ module Drizzle
       return Object::StringObj.new node.value
     end
 
+    # eval method for list literals
+    def self.eval(node : AST::ListLiteral, env : Environment) : Object::Object
+      elements = eval_expressions node.elements, env
+      if elements.size == 1 && elements[0].object_type.error?
+        return elements[0]
+      end
+      return Object::List.new elements
+    end
+
     # eval method for identifiers
     def self.eval(node : AST::Identifier, env : Environment) : Object::Object
       # Check if the name is in the env, if its not throw an error
