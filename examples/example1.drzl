@@ -11,3 +11,4 @@ let other_message: str = "hello, world"
 let err: str = 'hi
 '
 let lst: list = [1, 2]
+let dct: dict = {'foo': 1}

@@ -148,8 +148,21 @@ describe Drizzle::Lexer do
       Drizzle::Token.new(Drizzle::TokenType::RIGHT_BRACKET, "]", file_name, 13, 22),
       Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 13, 23),
 
+      # let dct: dict = {'foo': 1}
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 14, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "dct", file_name, 14, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 14, 8),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "dict", file_name, 14, 10),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 14, 15),
+      Drizzle::Token.new(Drizzle::TokenType::LEFT_BRACE, "{", file_name, 14, 17),
+      Drizzle::Token.new(Drizzle::TokenType::STRING, "foo", file_name, 14, 18),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 14, 23),
+      Drizzle::Token.new(Drizzle::TokenType::INTEGER, "1", file_name, 14, 25),
+      Drizzle::Token.new(Drizzle::TokenType::RIGHT_BRACE, "}", file_name, 14, 26),
+      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 14, 27),
+
       # EOF
-      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 14, 1),
+      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 15, 1),
     }
 
     # Create a lexer for this file
