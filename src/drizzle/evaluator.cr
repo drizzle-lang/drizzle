@@ -230,6 +230,37 @@ module Drizzle
       return Object::List.new elements
     end
 
+    # eval method for dict literals
+    def self.eval(node : AST::DictLiteral, env : Environment) : Object::Object
+      pairs = {} of Object::DictKey => Object::DictPair
+      node.pairs.each do |key_node, value_node|
+        key = eval key_node, env
+
+        # check for errors
+        if key.object_type.error?
+          return key
+        end
+
+        # Ensure that the key is a hashable type
+        if !key.is_a? Object::Hashable
+          return new_error "KeyError: Cannot use #{key.object_type} as a dictionary key, unhashable type"
+        end
+
+        # evaluate the value
+        value = eval value_node, env
+
+        # check for errors
+        if value.object_type.error?
+          return value
+        end
+
+        # generate the key's hash and insert into the dictionary
+        hash = key.as(Object::Hashable).hash
+        pairs[hash] = Object::DictPair.new key, value
+      end
+      return Object::Dict.new pairs
+    end
+
     # eval method for identifiers
     def self.eval(node : AST::Identifier, env : Environment) : Object::Object
       # Check if the name is in the env, if its not throw an error
