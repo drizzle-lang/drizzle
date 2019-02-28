@@ -186,6 +186,12 @@ module Drizzle
       when '}'
         token_type = TokenType::RIGHT_BRACE
         literal = "}"
+      when '['
+        token_type = TokenType::LEFT_BRACKET
+        literal = "["
+      when ']'
+        token_type = TokenType::RIGHT_BRACKET
+        literal = "]"
       when '!'
         if self.peek_next_char == '='
           token_type = TokenType::NOT_EQ
