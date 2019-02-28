@@ -20,6 +20,8 @@ module Drizzle
       STRING
       # Builtins
       BUILTIN
+      # List
+      LIST
     end
     # Type definition for a built in function
     alias BuiltinFunction = Proc(Array(Object), Object)
