@@ -16,6 +16,8 @@ module Drizzle
       ERROR
       # Function types
       FUNCTION
+      # Strings
+      STRING
     end
   end
 end
