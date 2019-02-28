@@ -9,7 +9,7 @@ def fib(n: int) -> int {
     }
 }
 
-fib(20)
+println(fib(20))
 
 # I'm legitimately so proud of this
 # time bin/drizzle examples/fib.drzl
