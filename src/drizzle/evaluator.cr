@@ -15,7 +15,7 @@ module Drizzle
     # an alternative is to wrap the `env` arg in #eval(Program) with a builtins env
     # but this is the way the book does it so that's how I'll leave it for now
     @@BUILTINS : Hash(String, Object::Builtin) = {
-      "len" => Object::Builtin.new ->(args : Array(Object::Object)) {
+      "len" => (Object::Builtin.new ->(args : Array(Object::Object)) {
         # wrap crystal's .size method for iterables
         if args.size != 1
           return new_error "ArgumentError: Incorrect number of arguments to `len`, expected 1, received #{args.size}"
@@ -27,7 +27,17 @@ module Drizzle
         else
           return new_error "ArgumentError: `len` received an unsupported argument of type #{args[0].object_type}"
         end
-      },
+      }),
+      "println" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's puts method
+        output = [] of String
+        args.each do |arg|
+          output << arg.inspect
+        end
+        puts output.join " "
+        # Have to return something here for now
+        return @@NULL.as Object::Object
+      }),
     }
 
     # eval method for program nodes, the starting point of any drizzle program
