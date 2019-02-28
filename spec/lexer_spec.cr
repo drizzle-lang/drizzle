@@ -108,8 +108,26 @@ describe Drizzle::Lexer do
       Drizzle::Token.new(Drizzle::TokenType::RIGHT_PAREN, ")", file_name, 8, 32),
       Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 8, 33),
 
+      # let message: str = 'hello world'
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 9, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "message", file_name, 9, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 9, 12),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "str", file_name, 9, 14),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 9, 18),
+      Drizzle::Token.new(Drizzle::TokenType::STRING, "hello world", file_name, 9, 20),
+      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 9, 33),
+
+      # let other_message: str = "hello, world"
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 9, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "other_message", file_name, 9, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 9, 18),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "str", file_name, 9, 20),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 9, 24),
+      Drizzle::Token.new(Drizzle::TokenType::STRING, "hello, world", file_name, 9, 26),
+      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 9, 40),
+
       # EOF
-      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 9, 1),
+      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 11, 1),
     }
 
     # Create a lexer for this file
