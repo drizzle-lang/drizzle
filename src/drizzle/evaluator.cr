@@ -154,6 +154,11 @@ module Drizzle
       return convert_native_bool_to_object node.value
     end
 
+    # eval method for string literals
+    def self.eval(node : AST::StringLiteral, env : Environment) : Object::Object
+      return Object::StringObj.new node.value
+    end
+
     # eval method for identifiers
     def self.eval(node : AST::Identifier, env : Environment) : Object::Object
       # Check if the name is in the env, if its not throw an error
