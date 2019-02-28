@@ -86,6 +86,7 @@ module Drizzle
       # Prefix Parsers
       add_prefix IDENTIFIER, parse_identifier
       add_prefix INTEGER, parse_integer_literal
+      add_prefix STRING, parse_string_literal
       add_prefix NOT, parse_prefix_expression
       add_prefix MINUS, parse_prefix_expression
       add_prefix TRUE, parse_boolean_literal
@@ -421,6 +422,12 @@ module Drizzle
     def parse_integer_literal : AST::Expression
       # This function only gets called on an INTEGER type token, which we know has to be an integer
       return AST::IntegerLiteral.new @current, @current.literal.to_i64
+    end
+
+    # Parse a string found at the current token
+    # `string`
+    def parse_string_literal : AST::Expression
+      return AST::StringLiteral.new @current, @current.literal
     end
 
     # Parse a boolean found at the current token
