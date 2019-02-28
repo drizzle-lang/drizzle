@@ -92,6 +92,7 @@ module Drizzle
       add_prefix TRUE, parse_boolean_literal
       add_prefix FALSE, parse_boolean_literal
       add_prefix LEFT_PAREN, parse_grouped_expression
+      add_prefix LEFT_BRACKET, parse_list_literal
 
       # Infix Parsers
       add_infix PLUS, parse_infix_expression
@@ -436,6 +437,14 @@ module Drizzle
       return AST::BooleanLiteral.new @current, @current.token_type.true?
     end
 
+    # Parse a list literal found at the current token
+    # [expression*]
+    def parse_list_literal : AST::Expression
+      token = @current
+      elements = parse_expression_list TokenType::RIGHT_BRACKET
+      return AST::ListLiteral.new token, elements
+    end
+
     # Parse a prefix expression found at the current token
     # `operator expression`
     def parse_prefix_expression : AST::Expression
@@ -472,15 +481,15 @@ module Drizzle
     # `identifier argument_list`
     def parse_call_expression(left : AST::Expression) : AST::Expression
       token = @current
-      arguments = self.parse_call_arguments
+      arguments = parse_expression_list TokenType::RIGHT_PAREN
       return AST::CallExpression.new token, left.as(AST::Identifier), arguments
     end
 
-    # Parse an argument list for a call expression
-    # `(expression*)`
-    def parse_call_arguments : Array(AST::Expression)
+    # Helper method to parse a generic list of comma separated expressions, given the token that will indicate the end of the group
+    def parse_expression_list(closing_token : TokenType) : Array(AST::Expression)
       args = [] of AST::Expression
-      if @peek.token_type.right_paren?
+      if @peek.token_type == closing_token
+        # Return an empty list if the list is empty
         self.next_token
         return args
       end
@@ -506,10 +515,9 @@ module Drizzle
           args << exp
         end
       end
-
-      # Ensure the peek token is a right paren. If it is, advance the tokens, if not add an error
+      # Ensure the peek token is the same as the specified clsoing token. If it is, advance the tokens, if not add an error
       # I'm not going to use my eat macro here to avoid having to make the return type nilable which will cause a lot of changes to have to be made
-      if !self.eat? TokenType::RIGHT_PAREN
+      if !self.eat? closing_token
         return [] of AST::Expression
       end
       return args
