@@ -118,16 +118,25 @@ describe Drizzle::Lexer do
       Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 9, 33),
 
       # let other_message: str = "hello, world"
-      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 9, 1),
-      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "other_message", file_name, 9, 5),
-      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 9, 18),
-      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "str", file_name, 9, 20),
-      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 9, 24),
-      Drizzle::Token.new(Drizzle::TokenType::STRING, "hello, world", file_name, 9, 26),
-      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 9, 40),
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 10, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "other_message", file_name, 10, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 10, 18),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "str", file_name, 10, 20),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 10, 24),
+      Drizzle::Token.new(Drizzle::TokenType::STRING, "hello, world", file_name, 10, 26),
+      Drizzle::Token.new(Drizzle::TokenType::EOL, "\n", file_name, 10, 40),
+
+      # let err: str = 'hi\n'
+      Drizzle::Token.new(Drizzle::TokenType::LET, "let", file_name, 11, 1),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "err", file_name, 11, 5),
+      Drizzle::Token.new(Drizzle::TokenType::COLON, ":", file_name, 11, 8),
+      Drizzle::Token.new(Drizzle::TokenType::IDENTIFIER, "str", file_name, 11, 10),
+      Drizzle::Token.new(Drizzle::TokenType::ASSIGN, "=", file_name, 11, 14),
+      Drizzle::Token.new(Drizzle::TokenType::ILLEGAL, Char::ZERO.to_s, file_name, 11, 16), # \n in string makes string illegal
+      Drizzle::Token.new(Drizzle::TokenType::ILLEGAL, Char::ZERO.to_s, file_name, 12, 1),  # single quote on its own line is also illegal
 
       # EOF
-      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 11, 1),
+      Drizzle::Token.new(Drizzle::TokenType::EOF, Char::ZERO.to_s, file_name, 13, 1),
     }
 
     # Create a lexer for this file
