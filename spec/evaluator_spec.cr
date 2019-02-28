@@ -328,7 +328,7 @@ describe Drizzle::Evaluator do
       },
       {
         "[1, 2, 3][3]",
-        nil,
+        "IndexError: Index out of bounds (3)",
       },
       {
         "[1, 2, 3][-1]",
@@ -337,10 +337,11 @@ describe Drizzle::Evaluator do
     }
     tests.each do |test|
       evaluated = test_eval test[0]
-      if test[1].nil?
-        test_null evaluated
+      if test[1].is_a?(String)
+        evaluated.object_type.should eq Drizzle::Object::ObjectType::ERROR
+        evaluated.as(Drizzle::Object::Error).message.should eq test[1]
       else
-        test_integer evaluated, test[1].not_nil!
+        test_integer evaluated, test[1].to_i64
       end
     end
   end

@@ -308,7 +308,7 @@ module Drizzle
       max_index = list.elements.size - 1
 
       if index_val < min_index || index_val > max_index
-        return @@NULL
+        return new_error "IndexError: Index out of bounds (#{index_val})"
       end
       # handle negative indexing
       if index_val < 0
