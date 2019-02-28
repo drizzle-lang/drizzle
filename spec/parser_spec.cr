@@ -42,4 +42,15 @@ describe Drizzle::Parser do
       result.should eq output
     end
   end
+
+  it "correctly parses strings" do
+    input = "'hello, world'"
+    lexer = Drizzle::Lexer.new input
+    parser = Drizzle::Parser.new lexer
+    program = parser.parse_program
+    check_parser_errors parser
+    statement = program.statements[0].as Drizzle::AST::ExpressionStatement
+    string = statement.expression.as Drizzle::AST::StringLiteral
+    string.value.should eq "hello, world"
+  end
 end
