@@ -1,19 +1,20 @@
-require "./object"
+require "./hashable"
 
 module Drizzle
   module Object
-    class StringObj < Object
+    class StringObj < Hashable
       @value : String
 
       def initialize(@value)
         @object_type = ObjectType::STRING
+        @hash = generate_hash
       end
 
       def inspect : String
         return "#{@value}"
       end
 
-      def hash : DictKey?
+      private def generate_hash : DictKey
         # To save me from having to include a lib I'm just gonna write the method here
         # using https://github.com/pawandubey/crystal_fnv/blob/master/src/crystal_fnv.cr for basis
         hash = 0xcbf29ce484222325

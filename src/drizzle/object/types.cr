@@ -22,6 +22,8 @@ module Drizzle
       BUILTIN
       # List
       LIST
+      # Dict
+      DICT
     end
     # Type definition for a built in function
     alias BuiltinFunction = Proc(Array(Object), Object)

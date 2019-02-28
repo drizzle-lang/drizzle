@@ -2,6 +2,7 @@ require "./types"
 
 module Drizzle
   # Module containing the internal representations of data types within Drizzle
+
   module Object
     # Class for storing hash keys for the upcoming dict implementations
     class DictKey
