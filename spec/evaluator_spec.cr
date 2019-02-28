@@ -291,4 +291,57 @@ describe Drizzle::Evaluator do
     test_integer list.elements[1], 4_i64
     test_integer list.elements[2], 6_i64
   end
+
+  it "correctly evaluates list index expressions" do
+    tests = {
+      {
+        "[1, 2, 3][0]",
+        1_i64,
+      },
+      {
+        "[1, 2, 3][1]",
+        2_i64,
+      },
+      {
+        "[1, 2, 3][2]",
+        3_i64,
+      },
+      {
+        "let i: int = 0\n[1][i]",
+        1_i64,
+      },
+      {
+        "[1, 2, 3][1 + 1]",
+        3_i64,
+      },
+      {
+        "let myArray: list = [1, 2, 3]\nmyArray[2]",
+        3_i64,
+      },
+      {
+        "let myArray: list = [1, 2, 3]\nmyArray[0] + myArray[1] + myArray[2]",
+        6_i64,
+      },
+      {
+        "let myArray: list = [1, 2, 3]\nlet i: int = myArray[0]\nmyArray[i]",
+        2_i64,
+      },
+      {
+        "[1, 2, 3][3]",
+        nil,
+      },
+      {
+        "[1, 2, 3][-1]",
+        nil,
+      },
+    }
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      if test[1].nil?
+        test_null evaluated
+      else
+        test_integer evaluated, test[1].not_nil!
+      end
+    end
+  end
 end
