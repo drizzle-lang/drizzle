@@ -257,4 +257,27 @@ describe Drizzle::Evaluator do
     string = evaluated.as Drizzle::Object::StringObj
     string.value.should eq "Hello World!"
   end
+
+  it "correctly uses builtin functions" do
+    tests = {
+      # len
+      {"len('')", 0_i64},
+      {"len('four')", 4_i64},
+      {"len('hello world')", 11_i64},
+      {"len(1)", "argument to `len` not supported, got INTEGER"},
+      {"len('one', 'two')", "wrong number of arguments. got=2, want=1"},
+    }
+
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      case test[1]
+      when .is_a?(Int64)
+        test_integer evaluated, test[1].to_i64
+      when .is_a?(String)
+        # Assume it's an error
+        evaluated.object_type.should eq Drizzle::Object::ObjectType::ERROR
+        evaluated.as(Drizzle::Object::Error).message.should eq test[1]
+      end
+    end
+  end
 end
