@@ -173,6 +173,25 @@ module Drizzle
       return apply_function function, args
     end
 
+    # eval method for index expressions, formed as a result of attempting to index into an iterable
+    def self.eval(node : AST::IndexExpression, env : Environment) : Object::Object
+      left = eval node.left, env
+
+      # check for errors
+      if left.object_type.error?
+        return left
+      end
+
+      index = eval node.index, env
+
+      # check for errors
+      if index.object_type.error?
+        return index
+      end
+
+      return eval_index_expression left, index
+    end
+
     # eval method for integer literal nodes
     def self.eval(node : AST::IntegerLiteral, env : Environment) : Object::Object
       return Object::Integer.new node.value
@@ -269,6 +288,29 @@ module Drizzle
       else
         return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
       end
+    end
+
+    # eval method for index expressions
+    private def self.eval_index_expression(left : Object::Object, index : Object::Object) : Object::Object
+      # ensure correct types are being used here
+      if left.object_type.list? && index.object_type.integer?
+        return eval_list_index_expression left, index
+      else
+        return new_error "index operator not supported for #{left.object_type}"
+      end
+    end
+
+    # eval method for specifically handling list indexing
+    private def self.eval_list_index_expression(left : Object::Object, index : Object::Object) : Object::Object
+      list = left.as Object::List
+      index_val = index.as(Object::Integer).value
+      max_index = list.elements.size - 1
+
+      # No support for negative indexing (for now anyway)
+      if index_val < 0 || index_val > max_index
+        return @@NULL
+      end
+      return list.elements[index_val]
     end
 
     # eval method for conditionals
