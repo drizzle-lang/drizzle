@@ -24,9 +24,24 @@ module Drizzle
         case args[0].object_type
         when .string?
           return Object::Integer.new args[0].as(Object::StringObj).value.size.to_i64
+        when .list?
+          return Object::Integer.new args[0].as(Object::List).elements.size.to_i64
         else
           return new_error "ArgumentError: `len` received an unsupported argument of type #{args[0].object_type}"
         end
+      }),
+      "push!" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's .size method for iterables
+        if args.size != 2
+          return new_error "ArgumentError: Incorrect number of arguments to `push`, expected 2, received #{args.size}"
+        end
+        # Ensure that args[0] is a list
+        if !args[0].object_type.list?
+          return new_error "ArgumentError: First argument to `push` should be a list, received #{args[0].object_type}"
+        end
+        args[0].as(Drizzle::Object::List).elements << args[1]
+        # return Drizzle::Object::List.new elements
+        return @@NULL
       }),
       "println" => (Object::Builtin.new ->(args : Array(Object::Object)) {
         # wrap crystal's puts method
