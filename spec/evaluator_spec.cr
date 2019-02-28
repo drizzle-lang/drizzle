@@ -359,7 +359,7 @@ describe Drizzle::Evaluator do
     evaluated = test_eval input
     evaluated.object_type.should eq Drizzle::Object::ObjectType::DICT
     dict = evaluated.as Drizzle::Object::Dictionary
-    expected : Hash(Drizzle::Object::HashKey, Int64) = {
+    expected : Hash(Drizzle::Object::DictKey, Int64) = {
       (Drizzle::Object::String.new "one").hash   => 1_i64,
       (Drizzle::Object::String.new "two").hash   => 2_i64,
       (Drizzle::Object::String.new "three").hash => 3_i64,

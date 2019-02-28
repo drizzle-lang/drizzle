@@ -1,4 +1,5 @@
 require "./types"
+require "./hash_key"
 
 module Drizzle
   # Module containing the internal representations of data types within Drizzle
@@ -9,6 +10,10 @@ module Drizzle
 
       def initialize
         @object_type = ObjectType::OBJECT
+      end
+
+      def hash : DictKey?
+        return nil
       end
 
       # A method that converts the object into a string representation, typically involving the value of the object
