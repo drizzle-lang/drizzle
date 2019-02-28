@@ -12,6 +12,10 @@ module Drizzle
       def initialize(@object_type, @value)
       end
 
+      def ==(other : DictKey)
+        return @object_type == other.object_type && @value == other.value
+      end
+
       # The type of the object that created the hash key
       getter object_type
 
