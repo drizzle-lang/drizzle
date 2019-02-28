@@ -240,4 +240,12 @@ describe Drizzle::Evaluator do
     evaluated = test_eval input
     test_integer evaluated, 4_i64
   end
+
+  it "correctly evaluates string literals" do
+    input = "'Hello World!'"
+    evaluated = test_eval input
+    evaluated.object_type.should eq Drizzle::Object::ObjectType::STRING
+    string = evaluated.as Drizzle::Object::StringObj
+    string.value.should eq "Hello World!"
+  end
 end
