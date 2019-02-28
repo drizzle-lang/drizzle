@@ -280,4 +280,15 @@ describe Drizzle::Evaluator do
       end
     end
   end
+
+  it "correctly evaluates list literals" do
+    input = "[1, 2 * 2, 3 + 3]"
+    evaluated = test_eval input
+    evaluated.object_type.should eq Drizzle::Object::ObjectType::LIST
+    list = evaluated.as Drizzle::Object::List
+    list.elements.size.should eq 3
+    test_integer list.elements[0], 1_i64
+    test_integer list.elements[1], 4_i64
+    test_integer list.elements[2], 6_i64
+  end
 end
