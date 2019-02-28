@@ -34,7 +34,7 @@ Here's a basic roadmap for anyone who is interested in what's going on with this
 - [ ] Interpreter written in Crystal (using https://interpreterbook.com)
     - [x] Chapter 1 (Lexing)
     - [x] Chapter 2 (Parsing)
-    - [ ] Chapter 3 (Evaluating)
+    - [x] Chapter 3 (Evaluating)
     - [ ] Chapter 4 (Extending the Interpreter)
 - [ ] Minor Extras before improving the language again
     - [ ] Move docs to using [Gitbook](https://www.gitbook.com/?t=2) and make it more in depth / finalize initial languge design
