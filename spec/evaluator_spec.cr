@@ -176,6 +176,7 @@ describe Drizzle::Evaluator do
         "unknown operator: BOOLEAN + BOOLEAN",
       },
       {"foobar", "identifier not found: foobar"},
+      {"'hello' - 'world'", "unknown operator: STRING - STRING"},
     }
 
     tests.each do |test|
