@@ -214,6 +214,8 @@ module Drizzle
         return eval_arithmetic_infix_expression op, left, right, env
         # Because there is only two comparison operators for booleans, we can handle them here
         # These comparisons use pointer arithmetic because we can since we only have one instance of true, false or null
+      elsif left.object_type.string? && right.object_type.string?
+        return eval_string_infix_expression op, left, right, env
       elsif op == "=="
         return convert_native_bool_to_object left == right
       elsif op == "!="
@@ -325,6 +327,17 @@ module Drizzle
       else
         return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
       end
+    end
+
+    # eval method for handling infix expressions for strings
+    private def self.eval_string_infix_expression(op : String, left : Object::Object, right : Object::Object, env : Environment) : Object::Object
+      if op != "+"
+        return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
+      end
+      # unwrap the values between left and right, concatenate them and wrap them in a new string obj
+      left_val = left.as(Object::StringObj).value
+      right_val = right.as(Object::StringObj).value
+      return Object::StringObj.new "#{left_val}#{right_val}"
     end
 
     # helper that manages setting up the env for a function, running it and returning the result
