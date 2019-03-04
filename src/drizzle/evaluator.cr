@@ -243,7 +243,7 @@ module Drizzle
 
         # Ensure that the key is a hashable type
         if !key.is_a? Object::Hashable
-          return new_error "KeyError: Cannot use #{key.object_type} as a dictionary key, unhashable type"
+          return new_error "TypeError: Un-hashable type: #{key.object_type}"
         end
 
         # evaluate the value
@@ -340,6 +340,8 @@ module Drizzle
       # ensure correct types are being used here
       if left.object_type.list? && index.object_type.integer?
         return eval_list_index_expression left, index
+      elsif left.object_type.dict?
+        return eval_dict_index_expression left, index
       else
         return new_error "index operator not supported for #{left.object_type}"
       end
@@ -360,6 +362,22 @@ module Drizzle
         index_val += list.elements.size
       end
       return list.elements[index_val]
+    end
+
+    # eval method for handling dict indexing
+    private def self.eval_dict_index_expression(left : Object::Object, index : Object::Object) : Object::Object
+      if !index.is_a? Object::Hashable
+        return new_error "TypeError: Un-hashable type: #{index.object_type}"
+      end
+      # generate the hash key for the dict
+      key = index.as(Object::Hashable).hash
+      # search the dict for the desired key
+      pair = left.as(Object::Dict).pairs[key]?
+      if pair.nil?
+        return new_error "KeyError: #{index.inspect}"
+      else
+        return pair.value
+      end
     end
 
     # eval method for conditionals

@@ -384,15 +384,15 @@ describe Drizzle::Evaluator do
       },
       {
         "{'foo': 5}['bar']",
-        "nil",
+        "KeyError: bar",
       },
       {
-        "let key = 'foo'; {'foo': 5}[key]",
+        "let key: str = 'foo'\n{'foo': 5}[key]",
         5_i64,
       },
       {
         "{}['foo']",
-        "nil",
+        "KeyError: foo",
       },
       {
         "{5: 5}[5]",
