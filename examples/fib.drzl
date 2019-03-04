@@ -12,7 +12,7 @@ def fib(n: int) -> int {
 println(fib(20))
 
 # I'm legitimately so proud of this
-# time bin/drizzle examples/fib.drzl
+# time bin/drizzle examples/fib.drzl (fib(20))
 # 6765
-# 0.04user 0.00system 0:00.06elapsed 88%CPU (0avgtext+0avgdata 5048maxresident)k
-# 0inputs+0outputs (0major+510minor)pagefaults 0swaps
+# 0.01user 0.00system 0:00.02elapsed 75%CPU (0avgtext+0avgdata 4584maxresident)k
+# 0inputs+0outputs (0major+499minor)pagefaults 0swaps
