@@ -369,9 +369,51 @@ describe Drizzle::Evaluator do
     }
     dict.pairs.size.should eq expected.size
     expected.each do |k, v|
-      value = dict.pairs[k]?
-      value.nil?.should be_false
-      # test_integer value, v
+      pair = dict.pairs[k]?
+      pair.nil?.should be_false
+      test_integer pair.not_nil!.value, v
+    end
+  end
+
+  it "correctly handles dictionary index expressions" do
+    tests = {
+      {
+        "{'foo': 5}['foo']",
+        5_i64,
+      },
+      {
+        "{'foo': 5}['bar']",
+        "nil",
+      },
+      {
+        "let key = 'foo'; {'foo': 5}[key]",
+        5_i64,
+      },
+      {
+        "{}['foo']",
+        "nil",
+      },
+      {
+        "{5: 5}[5]",
+        5_i64,
+      },
+      {
+        "{true: 5}[true]",
+        5_i64,
+      },
+      {
+        "{false: 5}[false]",
+        5_i64,
+      },
+    }
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      if test[1].is_a?(String)
+        evaluated.object_type.should eq Drizzle::Object::ObjectType::ERROR
+        evaluated.as(Drizzle::Object::Error).message.should eq test[1]
+      else
+        test_integer evaluated, test[1].to_i64
+      end
     end
   end
 end
