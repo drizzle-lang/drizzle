@@ -16,6 +16,12 @@ module Drizzle
         return @object_type == other.object_type && @value == other.value
       end
 
+      def hash
+        # Return an integer that indicates this object
+        # Would I be safe in just using the @value?
+        @value
+      end
+
       # The type of the object that created the hash key
       getter object_type
 

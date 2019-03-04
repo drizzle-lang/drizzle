@@ -125,6 +125,10 @@ module Drizzle
     def next_token
       @current = @peek
       @peek = @lexer.get_next_token
+      # Gonna try skipping EOLs here and see how much that fucks with everything
+      while @current.token_type.eol?
+        self.next_token
+      end
     end
 
     # Parse a program and build a program node from it, and return it
@@ -457,6 +461,10 @@ module Drizzle
       pairs = {} of AST::Expression => AST::Expression
       while !@peek.token_type.right_brace?
         self.next_token
+        # check if current is a right brace and end the loop if it is
+        if @current.token_type.right_brace?
+          break
+        end
         # parse the key expression
         key = parse_expression Precedence::LOWEST
         eat_or_return_nil COLON
@@ -467,7 +475,10 @@ module Drizzle
           eat_or_return_nil COMMA
         end
       end
-      eat_or_return_nil RIGHT_BRACE
+      if !@current.token_type.right_brace?
+        # If we haven't ended the loop because our current token became a right brace, ensure that our peek is a right brace and eat it
+        eat_or_return_nil RIGHT_BRACE
+      end
       return AST::DictLiteral.new token, pairs
     end
 
