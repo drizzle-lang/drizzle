@@ -32,7 +32,7 @@ module Drizzle
         evaluated = Evaluator.eval program, env
         if evaluated.object_type.error?
           puts evaluated.inspect.colorize :red
-        else
+        elsif !evaluated.object_type.null?
           puts evaluated.inspect
         end
       end

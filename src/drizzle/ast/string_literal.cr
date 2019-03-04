@@ -3,10 +3,10 @@ require "../token"
 
 module Drizzle
   module AST
-    # Node class representing an Boolean.
-    class BooleanLiteral < Expression
+    # Node class representing an String.
+    class StringLiteral < Expression
       @token : Token
-      @value : Bool
+      @value : String
 
       def initialize(@token, @value)
       end
@@ -16,12 +16,12 @@ module Drizzle
       end
 
       def to_s : String
-        return @token.literal
+        return "'#{@token.literal}'"
       end
 
       # The token that caused the generation of this node
       getter token
-      # The value of the boolean
+      # The value of the string
       getter value
     end
   end

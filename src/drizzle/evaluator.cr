@@ -11,6 +11,83 @@ module Drizzle
     # Same can be said for NULL
     @@NULL = Object::Null.new
 
+    # Builtins definition
+    # an alternative is to wrap the `env` arg in #eval(Program) with a builtins env
+    # but this is the way the book does it so that's how I'll leave it for now
+    @@BUILTINS : Hash(String, Object::Builtin) = {
+      "len" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's .size method for iterables
+        if args.size != 1
+          return new_error "ArgumentError: Incorrect number of arguments to `len`, expected 1, received #{args.size}"
+        end
+        # Do stuff based on the type of the object
+        case args[0].object_type
+        when .string?
+          return Object::Integer.new args[0].as(Object::StringObj).value.size.to_i64
+        when .list?
+          return Object::Integer.new args[0].as(Object::List).elements.size.to_i64
+        else
+          return new_error "ArgumentError: `len` received an unsupported argument of type #{args[0].object_type}"
+        end
+      }),
+      "keys" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's .size method for iterables
+        if args.size != 1
+          return new_error "ArgumentError: Incorrect number of arguments to `keys`, expected 1, received #{args.size}"
+        end
+        # Do stuff based on the type of the object
+        if args[0].object_type.dict?
+          # generate a list of the keys in the dict and return it
+          elements = [] of Object::Object
+          args[0].as(Object::Dict).pairs.each_value do |pair|
+            elements << pair.key
+          end
+          return Object::List.new elements
+        else
+          return new_error "ArgumentError: `keys` received an unsupported argument of type #{args[0].object_type}"
+        end
+      }),
+      "push!" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's .size method for iterables
+        if args.size != 2
+          return new_error "ArgumentError: Incorrect number of arguments to `push`, expected 2, received #{args.size}"
+        end
+        # Ensure that args[0] is a list
+        if !args[0].object_type.list?
+          return new_error "ArgumentError: First argument to `push` should be a list, received #{args[0].object_type}"
+        end
+        args[0].as(Drizzle::Object::List).elements << args[1]
+        return @@NULL
+      }),
+      "println" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's puts method
+        output = [] of String
+        args.each do |arg|
+          output << arg.inspect
+        end
+        puts output.join " "
+        # Have to return something here for now
+        return @@NULL.as Object::Object
+      }),
+      "values" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's .size method for iterables
+        if args.size != 1
+          return new_error "ArgumentError: Incorrect number of arguments to `keys`, expected 1, received #{args.size}"
+        end
+        # Do stuff based on the type of the object
+        if args[0].object_type.dict?
+          # generate a list of the keys in the dict and return it
+          elements = [] of Object::Object
+          args[0].as(Object::Dict).pairs.each_value do |pair|
+            elements << pair.value
+          end
+          return Object::List.new elements
+        else
+          return new_error "ArgumentError: `keys` received an unsupported argument of type #{args[0].object_type}"
+        end
+      }),
+    }
+
     # eval method for program nodes, the starting point of any drizzle program
     def self.eval(node : AST::Program, env : Environment) : Object::Object
       # loop through the program's statements, returning a specified return value or the final value encountered
@@ -144,6 +221,25 @@ module Drizzle
       return apply_function function, args
     end
 
+    # eval method for index expressions, formed as a result of attempting to index into an iterable
+    def self.eval(node : AST::IndexExpression, env : Environment) : Object::Object
+      left = eval node.left, env
+
+      # check for errors
+      if left.object_type.error?
+        return left
+      end
+
+      index = eval node.index, env
+
+      # check for errors
+      if index.object_type.error?
+        return index
+      end
+
+      return eval_index_expression left, index
+    end
+
     # eval method for integer literal nodes
     def self.eval(node : AST::IntegerLiteral, env : Environment) : Object::Object
       return Object::Integer.new node.value
@@ -154,12 +250,63 @@ module Drizzle
       return convert_native_bool_to_object node.value
     end
 
+    # eval method for string literals
+    def self.eval(node : AST::StringLiteral, env : Environment) : Object::Object
+      return Object::StringObj.new node.value
+    end
+
+    # eval method for list literals
+    def self.eval(node : AST::ListLiteral, env : Environment) : Object::Object
+      elements = eval_expressions node.elements, env
+      if elements.size == 1 && elements[0].object_type.error?
+        return elements[0]
+      end
+      return Object::List.new elements
+    end
+
+    # eval method for dict literals
+    def self.eval(node : AST::DictLiteral, env : Environment) : Object::Object
+      pairs = {} of Object::DictKey => Object::DictPair
+      node.pairs.each do |key_node, value_node|
+        key = eval key_node, env
+
+        # check for errors
+        if key.object_type.error?
+          return key
+        end
+
+        # Ensure that the key is a hashable type
+        if !key.is_a? Object::Hashable
+          return new_error "TypeError: Un-hashable type: #{key.object_type}"
+        end
+
+        # evaluate the value
+        value = eval value_node, env
+
+        # check for errors
+        if value.object_type.error?
+          return value
+        end
+
+        # generate the key's hash and insert into the dictionary
+        hash = key.as(Object::Hashable).hash
+        pairs[hash] = Object::DictPair.new key, value
+      end
+      return Object::Dict.new pairs
+    end
+
     # eval method for identifiers
     def self.eval(node : AST::Identifier, env : Environment) : Object::Object
       # Check if the name is in the env, if its not throw an error
       val = env.get node.value
       if val.nil?
-        return new_error "identifier not found: #{node.value}"
+        # check the builtin map before assuming there's an error
+        val = @@BUILTINS[node.value]?
+        if val.nil?
+          return new_error "identifier not found: #{node.value}"
+        else
+          return val
+        end
       else
         return val
       end
@@ -209,6 +356,8 @@ module Drizzle
         return eval_arithmetic_infix_expression op, left, right, env
         # Because there is only two comparison operators for booleans, we can handle them here
         # These comparisons use pointer arithmetic because we can since we only have one instance of true, false or null
+      elsif left.object_type.string? && right.object_type.string?
+        return eval_string_infix_expression op, left, right, env
       elsif op == "=="
         return convert_native_bool_to_object left == right
       elsif op == "!="
@@ -217,6 +366,51 @@ module Drizzle
         return new_error "type mismatch: #{left.object_type} #{op} #{right.object_type}"
       else
         return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
+      end
+    end
+
+    # eval method for index expressions
+    private def self.eval_index_expression(left : Object::Object, index : Object::Object) : Object::Object
+      # ensure correct types are being used here
+      if left.object_type.list? && index.object_type.integer?
+        return eval_list_index_expression left, index
+      elsif left.object_type.dict?
+        return eval_dict_index_expression left, index
+      else
+        return new_error "index operator not supported for #{left.object_type}"
+      end
+    end
+
+    # eval method for specifically handling list indexing
+    private def self.eval_list_index_expression(left : Object::Object, index : Object::Object) : Object::Object
+      list = left.as Object::List
+      index_val = index.as(Object::Integer).value
+      min_index = -list.elements.size
+      max_index = list.elements.size - 1
+
+      if index_val < min_index || index_val > max_index
+        return new_error "IndexError: Index out of bounds (#{index_val})"
+      end
+      # handle negative indexing
+      if index_val < 0
+        index_val += list.elements.size
+      end
+      return list.elements[index_val]
+    end
+
+    # eval method for handling dict indexing
+    private def self.eval_dict_index_expression(left : Object::Object, index : Object::Object) : Object::Object
+      if !index.is_a? Object::Hashable
+        return new_error "TypeError: Un-hashable type: #{index.object_type}"
+      end
+      # generate the hash key for the dict
+      key = index.as(Object::Hashable).hash
+      # search the dict for the desired key
+      pair = left.as(Object::Dict).pairs[key]?
+      if pair.nil?
+        return new_error "KeyError: #{index.inspect}"
+      else
+        return pair.value
       end
     end
 
@@ -322,22 +516,41 @@ module Drizzle
       end
     end
 
+    # eval method for handling infix expressions for strings
+    private def self.eval_string_infix_expression(op : String, left : Object::Object, right : Object::Object, env : Environment) : Object::Object
+      left_val = left.as(Object::StringObj).value
+      right_val = right.as(Object::StringObj).value
+      case op
+      when "+"
+        return Object::StringObj.new "#{left_val}#{right_val}"
+        # can add * handling later
+      else
+        return new_error "unknown operator: #{left.object_type} #{op} #{right.object_type}"
+      end
+      # unwrap the values between left and right, concatenate them and wrap them in a new string obj
+    end
+
     # helper that manages setting up the env for a function, running it and returning the result
     private def self.apply_function(obj : Object::Object, args : Array(Object::Object)) : Object::Object
-      # cast the function to a function object
-      if !obj.object_type.function?
-        return new_error "not a function: #{obj.object_type}"
-      end
-      function = obj.as Object::Function
-      # create an extended environment for the function
-      extended_env = extend_function_env function, args
-      # now evaluate the body of the function using the extended environment
-      evaluated = eval function.body, extended_env
-      # check if there was a return within the function and return either its value or null
-      if evaluated.object_type.return_value?
-        return evaluated.as(Object::ReturnValue).value
+      # cast the function to either a function or builtin object
+      case obj.object_type
+      when .function?
+        function = obj.as Object::Function
+        # create an extended environment for the function
+        extended_env = extend_function_env function, args
+        # now evaluate the body of the function using the extended environment
+        evaluated = eval function.body, extended_env
+        # check if there was a return within the function and return either its value or null
+        if evaluated.object_type.return_value?
+          return evaluated.as(Object::ReturnValue).value
+        else
+          return @@NULL
+        end
+      when .builtin?
+        function = obj.as(Object::Builtin).function
+        return function.call args
       else
-        return @@NULL
+        return new_error "not a function: #{obj.object_type}"
       end
     end
 

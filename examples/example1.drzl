@@ -6,3 +6,9 @@ def add(x: num, y: num) -> num {
 }
 
 let result: num = add(five, ten)
+let message: str = 'hello world'
+let other_message: str = "hello, world"
+let err: str = 'hi
+'
+let lst: list = [1, 2]
+let dct: dict = {'foo': 1}

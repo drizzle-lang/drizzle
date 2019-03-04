@@ -16,6 +16,16 @@ module Drizzle
       ERROR
       # Function types
       FUNCTION
+      # Strings
+      STRING
+      # Builtins
+      BUILTIN
+      # List
+      LIST
+      # Dict
+      DICT
     end
+    # Type definition for a built in function
+    alias BuiltinFunction = Proc(Array(Object), Object)
   end
 end

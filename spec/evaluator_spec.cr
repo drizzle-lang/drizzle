@@ -176,6 +176,8 @@ describe Drizzle::Evaluator do
         "unknown operator: BOOLEAN + BOOLEAN",
       },
       {"foobar", "identifier not found: foobar"},
+      {"'hello' - 'world'", "unknown operator: STRING - STRING"},
+      {"{'name': 'drizzle'}[[1,2,3]]", "TypeError: Un-hashable type: LIST"},
     }
 
     tests.each do |test|
@@ -239,5 +241,180 @@ describe Drizzle::Evaluator do
     add_two(2)"
     evaluated = test_eval input
     test_integer evaluated, 4_i64
+  end
+
+  it "correctly evaluates string literals" do
+    input = "'Hello World!'"
+    evaluated = test_eval input
+    evaluated.object_type.should eq Drizzle::Object::ObjectType::STRING
+    string = evaluated.as Drizzle::Object::StringObj
+    string.value.should eq "Hello World!"
+  end
+
+  it "can handle string concatenation using the `+` operator" do
+    input = "'Hello' + ' ' + 'World!'"
+    evaluated = test_eval input
+    evaluated.object_type.should eq Drizzle::Object::ObjectType::STRING
+    string = evaluated.as Drizzle::Object::StringObj
+    string.value.should eq "Hello World!"
+  end
+
+  it "correctly uses builtin functions" do
+    tests = {
+      # len
+      {"len('')", 0_i64},
+      {"len('four')", 4_i64},
+      {"len('hello world')", 11_i64},
+      {"len(1)", "ArgumentError: `len` received an unsupported argument of type INTEGER"},
+      {"len('one', 'two')", "ArgumentError: Incorrect number of arguments to `len`, expected 1, received 2"},
+    }
+
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      case test[1]
+      when .is_a?(Int64)
+        test_integer evaluated, test[1].to_i64
+      when .is_a?(String)
+        # Assume it's an error
+        evaluated.object_type.should eq Drizzle::Object::ObjectType::ERROR
+        evaluated.as(Drizzle::Object::Error).message.should eq test[1]
+      end
+    end
+  end
+
+  it "correctly evaluates list literals" do
+    input = "[1, 2 * 2, 3 + 3]"
+    evaluated = test_eval input
+    evaluated.object_type.should eq Drizzle::Object::ObjectType::LIST
+    list = evaluated.as Drizzle::Object::List
+    list.elements.size.should eq 3
+    test_integer list.elements[0], 1_i64
+    test_integer list.elements[1], 4_i64
+    test_integer list.elements[2], 6_i64
+  end
+
+  it "correctly evaluates list index expressions" do
+    tests = {
+      {
+        "[1, 2, 3][0]",
+        1_i64,
+      },
+      {
+        "[1, 2, 3][1]",
+        2_i64,
+      },
+      {
+        "[1, 2, 3][2]",
+        3_i64,
+      },
+      {
+        "let i: int = 0\n[1][i]",
+        1_i64,
+      },
+      {
+        "[1, 2, 3][1 + 1]",
+        3_i64,
+      },
+      {
+        "let myArray: list = [1, 2, 3]\nmyArray[2]",
+        3_i64,
+      },
+      {
+        "let myArray: list = [1, 2, 3]\nmyArray[0] + myArray[1] + myArray[2]",
+        6_i64,
+      },
+      {
+        "let myArray: list = [1, 2, 3]\nlet i: int = myArray[0]\nmyArray[i]",
+        2_i64,
+      },
+      {
+        "[1, 2, 3][3]",
+        "IndexError: Index out of bounds (3)",
+      },
+      {
+        "[1, 2, 3][-1]",
+        3_i64,
+      },
+    }
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      if test[1].is_a?(String)
+        evaluated.object_type.should eq Drizzle::Object::ObjectType::ERROR
+        evaluated.as(Drizzle::Object::Error).message.should eq test[1]
+      else
+        test_integer evaluated, test[1].to_i64
+      end
+    end
+  end
+
+  it "correctly handles dict literals" do
+    input = "let two: str = 'two'
+    return {
+      'one': 10 - 9,
+      two: 1 + 1,
+      'thr' + 'ee': 6 / 2,
+      4: 4,
+      true: 5,
+      false: 6,
+    }"
+    evaluated = test_eval input
+    evaluated.object_type.should eq Drizzle::Object::ObjectType::DICT
+    dict = evaluated.as Drizzle::Object::Dict
+    expected : Hash(Drizzle::Object::DictKey, Int64) = {
+      (Drizzle::Object::StringObj.new "one").hash   => 1_i64,
+      (Drizzle::Object::StringObj.new "two").hash   => 2_i64,
+      (Drizzle::Object::StringObj.new "three").hash => 3_i64,
+      (Drizzle::Object::Integer.new 4_i64).hash     => 4_i64,
+      (Drizzle::Object::Boolean.new true).hash      => 5_i64,
+      (Drizzle::Object::Boolean.new false).hash     => 6_i64,
+    }
+    dict.pairs.size.should eq expected.size
+    expected.each do |k, v|
+      pair = dict.pairs[k]?
+      pair.nil?.should be_false
+      test_integer pair.not_nil!.value, v
+    end
+  end
+
+  it "correctly handles dictionary index expressions" do
+    tests = {
+      {
+        "{'foo': 5}['foo']",
+        5_i64,
+      },
+      {
+        "{'foo': 5}['bar']",
+        "KeyError: bar",
+      },
+      {
+        "let key: str = 'foo'\n{'foo': 5}[key]",
+        5_i64,
+      },
+      {
+        "{}['foo']",
+        "KeyError: foo",
+      },
+      {
+        "{5: 5}[5]",
+        5_i64,
+      },
+      {
+        "{true: 5}[true]",
+        5_i64,
+      },
+      {
+        "{false: 5}[false]",
+        5_i64,
+      },
+    }
+    tests.each do |test|
+      evaluated = test_eval test[0]
+      if test[1].is_a?(String)
+        evaluated.object_type.should eq Drizzle::Object::ObjectType::ERROR
+        evaluated.as(Drizzle::Object::Error).message.should eq test[1]
+      else
+        test_integer evaluated, test[1].to_i64
+      end
+    end
   end
 end

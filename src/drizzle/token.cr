@@ -17,6 +17,8 @@ module Drizzle
     IDENTIFIER
     # Integer literal
     INTEGER
+    # String literal
+    STRING
 
     # Operators
 
@@ -63,6 +65,10 @@ module Drizzle
     LEFT_BRACE
     # CLosing of code blocks i.e. functions, as well as closing of set and dict literals
     RIGHT_BRACE
+    # Opening of arrays and indexing operations
+    LEFT_BRACKET
+    # Closing of arrays and indexing operations
+    RIGHT_BRACKET
 
     # Language keywords
 
