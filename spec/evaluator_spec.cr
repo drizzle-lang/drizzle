@@ -177,6 +177,7 @@ describe Drizzle::Evaluator do
       },
       {"foobar", "identifier not found: foobar"},
       {"'hello' - 'world'", "unknown operator: STRING - STRING"},
+      {"{'name': 'drizzle'}[[1,2,3]]", "TypeError: Un-hashable type: LIST"},
     }
 
     tests.each do |test|
