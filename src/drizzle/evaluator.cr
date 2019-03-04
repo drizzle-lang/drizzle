@@ -30,6 +30,23 @@ module Drizzle
           return new_error "ArgumentError: `len` received an unsupported argument of type #{args[0].object_type}"
         end
       }),
+      "keys" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's .size method for iterables
+        if args.size != 1
+          return new_error "ArgumentError: Incorrect number of arguments to `keys`, expected 1, received #{args.size}"
+        end
+        # Do stuff based on the type of the object
+        if args[0].object_type.dict?
+          # generate a list of the keys in the dict and return it
+          elements = [] of Object::Object
+          args[0].as(Object::Dict).pairs.each_value do |pair|
+            elements << pair.key
+          end
+          return Object::List.new elements
+        else
+          return new_error "ArgumentError: `keys` received an unsupported argument of type #{args[0].object_type}"
+        end
+      }),
       "push!" => (Object::Builtin.new ->(args : Array(Object::Object)) {
         # wrap crystal's .size method for iterables
         if args.size != 2
@@ -51,6 +68,23 @@ module Drizzle
         puts output.join " "
         # Have to return something here for now
         return @@NULL.as Object::Object
+      }),
+      "values" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+        # wrap crystal's .size method for iterables
+        if args.size != 1
+          return new_error "ArgumentError: Incorrect number of arguments to `keys`, expected 1, received #{args.size}"
+        end
+        # Do stuff based on the type of the object
+        if args[0].object_type.dict?
+          # generate a list of the keys in the dict and return it
+          elements = [] of Object::Object
+          args[0].as(Object::Dict).pairs.each_value do |pair|
+            elements << pair.value
+          end
+          return Object::List.new elements
+        else
+          return new_error "ArgumentError: `keys` received an unsupported argument of type #{args[0].object_type}"
+        end
       }),
     }
 
