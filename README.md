@@ -16,6 +16,16 @@ From there I thought of his ability *Drizzle*, which I thought was a nice name f
 
 (Also I already had made stickers of the logo so I had to stick with blue and stuff >.>)
 
+## Installation
+With the release of the v0.1.0 beta, I thought it handy to put in some installation instructions.
+Only installation from source works at the moment, although I may put Drizzle up on the AUR at the very least sometime soon.
+
+1. Install [Crystal](https://crystal-lang.org/reference/installation/)
+2. Clone this repo
+3. Build the Drizzle binary using `shards build --release`
+4. *Optional* Add the binary to your path using `install bin/drizzle ~/.bin`
+5. Run the `drizzle` command anywhere to start a REPL environment, or use `drizzle file.drzl` to run the code contained in the file
+
 ## Goals
 The goals of the project are (in some particular order):
 - Create a language with a nice syntax that I would like to use.
