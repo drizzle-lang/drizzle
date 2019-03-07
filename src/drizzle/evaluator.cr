@@ -59,7 +59,7 @@ module Drizzle
         args[0].as(Drizzle::Object::List).elements << args[1]
         return @@NULL
       }),
-      "println" => (Object::Builtin.new ->(args : Array(Object::Object)) {
+      "print" => (Object::Builtin.new ->(args : Array(Object::Object)) {
         # wrap crystal's puts method
         output = [] of String
         args.each do |arg|
